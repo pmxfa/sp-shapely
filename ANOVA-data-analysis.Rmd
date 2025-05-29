@@ -1,0 +1,79 @@
+```{r setup}
+library(jsonlite)
+library(rlang)
+```
+
+```{r}
+dataset <- read.csv("/home/pnx/Documents/sp_env/sp_data_analysis - bootstrap-summary.csv")
+```
+
+```{r data-cleaning}
+# Load and clean the dataset
+dataset <- read.csv("/home/pnx/Documents/sp_env/sp_data_analysis - bootstrap-summary.csv")
+
+# Check the structure of the data
+str(dataset)
+
+# Convert categorical variables to factors
+dataset$model <- as.factor(dataset$model)
+dataset$dataset <- as.factor(dataset$dataset)
+
+# Check for missing values
+sum(is.na(dataset))
+
+# Summary of the cleaned data
+summary(dataset)
+
+# Check factor levels
+levels(dataset$model)
+levels(dataset$dataset)
+```
+
+
+```{r two-way-anova-other-metrics}
+# Two-way ANOVA for other metrics
+#res_rmse <- 
+res_wasserstein <- aov(wasserstein ~ model + dataset + model*dataset, data = dataset)
+res_kl <- aov(kl ~ model + dataset + model*dataset, data = dataset)
+res_mae <- aov(mae ~ model + dataset + model*dataset, data = dataset)
+
+# Display summaries
+cat("Wasserstein Distance ANOVA:\n")
+summary(res_wasserstein)
+
+cat("\nKL Divergence ANOVA:\n")
+summary(res_kl)
+
+cat("\nMAE ANOVA:\n")
+summary(res_mae)
+```
+
+// ...existing code...
+```{r interaction-plots}
+# Interaction plots for all metrics
+par(mfrow = c(2, 2))
+
+# RMSE interaction plot
+interaction.plot(dataset$model, dataset$dataset, dataset$rmse, 
+                col = 1:3, lty = 1, lwd = 2, 
+                xlab = "Model", ylab = "RMSE", trace.label = "Dataset")
+
+# Wasserstein Distance interaction plot
+interaction.plot(dataset$model, dataset$dataset, dataset$wasserstein, 
+                col = 1:3, lty = 1, lwd = 2, 
+                xlab = "Model", ylab = "Wasserstein Distance", trace.label = "Dataset")
+
+# KL Divergence interaction plot
+interaction.plot(dataset$model, dataset$dataset, dataset$kl, 
+                col = 1:3, lty = 1, lwd = 2, 
+                xlab = "Model", ylab = "KL Divergence", trace.label = "Dataset")
+
+# MAE interaction plot
+interaction.plot(dataset$model, dataset$dataset, dataset$mae, 
+                col = 1:3, lty = 1, lwd = 2, 
+                xlab = "Model", ylab = "MAE", trace.label = "Dataset")
+
+# Reset plot layout
+par(mfrow = c(1, 1))
+```
+// ...existing code...
