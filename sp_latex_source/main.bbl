@@ -1,0 +1,291 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{goodfellow2014}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5d2585c11210cf1d4512e6e0a03ec315}{%
+           family={Goodfellow},
+           familyi={G\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{fullhash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{fullhashraw}{d17e6557c5836d2d978179999ea1037f}
+      \strng{bibnamehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authorbibnamehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authornamehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authorfullhash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authorfullhashraw}{d17e6557c5836d2d978179999ea1037f}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Generative adversarial nets}
+      \field{year}{2014}
+      \true{nocite}
+    \endentry
+    \entry{goyal2024}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=ccb00692c9d499e4fbca17542178cd7e}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3940a0cf7129928e045c121332d4521a}{%
+           family={Mahmoud},
+           familyi={M\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{fullhash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{fullhashraw}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{bibnamehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authorbibnamehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authornamehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authorfullhash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authorfullhashraw}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence Review}
+      \field{title}{Synthetic data for machine learning}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{jordon2022}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dc1b699df1b7fc62600a7ab386ec0982}{%
+           family={Jordon},
+           familyi={J\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{fullhash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{fullhashraw}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{bibnamehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authorbibnamehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authornamehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authorfullhash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authorfullhashraw}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{title}{Synthetic data generation}
+      \field{year}{2022}
+      \true{nocite}
+    \endentry
+    \entry{kingma2013}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b6fbd171848aad4edf3925543f1f1522}{%
+           family={Kingma},
+           familyi={K\bibinitperiod},
+           given={Diederik\bibnamedelima P},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=53d2880ad8047b61cdae2c6b2803e763}{%
+           family={Welling},
+           familyi={W\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{fullhash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{fullhashraw}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{bibnamehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authorbibnamehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authornamehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authorfullhash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authorfullhashraw}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:1312.6114}
+      \field{title}{Auto-encoding variational bayes}
+      \field{year}{2013}
+      \true{nocite}
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global/global}
+    \entry{goodfellow2014}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5d2585c11210cf1d4512e6e0a03ec315}{%
+           family={Goodfellow},
+           familyi={G\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{fullhash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{fullhashraw}{d17e6557c5836d2d978179999ea1037f}
+      \strng{bibnamehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authorbibnamehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authornamehash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authorfullhash}{d17e6557c5836d2d978179999ea1037f}
+      \strng{authorfullhashraw}{d17e6557c5836d2d978179999ea1037f}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Generative adversarial nets}
+      \field{year}{2014}
+      \true{nocite}
+    \endentry
+    \entry{goyal2024}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=ccb00692c9d499e4fbca17542178cd7e}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3940a0cf7129928e045c121332d4521a}{%
+           family={Mahmoud},
+           familyi={M\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{fullhash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{fullhashraw}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{bibnamehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authorbibnamehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authornamehash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authorfullhash}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \strng{authorfullhashraw}{47a9b3504e1ae061f0a9eddce81b01ec}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence Review}
+      \field{title}{Synthetic data for machine learning}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{jordon2022}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dc1b699df1b7fc62600a7ab386ec0982}{%
+           family={Jordon},
+           familyi={J\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{fullhash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{fullhashraw}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{bibnamehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authorbibnamehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authornamehash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authorfullhash}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \strng{authorfullhashraw}{c4a6ffa76955f8f18b2ff55f67fa4642}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{title}{Synthetic data generation}
+      \field{year}{2022}
+      \true{nocite}
+    \endentry
+    \entry{kingma2013}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b6fbd171848aad4edf3925543f1f1522}{%
+           family={Kingma},
+           familyi={K\bibinitperiod},
+           given={Diederik\bibnamedelima P},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=53d2880ad8047b61cdae2c6b2803e763}{%
+           family={Welling},
+           familyi={W\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{fullhash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{fullhashraw}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{bibnamehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authorbibnamehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authornamehash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authorfullhash}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \strng{authorfullhashraw}{aabdd5db7a1ed298b1dfb6824d032c66}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:1312.6114}
+      \field{title}{Auto-encoding variational bayes}
+      \field{year}{2013}
+      \true{nocite}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
