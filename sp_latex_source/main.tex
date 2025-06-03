@@ -23,7 +23,9 @@
 
 % Bibliography
 \usepackage[backend=biber,style=apa]{biblatex}
-\addbibresource{/home/pnx/Documents/sp_env/sp_latex_source/rrl.bib}
+% \addbibresource{/home/pnx/Documents/sp_env/sp_latex_source/rrl.bib}
+
+
 
 
 \title{Interpretable Deep Learning: Shapley-based Analysis of Generative Models for Synthetic Data Generation}
@@ -32,6 +34,14 @@
 \date{January 1, 2025}
 
 \maketitle
+
+\newpage
+
+% Add after \tableofcontents
+\tableofcontents
+\thispagestyle{empty} % Remove page number from TOC page
+\newpage
+\setcounter{page}{1}  % Start page numbering from 1 after TOC
 
 \section{Introduction}
 
@@ -367,21 +377,239 @@ To ensure statistical robustness, each model-dataset combination was evaluated t
 \end{tabular}
 \end{table}
 
-\subsection{Statistical Analysis of Model Performance (ANOVA)}
+\subsection{Statistical Analysis (ANOVA)}
+
+
+
+\subsubsection{ANOVA Summary}
+
+The two-way ANOVA analysis reveals significant performance differences between generative models across all evaluation metrics. Table \ref{tab:anova_summary} demonstrates that model type, dataset characteristics, and their interactions all produce statistically significant effects (p $<$ 0.001) on synthetic data quality.
+
+The significant main effects confirm that TimeGAN, TimeVAE, and VRNNGAN generate distinctly different synthetic data quality outcomes, with performance variations that are consistent across the four metrics examined. Similarly, the three datasets—electricity, exchange, and weather—present varying challenges for synthetic data generation, indicating that certain time series characteristics inherently affect model performance.
+
+Most importantly, the significant Model × Dataset interactions across all metrics indicate that model performance is context-dependent rather than universal. This finding demonstrates that the relative effectiveness of each generative approach varies substantially depending on the specific characteristics of the time series data being modeled. The interaction effects provide statistical justification for conducting dataset-specific analyses rather than relying on aggregated performance comparisons, which could obscure important context-dependent patterns in model effectiveness.
+
+These results establish a robust foundation for the detailed Shapley value analysis that follows, confirming that meaningful differences exist between models while highlighting the importance of considering dataset-specific performance patterns.
+
+\begin{table}[H]
+\centering
+\caption{Two-way ANOVA summary for synthetic data quality metrics}
+\label{tab:anova_summary}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Metric} & \textbf{Model} & \textbf{Dataset} & \textbf{Model × Dataset} & \textbf{Significance} \\
+ & \textbf{F-statistic} & \textbf{F-statistic} & \textbf{F-statistic} & \textbf{(p $<$ 0.001)} \\
+\midrule
+KL Divergence & 300,802 & 31,336 & 18,227 & *** \\
+Wasserstein Distance & 115 & 2,098 & 3,805 & *** \\
+RMSE & 20,828 & 32,897 & 18,110 & *** \\
+MAE & 12,066 & 14,375 & 8,758 & *** \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\subsubsection{Model × Dataset Interaction}
+
+The significant Model × Dataset interactions identified in the ANOVA analysis are visualized through interaction plots that demonstrate how model performance varies across different dataset contexts. These plots reveal non-parallel lines, confirming that the relative effectiveness of each generative model changes substantially depending on the specific characteristics of the time series data being modeled.
+
+Figure \ref{fig:kl_interaction} illustrates the interaction effects for KL divergence, showing the most pronounced performance variations across datasets. The dramatic convergence of all three dataset lines at VRNNGAN demonstrates the hybrid model's universal effectiveness in preserving statistical fidelity, while the divergent patterns for TimeGAN and TimeVAE across datasets highlight their context-dependent performance.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/interaction_kl.png}
+\caption{Model × Dataset interaction effects for KL Divergence}
+\label{fig:kl_interaction}
+\end{figure}
+
+The Wasserstein distance interactions, shown in Figure \ref{fig:wasserstein_interaction}, reveal different patterns where TimeVAE demonstrates superior performance specifically for electricity data, while TimeGAN shows advantages for exchange data. These crossing lines exemplify how geometric similarity preservation varies significantly by dataset characteristics.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/interaction_wasserstein.png}
+\caption{Model × Dataset interaction effects for Wasserstein distance}
+\label{fig:wasserstein_interaction}
+\end{figure}
+
+Figures \ref{fig:rmse_interaction} and \ref{fig:mae_interaction} display the forecasting performance interactions, where weather data presents unique challenges for all models, particularly affecting TimeVAE performance. The near-parallel lines for electricity and exchange data in both RMSE and MAE suggest more consistent relative model performance for these forecasting metrics across these datasets.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/interaction_rmse.png}
+\caption{Model × Dataset interaction effects for RMSE}
+\label{fig:rmse_interaction}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/interaction_mae.png}
+\caption{Model × Dataset interaction effects for MAE}
+\label{fig:mae_interaction}
+\end{figure}
+
+These interaction patterns validate the statistical findings from the ANOVA analysis, demonstrating that model selection cannot be made universally but must consider the specific properties of the target dataset. The varying interaction strengths across metrics further indicate that different aspects of synthetic data quality—statistical fidelity versus forecasting utility—are affected differently by dataset characteristics, necessitating the dataset-specific Shapley analysis that follows.
+
+
+\subsubsection{Tukey-HSD Post-Hoc Results}
+
+Following the confirmation of statistically significant differences between models in the ANOVA analysis, Tukey HSD post-hoc tests were conducted to examine the specific patterns of these differences and identify exactly where the models differ from one another. This analysis provides detailed insights into the pairwise comparisons between TimeGAN, TimeVAE, and VRNNGAN across all evaluation metrics.
+
+The post-hoc analysis reveals consistent performance hierarchies across metrics, with distinct groupings that highlight each model's relative strengths and weaknesses. For KL divergence (Table \ref{tab:tukey_kl}), VRNNGAN demonstrates substantially superior performance with a mean value of 1.64, forming its own distinct group (c). TimeGAN and TimeVAE show relatively similar but significantly different performance levels, with TimeGAN (13.16, group a) slightly outperforming TimeVAE (13.33, group b). This pattern indicates that while both individual models struggle with statistical fidelity compared to the hybrid approach, TimeGAN maintains marginally better distributional similarity to real data.
+% KL Divergence Tukey HSD Results
+\begin{table}[H]
+\centering
+\caption{Tukey HSD Post-Hoc Analysis for KL Divergence}
+\label{tab:tukey_kl}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Mean Value} & \textbf{Tukey Group} \\
+\midrule
+VRNNGAN & 1.6399 & c \\
+TimeGAN & 13.1554 & a \\
+TimeVAE & 13.3337 & b \\
+\bottomrule
+\end{tabular}
+\footnotesize
+\end{table}
+
+The Wasserstein distance results (Table \ref{tab:tukey_wasserstein}) reveal a different performance ranking, where all three models form distinct statistical groups despite relatively small absolute differences. VRNNGAN again achieves the best performance (0.142, group c), followed by TimeVAE (0.148, group b) and TimeGAN (0.149, group a). The closer clustering of values suggests that geometric similarity preservation shows less dramatic differences between models compared to statistical divergence measures.
+
+% Wasserstein Distance Tukey HSD Results
+\begin{table}[H]
+\centering
+\caption{Tukey HSD Post-Hoc Analysis for Wasserstein Distance}
+\label{tab:tukey_wasserstein}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Mean Value} & \textbf{Tukey Group} \\
+\midrule
+VRNNGAN & 0.1424 & c \\
+TimeVAE & 0.1481 & b \\
+TimeGAN & 0.1488 & a \\
+\bottomrule
+\end{tabular}
+\footnotesize
+\end{table}
+
+For forecasting performance metrics, the post-hoc analysis demonstrates more pronounced differences between models. In RMSE evaluation (Table \ref{tab:tukey_rmse}), VRNNGAN maintains its superior performance (0.220, group c), while TimeGAN (0.259, group a) significantly outperforms TimeVAE (0.629, group b). This substantial gap indicates that TimeVAE's approach to latent space modeling may not effectively capture the temporal dependencies necessary for accurate forecasting. Similarly, MAE results (Table \ref{tab:tukey_mae}) confirm this pattern, with VRNNGAN (0.149, group c) leading, followed by TimeGAN (0.181, group a), and TimeVAE showing notably higher error rates (0.412, group b).
+
+
+% RMSE Tukey HSD Results
+\begin{table}[H]
+\centering
+\caption{Tukey HSD Post-Hoc Analysis for RMSE}
+\label{tab:tukey_rmse}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Mean Value} & \textbf{Tukey Group} \\
+\midrule
+VRNNGAN & 0.2203 & c \\
+TimeGAN & 0.2591 & a \\
+TimeVAE & 0.6287 & b \\
+\bottomrule
+\end{tabular}
+\footnotesize
+\end{table}
+
+% MAE Tukey HSD Results
+\begin{table}[H]
+\centering
+\caption{Tukey HSD Post-Hoc Analysis for MAE}
+\label{tab:tukey_mae}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Mean Value} & \textbf{Tukey Group} \\
+\midrule
+VRNNGAN & 0.1492 & c \\
+TimeGAN & 0.1811 & a \\
+TimeVAE & 0.4123 & b \\
+\bottomrule
+\end{tabular}
+\footnotesize
+\end{table}
+
+The consistent emergence of three distinct statistical groups across all metrics confirms that each model contributes unique characteristics to synthetic data generation. VRNNGAN's consistent placement in the superior performance group (c) across all metrics validates the effectiveness of hybrid architectures in balancing multiple aspects of data quality. The varying relative positions of TimeGAN and TimeVAE across different metrics highlight the trade-offs inherent in different generative approaches, with TimeGAN showing particular strength in forecasting tasks and TimeVAE demonstrating competitive performance in certain geometric similarity measures.
 
 \subsection{Shapley Value Analysis}
 The Shapley analysis reveals the individual contributions of each model component to the overall performance across different metrics and datasets. For each metric evaluated, the analysis examines the marginal contributions and interactions between model components.
 
-\subsubsection{Wasserstein Distance}
+% Dataset-Specific Shapley Analysis Summary
 
-insert info for each dataset per metric
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/shapley_dataset_winners.png}
+\caption{Shapley Analysis Summary Plot}
+\label{fig:shap}
+\end{figure}
 
-\subsubsection{KL Divergence}
-\subsubsection{RMSE}
-\subsubsection{MAE}
+The comprehensive analysis across datasets reveals distinct patterns in model effectiveness. VRNNGAN demonstrates consistent superiority across most metrics and datasets, with particularly strong performance in statistical fidelity measures (KL divergence) and forecasting accuracy (RMSE, MAE). However, individual models show dataset-specific advantages: TimeVAE excels in geometric similarity preservation for electricity data, while TimeGAN demonstrates superior Wasserstein distance performance for exchange data. 
+
+\subsubsection{Electricity Dataset Results}
+
+he electricity dataset demonstrates VRNNGAN's strong performance across most evaluation metrics, with the notable exception of Wasserstein distance where TimeVAE shows superior geometric similarity preservation. Table \ref{tab:shapley_electricity} shows that VRNNGAN achieves the highest Shapley values for KL divergence (0.883), RMSE (0.186), and MAE (0.125), indicating consistent effectiveness in both statistical fidelity and forecasting utility.
+\begin{table}[H]
+\centering
+\caption{Shapley value contributions: electricity dataset}
+\label{tab:shapley_electricity}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Approach} & \textbf{KL Divergence} & \textbf{Wasserstein} & \textbf{RMSE} & \textbf{MAE} \\
+\midrule
+TimeGAN & 0.266 & 0.092 & 0.113 & 0.072 \\
+TimeVAE & 0.618 & \textbf{0.033} & 0.073 & 0.053 \\
+VRNNGAN & \textbf{0.883} & 0.125 & \textbf{0.186} & \textbf{0.125} \\
+\bottomrule
+\end{tabular}
+\\[0.5em]
+\footnotesize
+\textit{Note: Bold indicates highest Shapley value (best contributor) per metric.}
+\end{table}
+
+\subsubsection{Exchange Dataset Results}
+he exchange dataset analysis reveals VRNNGAN's dominance across most metrics, with notable exceptions in geometric similarity preservation. Table \ref{tab:shapley_exchange} demonstrates that for KL divergence, VRNNGAN achieves the highest Shapley value (0.964), indicating exceptional statistical fidelity preservation. However, TimeGAN demonstrates superior performance for Wasserstein distance (0.054), suggesting better geometric similarity modeling for this specific financial dataset context.
+
+\begin{table}[H]
+\centering
+\caption{Shapley value contributions: exchange dataset}
+\label{tab:shapley_exchange}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Approach} & \textbf{KL Divergence} & \textbf{Wasserstein} & \textbf{RMSE} & \textbf{MAE} \\
+\midrule
+TimeGAN & 0.861 & \textbf{0.054} & 0.059 & 0.037 \\
+TimeVAE & 0.104 & 0.118 & 0.112 & 0.086 \\
+VRNNGAN & \textbf{0.964} & 0.172 & \textbf{0.171} & \textbf{0.123} \\
+\bottomrule
+\end{tabular}
+\\[0.5em]
+\footnotesize
+\textit{Note: Bold indicates highest Shapley value (best contributor) per metric.}
+\end{table}
+
+\subsubsection{Weather Dataset Results}
+he weather dataset presents the most challenging context for synthetic data generation, evidenced by the emergence of negative Shapley contributions. Table \ref{tab:shapley_weather} reveals that VRNNGAN maintains superior performance across all metrics, with particularly strong contributions for KL divergence (3.072). Notably, TimeGAN exhibits negative contributions for RMSE (-0.396) and MAE (-0.232), indicating that its inclusion in coalition modeling actually degrades forecasting performance for this complex meteorological dataset.
+
+\begin{table}[H]
+\centering
+\caption{Shapley value contributions: weather dataset}
+\label{tab:shapley_weather}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Approach} & \textbf{KL Divergence} & \textbf{Wasserstein} & \textbf{RMSE} & \textbf{MAE} \\
+\midrule
+TimeGAN & 1.066 & 0.068 & -0.396 & -0.232 \\
+TimeVAE & 2.006 & 0.061 & 0.699 & 0.432 \\
+VRNNGAN & \textbf{3.072} & \textbf{0.129} & \textbf{0.304} & \textbf{0.200} \\
+\bottomrule
+\end{tabular}
+\\[0.5em]
+\footnotesize
+\textit{Note: Bold indicates highest Shapley value (best contributor) per metric. Negative values indicate performance degradation when model is included.}
+\end{table}
+
 
 \subsection{Discussion}
-The results demonstrate that hybrid approaches, particularly VRNNGAN, achieve superior performance across both fidelity and usability metrics. This suggests that combining GAN and VAE architectures can effectively balance the trade-offs between statistical similarity and practical utility in synthetic data generation.
 
 \section{Conclusion}
 
