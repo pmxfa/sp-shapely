@@ -10,6 +10,7 @@ dataset <- read.csv("/home/pnx/Documents/sp_env/sp_data_analysis - bootstrap-sum
 ```{r data-cleaning}
 # Load and clean the dataset
 dataset <- read.csv("/home/pnx/Documents/sp_env/sp_data_analysis - bootstrap-summary.csv")
+dataset <- read.csv("cleaned_bootstrap.csv")
 
 # Check the structure of the data
 str(dataset)
@@ -44,6 +45,8 @@ summary(res_wasserstein)
 cat("\nKL Divergence ANOVA:\n")
 summary(res_kl)
 
+summary(res_rmse)
+f
 cat("\nMAE ANOVA:\n")
 summary(res_mae)
 ```

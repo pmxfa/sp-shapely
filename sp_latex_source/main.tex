@@ -14,6 +14,7 @@
 % Math and graphics
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{array}
 
 % Tables
 \usepackage{multirow}
@@ -39,39 +40,158 @@
 % \author{Pinky Grace A. Marfa}
 % \date{January 1, 2025}
 
+% title page
+\begin{titlepage}
+    \centering
+    \includegraphics[height=3cm]{assets/up-logo.png}
+    \includegraphics[height=3cm]{assets/upc-logo.png} \\ [0.5cm]
 
+    \Large \textbf{Interpretable Deep Learning: Shapley-based Analysis of Generative Models for Synthetic Data Generation} \\ [0.2cm]
+    \rule{\textwidth}{0.1pt}
 
-% \begin{titlepage}
-%     \centering
-%     \includegraphics[height=3cm]{assets/up-logo2.jpg}
-%     \includegraphics[height=3cm]{assets/upc-logo.jpeg} \\ [0.5cm]
+    \large A Special Project Presented to the \\
+    \large Faculty of the Department of Computer Science, \\
+    \large College of Science, \\
+    \large University of the Philippines Cebu\\
+    \vfill
+    \large In Partial Fulfillment \\
+    \large Of the Requirements for the Degree \\
+    \large Bachelor of Science in Computer Science \\
+    \rule{\textwidth}{0.1pt}
+    \vfill
+    \large Pinky Grace Arcenal Marfa \\
+    \large Bachelor of Science in Computer Science \\
+    \vfill
+    \large Asst. Prof. Dharyll Prince M. Abellana \\
+    \large Special Problem Adviser \\
+    \vfill
+    \large June 2025
+\end{titlepage}
 
-%     \Large \textbf{Interpretable Deep Learning: Shapley-based Analysis of Generative Models for Synthetic Data Generation} \\ [0.2cm]
-%     \rule{\textwidth}{0.1pt}
+% permission
 
-%     \large A Special Project Presented to the \\
-%     \large Faculty of the Department of Computer Science, \\
-%     \large College of Science, \\
-%     \large University of the Philippines Cebu\\
-%     \vfill
-%     \large In Partial Fulfillment \\
-%     \large Of the Requirements for the Degree \\
-%     \large Bachelor of Science in Computer Science \\
-%     \rule{\textwidth}{0.1pt}
-%     \vfill
-%     \large Pinky Grace A. Marfa \\
-%     \large Bachelor of Science in Computer Science \\
-%     \vfill
-%     \large Asst. Prof. Dharyll Prince M. Abellana \\
-%     \large Special Problem Adviser \\
-%     \vfill
-%     \large January 2025
-% \end{titlepage}
+% permission
+\begin{titlepage}
+    \centering
+    \includegraphics[height=3cm]{assets/up-logo.png}
+    \includegraphics[height=3cm]{assets/upc-logo.png} \\ [0.5cm]
+
+    \Large \textbf{UNIVERSITY OF THE PHILIPPINES CEBU} \\
+    \large Bachelor of Science in Computer Science \\
+    \vfill
+    \large Pinky Grace Arcenal Marfa \\
+    \vfill
+    \large \textbf{Interpretable Deep Learning: Shapley-based Analysis on Generative Models for Synthetic Data Generation}\\
+    \vfill
+    \large Asst. Prof. DHARYLL PRINCE M. ABELLANA \\
+    \large Special Problem Adviser \\
+    \vfill
+    \large College of Science \\
+    \large Department of Computer Science
+    \vfill
+    \large Permission is given for the following people to have access to this SP:
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{0.8} % Reduce row height
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.9\textwidth}|>{\centering\arraybackslash}m{0.1\textwidth}|}
+        \hline
+        Available to the general public & No \\ \hline
+        Available only after consultation with author/SP adviser & Yes \\ \hline
+        Available only to those bound by confidentiality agreement & Yes \\ \hline
+    \end{tabular}
+\end{table}
+
+    \vfill
+    \hspace*{-0.15in}
+    \begin{tabular}{ll}
+        \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \rule{8cm}{0.4pt} \\
+        PINKY GRACE ARCENAL MARFA\\
+        Student \\
+        \end{minipage}
+        &
+        \begin{minipage}[t]{0.60\textwidth}
+        \centering
+        \rule{7cm}{0.4pt} \\
+        Asst. Prof. DHARYLL PRINCE M. ABELLANA \\
+        Special Problem Adviser \\
+        \end{minipage}
+    \end{tabular}
+\end{titlepage}
 
 % \maketitle
 
 \pagenumbering{roman}
 \thispagestyle{empty}
+
+% approval sheet
+\begin{titlepage}
+\begin{center}
+    \Large\textbf{Approval Sheet}
+\end{center}
+\vspace{1em}
+
+The faculty of the University of the Philippines Cebu -- Department of Computer Science approves this Special Problem entitled:
+
+\begin{center}
+    \vspace{3em}
+    \textbf{Interpretable Deep Learning: Shapley-based Analysis on Generative Models for Synthetic Data Generation}\\
+    \vspace{3em}
+    \rule{\textwidth}{0.7pt} % Horizontal line
+    \textit{by}\\
+    \textbf{PINKY GRACE ARCENAL MARFA}
+\end{center}
+
+\vfill
+
+\noindent
+\begin{minipage}[t]{0.65\textwidth}
+    \centering
+    \rule{8.5cm}{0.4pt}\\
+    Asst. Prof. DHARYLL PRINCE M. ABELLANA \\
+    Special Problem Adviser
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \rule{3cm}{0.4pt} \\
+    Date Signed
+\end{minipage}
+
+\vfill
+
+\noindent
+\begin{minipage}[t]{0.65\textwidth}
+    \centering
+    \rule{8.5cm}{0.4pt} \\
+    Asst. Prof. DHARYLL PRINCE M. ABELLANA \\
+    Chair, Department of Computer Science
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \rule{3cm}{0.4pt} \\
+    Date Signed
+\end{minipage}
+
+\vfill
+
+\noindent
+\begin{minipage}[t]{0.65\textwidth}
+    \centering
+    \rule{8.5cm}{0.4pt} \\
+    Dr. ALVIN G. ROXAS \\
+    Dean, College of Science
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \rule{3cm}{0.4pt} \\
+    Date Signed
+\end{minipage}
+\end{titlepage}
 
 \newpage
 
@@ -131,7 +251,7 @@ Addressing this gap, this study employs a Shapley-based analysis to provide inte
 \subsection{Significance of the Study}
 This study addresses a critical gap in the literature on synthetic data generation, particularly focusing on the balance between fidelity and usability in datasets generated for time series applications. While generative models like GANs, VAEs, and their hybrids have shown promise in isolated studies, there remains a substantial need for a comprehensive evaluation framework that assesses these models based on their ability to produce high-quality synthetic datasets.
 
-By applying a Shapely-based analysis, this study provides a systematic approach for assessing how well synthetic data supports machine learning tasks while maintaining statistical similarity to real data. This dual-focus approach is crucial because generating high-quality synthetic data requires more than mere replication of the original data’s statistical features; it must also enhance the data's practical utility for machine learning tasks, particularly when the original datasets are flawed or biased.
+By applying a Shapley-based analysis, this study provides a systematic approach for assessing how well synthetic data supports machine learning tasks while maintaining statistical similarity to real data. This dual-focus approach is crucial because generating high-quality synthetic data requires more than mere replication of the original data’s statistical features; it must also enhance the data's practical utility for machine learning tasks, particularly when the original datasets are flawed or biased.
 
 The outcomes of this study are expected to significantly impact the field by providing actionable insights that can guide the development and refinement of generative models. Identifying models that effectively balance these two critical dimensions will help researchers and practitioners in fields where the quality of synthetic data is particularly important for overcoming challenges like data scarcity and bias without sacrificing the data’s utility.
 
@@ -188,7 +308,7 @@ General utility metrics assess the overall statistical properties and model eval
 
 In addition to utility metrics, privacy metrics are crucial for evaluating the extent to which synthetic data protects sensitive information in the original dataset. Differential Privacy (DP) is one of the most widely recognized privacy metrics, providing a formal framework that quantifies the privacy guarantees of a data release mechanism \parencite{jordon_synthetic_2022,goyal_systematic_2024,kaabachi_scoping_2024,nikolenko_synthetic_2019}. Similarly, Distance to Closest Record (DCR) offers another valuable perspective by measuring the distance between each synthetic data point and its nearest neighbor in the real training dataset \parencite{mendelevitch_fidelity_2021}.
 
-In evaluating synthetic data generation, one of the most significant challenges is the inconsistency in comparative evaluations of different methods, which arises from the lack of uniform evaluation metrics \parencite{chundawat_tabsyndex_2024}. This inconsistency leads to confusion and variability in determining the effectiveness of synthetic data. As different models and applications prioritize various aspects, such as privacy, accuracy, or utility, establishing a common ground for evaluation becomes problematic. For example, while some methods may focus on enhancing privacy, others might aim to improve the accuracy or utility of the synthetic data, resulting in a diverse range of metrics that are not easily comparable. In response to these discrepancies, there have been concerted efforts within the research community to develop more unified evaluation metrics. One notable example is TabSynDex by \cite{chundawat_tabsyndex_2024}, a single-score metric designed to robustly evaluate synthetic tabular data. Another innovative metric that has been developed is SHAPr \parencite{duddu_shapr_2022}, a Shapely-value based privacy metric which offers a versatile tool for measuring privacy risks.
+In evaluating synthetic data generation, one of the most significant challenges is the inconsistency in comparative evaluations of different methods, which arises from the lack of uniform evaluation metrics \parencite{chundawat_tabsyndex_2024}. This inconsistency leads to confusion and variability in determining the effectiveness of synthetic data. As different models and applications prioritize various aspects, such as privacy, accuracy, or utility, establishing a common ground for evaluation becomes problematic. For example, while some methods may focus on enhancing privacy, others might aim to improve the accuracy or utility of the synthetic data, resulting in a diverse range of metrics that are not easily comparable. In response to these discrepancies, there have been concerted efforts within the research community to develop more unified evaluation metrics. One notable example is TabSynDex by~\cite{chundawat_tabsyndex_2024}, a single-score metric designed to robustly evaluate synthetic tabular data. Another innovative metric that has been developed is SHAPr \parencite{duddu_shapr_2022}, a Shapley-value based privacy metric which offers a versatile tool for measuring privacy risks.
 
 However, these efforts encounter additional complexities. A prominent issue is the difficulty in balancing the trade-offs between privacy and utility. Enhancing privacy typically involves introducing mechanisms that may degrade the utility of the data by reducing its accuracy or limiting the types of analysis that can be performed effectively. This trade-off is particularly problematic in fields requiring high-fidelity data for accurate analysis, such as healthcare and finance, where both high utility and stringent privacy are critical \parencite{mendelevitch_fidelity_2021,caliskan_comparative_2023}. Moreover, many existing studies and methodologies fail to thoroughly evaluate residual privacy risks, especially concerning publicly released synthetic data \parencite{kaabachi_scoping_2024}. This oversight can lead to significant privacy breaches, as residual information may still be exploited to uncover sensitive data about individuals in the original dataset. Lastly, the metrics currently employed often struggle to capture complex relationships and dependencies between multiple attributes in the data. This deficiency can lead to synthetic datasets that, while statistically similar to original datasets in marginal distributions, fail to preserve more complex interdependencies, thus limiting their usefulness for more sophisticated data science tasks \parencite{jordon_synthetic_2022}.
 
@@ -222,7 +342,7 @@ For this study, three multivariate datasets are considered. These datasets were 
 
     \item \textbf{Weather:} 
 
-    his meteorological dataset contains 52,696 samples with 21 features recorded every 10 minutes throughout 2020. Ten features were selected for this study using seeded randomization. The dataset represents a commonly used benchmark in time series forecasting research, with documented usage across multiple comparative studies.
+    This meteorological dataset contains 52,696 samples with 21 features recorded every 10 minutes throughout 2020. Ten features were selected for this study using seeded randomization. The dataset represents a commonly used benchmark in time series forecasting research, with documented usage across multiple comparative studies.
 
 \end{enumerate}
 
@@ -603,10 +723,10 @@ The comprehensive analysis across datasets reveals distinct patterns in model ef
 
 \subsubsection{Electricity Dataset Results}
 
-he electricity dataset demonstrates VRNNGAN's strong performance across most evaluation metrics, with the notable exception of Wasserstein distance where TimeVAE shows superior geometric similarity preservation. Table \ref{tab:shapley_electricity} shows that VRNNGAN achieves the highest Shapley values for KL divergence (0.883), RMSE (0.186), and MAE (0.125), indicating consistent effectiveness in both statistical fidelity and forecasting utility.
+The electricity dataset demonstrates VRNNGAN's strong performance across most evaluation metrics, with the notable exception of Wasserstein distance where TimeVAE shows superior geometric similarity preservation. Table \ref{tab:shapley_electricity} shows that VRNNGAN achieves the highest Shapley values for KL divergence (0.883), RMSE (0.186), and MAE (0.125), indicating consistent effectiveness in both statistical fidelity and forecasting utility.
 \begin{table}[H]
 \centering
-\caption{Shapley value contributions: electricity dataset}
+\caption{Shapley value contributions for  electricity dataset}
 \label{tab:shapley_electricity}
 \begin{tabular}{lcccc}
 \toprule
@@ -623,7 +743,7 @@ VRNNGAN & \textbf{0.883} & 0.125 & \textbf{0.186} & \textbf{0.125} \\
 \end{table}
 
 \subsubsection{Exchange Dataset Results}
-he exchange dataset analysis reveals VRNNGAN's dominance across most metrics, with notable exceptions in geometric similarity preservation. Table \ref{tab:shapley_exchange} demonstrates that for KL divergence, VRNNGAN achieves the highest Shapley value (0.964), indicating exceptional statistical fidelity preservation. However, TimeGAN demonstrates superior performance for Wasserstein distance (0.054), suggesting better geometric similarity modeling for this specific financial dataset context.
+The exchange dataset analysis reveals VRNNGAN's dominance across most metrics, with notable exceptions in geometric similarity preservation. Table \ref{tab:shapley_exchange} demonstrates that for KL divergence, VRNNGAN achieves the highest Shapley value (0.964), indicating exceptional statistical fidelity preservation. However, TimeGAN demonstrates superior performance for Wasserstein distance (0.054), suggesting better geometric similarity modeling for this specific financial dataset context.
 
 \begin{table}[H]
 \centering
@@ -644,7 +764,7 @@ VRNNGAN & \textbf{0.964} & 0.172 & \textbf{0.171} & \textbf{0.123} \\
 \end{table}
 
 \subsubsection{Weather Dataset Results}
-he weather dataset presents the most challenging context for synthetic data generation, evidenced by the emergence of negative Shapley contributions. Table \ref{tab:shapley_weather} reveals that VRNNGAN maintains superior performance across all metrics, with particularly strong contributions for KL divergence (3.072). Notably, TimeGAN exhibits negative contributions for RMSE (-0.396) and MAE (-0.232), indicating that its inclusion in coalition modeling actually degrades forecasting performance for this complex meteorological dataset.
+The weather dataset presents the most challenging context for synthetic data generation, evidenced by the emergence of negative Shapley contributions. Table \ref{tab:shapley_weather} reveals that VRNNGAN maintains superior performance across all metrics, with particularly strong contributions for KL divergence (3.072). Notably, TimeGAN exhibits negative contributions for RMSE (-0.396) and MAE (-0.232), indicating that its inclusion in coalition modeling actually degrades forecasting performance for this complex meteorological dataset.
 
 \begin{table}[H]
 \centering
@@ -666,21 +786,31 @@ VRNNGAN & \textbf{3.072} & \textbf{0.129} & \textbf{0.304} & \textbf{0.200} \\
 
 \subsection{Discussion}
 
-The findings of this study provide valuable insights into the effectiveness of different generative model approaches for synthetic time series data generation, revealing patterns that both confirm and extend existing knowledge in the field.
+The statistical analysis reveals a coherent pattern of findings that illuminate both the individual strengths of generative models and their complex interactions with dataset characteristics. The significant main effects identified through ANOVA (all F-statistics $>$ 100, p $<$ 0.001) combined with the Tukey HSD post-hoc results establish VRNNGAN's consistent superiority across evaluation metrics, while the substantial Model × Dataset interactions demonstrate that synthetic data generation effectiveness is fundamentally context-dependent rather than universal.
 
-\subsubsection{Hybrid Architecture Superiority and Model Performance Patterns}
+This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence scores ranging from 0.883 to 3.072 compared to individual models' scores of 8.908 to 17.291 demonstrate substantial improvements in statistical fidelity, while RMSE improvements of 24-57\% over the best individual model performance confirm enhanced practical utility. These findings are consistent with~\cite{yoon_time-series_2019} and~\cite{desai_timevae_2021}, who identified distinct strengths in adversarial versus variational approaches, but this study extends their work by providing new quantitative evidence of context-dependent effectiveness through interpretable attribution analysis.
 
-The consistent dominance of VRNNGAN across all evaluation contexts demonstrates the effectiveness of combining VAE and GAN architectures to leverage complementary strengths. This study provides new empirical evidence through Shapley value analysis, revealing that the hybrid advantage represents genuine architectural synergy rather than merely additive effects. VRNNGAN's superior performance can be attributed to its combination of VAE's structured latent space learning with GAN's adversarial training, enabling more accurate preservation of statistical properties (KL divergence scores ranging from 0.883 to 3.072 compared to individual models' scores of 8.908 to 17.291) and improved downstream task performance with RMSE improvements of 24-57\% compared to the best individual model performance across datasets.
+Most notably, the Wasserstein distance metric reveals the clearest evidence of context-dependent model effectiveness, with each dataset favoring a different generative approach for geometric similarity preservation. For electricity data, TimeVAE achieves the highest Shapley value (0.033), demonstrating the effectiveness of variational approaches for structured temporal patterns with regular load distributions. In contrast, exchange data favors TimeGAN (0.054), indicating that adversarial training better captures the stochastic volatility and irregular patterns characteristic of financial time series. Weather data shows VRNNGAN's superiority (0.129), suggesting that the most complex meteorological patterns require hybrid architectural approaches to achieve optimal geometric similarity preservation. This pattern provides compelling evidence that geometric similarity—as measured by Wasserstein distance—is fundamentally influenced by dataset-specific temporal characteristics in ways that favor different generative paradigms.
 
-The differential performance of TimeGAN and TimeVAE across metrics reveals fundamental trade-offs in generative model design that extend previous literature findings. These results are consistent with \cite{yoon_time-series_2019} and \cite{desai_timevae_2021}, who identified distinct strengths in adversarial versus variational approaches, but this study provides new quantitative evidence of their context-dependent effectiveness. TimeGAN's superior performance in specific contexts (particularly Wasserstein distance for exchange data: 0.054 vs. competitors' 0.118-0.172) confirms the effectiveness of adversarial training for certain types of temporal pattern preservation. However, the emergence of negative Shapley values for weather data forecasting (-0.396 RMSE, -0.232 MAE) reveals previously undocumented limitations in complex, multi-feature meteorological contexts. TimeVAE's strength in geometric similarity preservation for electricity data (Wasserstein distance: 0.033) while showing poor forecasting performance (RMSE: 1.440 for weather data) demonstrates the classic trade-off between statistical accuracy and practical utility identified by \cite{lu_machine_2024}.
+The emergence of negative Shapley values for TimeGAN in weather data forecasting (-0.396 RMSE, -0.232 MAE) reveals previously undocumented limitations that occur when adversarial training encounters complex meteorological patterns with intricate interdependencies. This finding sheds new light compared to~\cite{lu_machine_2024}'s general observations about trade-offs between statistical accuracy and practical utility, demonstrating that these trade-offs can be severe enough to result in performance degradation rather than simply reduced effectiveness.
 
-\subsubsection{Dataset Complexity and Model-Context Interactions}
+
+
+% The findings of this study provide valuable insights into the effectiveness of different generative model approaches for synthetic time series data generation, revealing patterns that both confirm and extend existing knowledge in the field.
+
+% \subsubsection{Hybrid Architecture Superiority and Model Performance Patterns}
+
+% The consistent dominance of VRNNGAN across all evaluation contexts demonstrates the effectiveness of combining VAE and GAN architectures to leverage complementary strengths. This study provides new empirical evidence through Shapley value analysis, revealing that the hybrid advantage represents genuine architectural synergy rather than merely additive effects. VRNNGAN's superior performance can be attributed to its combination of VAE's structured latent space learning with GAN's adversarial training, enabling more accurate preservation of statistical properties (KL divergence scores ranging from 0.883 to 3.072 compared to individual models' scores of 8.908 to 17.291) and improved downstream task performance with RMSE improvements of 24-57\% compared to the best individual model performance across datasets.
+
+% The differential performance of TimeGAN and TimeVAE across metrics reveals fundamental trade-offs in generative model design that extend previous literature findings. These results are consistent with \cite{yoon_time-series_2019} and \cite{desai_timevae_2021}, who identified distinct strengths in adversarial versus variational approaches, but this study provides new quantitative evidence of their context-dependent effectiveness. TimeGAN's superior performance in specific contexts (particularly Wasserstein distance for exchange data: 0.054 vs. competitors' 0.118-0.172) confirms the effectiveness of adversarial training for certain types of temporal pattern preservation. However, the emergence of negative Shapley values for weather data forecasting (-0.396 RMSE, -0.232 MAE) reveals previously undocumented limitations in complex, multi-feature meteorological contexts. TimeVAE's strength in geometric similarity preservation for electricity data (Wasserstein distance: 0.033) while showing poor forecasting performance (RMSE: 1.440 for weather data) demonstrates the classic trade-off between statistical accuracy and practical utility identified by \cite{lu_machine_2024}.
+
+% \subsubsection{Dataset Complexity and Model-Context Interactions}
 
 % The significant Model × Dataset interactions identified through ANOVA analysis (all F-statistics > 100, p < 0.001) reveal that dataset characteristics fundamentally influence model effectiveness in ways not fully explored in previous literature. This finding challenges the common practice of universal model benchmarking and supports the need for context-aware model selection. The relatively consistent performance across models for electricity data (low bootstrap standard deviations: 0.001-0.043) suggests that this dataset represents a more structured, predictable temporal pattern that all models can reasonably capture, aligning with \cite{zhou_informer_2021}, who noted the regularity of electrical load patterns. 
 
 % Conversely, the substantial performance degradation observed for all models on weather data, particularly TimeVAE's poor forecasting performance (RMSE: 1.440 vs. 0.186-0.345 for other models), reflects the inherent complexity of meteorological time series. The mixed performance patterns observed for exchange data—where TimeGAN excels in geometric similarity (0.054 Wasserstein distance) while VRNNGAN dominates other metrics—reflects the unique properties of financial time series identified by \cite{lai_modeling_2018}, where exchange rates exhibit both stochastic volatility and subtle temporal dependencies that different architectural approaches capture with varying effectiveness.
 
-\subsubsection{Methodological Contributions and Practical Implications}
+% \subsubsection{Methodological Contributions and Practical Implications}
 
 % The application of Shapley value analysis to generative model evaluation represents a significant methodological advancement that addresses evaluation challenges identified in recent literature reviews. This approach is consistent with calls for more interpretable evaluation frameworks by \cite{goyal_systematic_2024}, while providing a novel solution to the attribution problem in synthetic data quality assessment. The bootstrap methodology with 15 iterations per model-dataset combination (generating 135 total observations out of 1,215 possible model-dataset-bootstrap combinations) provided sufficient statistical power for robust ANOVA testing while maintaining computational feasibility.
 
@@ -723,8 +853,9 @@ The author declares that there is no conflict of interest regarding the publicat
 The data used in this study were sourced from PapersWithCode.
 
 % Include all references, even if they are not cited in the text
-\nocite{*}
+% \nocite{*}
 
+\newpage
 % Print the bibliography
-% \printbibliography
+\printbibliography
 \end{document}
