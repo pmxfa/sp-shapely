@@ -1,0 +1,12 @@
+\contentsline {table}{\numberline {1}{\ignorespaces Bootstrap Summary Statistics for Electricity Dataset (15 runs per model)}}{15}{}%
+\contentsline {table}{\numberline {2}{\ignorespaces Bootstrap Summary Statistics for Exchange Dataset (15 runs per model)}}{16}{}%
+\contentsline {table}{\numberline {3}{\ignorespaces Bootstrap Summary Statistics for Weather Dataset (15 runs per model)}}{17}{}%
+\contentsline {table}{\numberline {4}{\ignorespaces Two-way ANOVA summary for synthetic data quality metrics}}{18}{}%
+\contentsline {table}{\numberline {5}{\ignorespaces Tukey HSD Post-Hoc analysis for KL Divergence}}{21}{}%
+\contentsline {table}{\numberline {6}{\ignorespaces Tukey HSD Post-Hoc Analysis for Wasserstein Distance}}{21}{}%
+\contentsline {table}{\numberline {7}{\ignorespaces Tukey HSD Post-Hoc Analysis for RMSE}}{21}{}%
+\contentsline {table}{\numberline {8}{\ignorespaces Tukey HSD Post-Hoc Analysis for MAE}}{22}{}%
+\contentsline {table}{\numberline {9}{\ignorespaces Shapley value contributions for the electricity dataset}}{23}{}%
+\contentsline {table}{\numberline {10}{\ignorespaces Shapley value contributions for the exchange dataset}}{24}{}%
+\contentsline {table}{\numberline {11}{\ignorespaces Shapley value contributions for the weather dataset}}{24}{}%
+\contentsfinish 
