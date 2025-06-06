@@ -3141,9 +3141,7 @@
     <bcf:citekey order="57" intorder="1">yoon_time-series_2019</bcf:citekey>
     <bcf:citekey order="58" intorder="1">desai_timevae_2021</bcf:citekey>
     <bcf:citekey order="59" intorder="1">lee_vrnngan_2022</bcf:citekey>
-    <bcf:citekey order="60" intorder="1">yoon_time-series_2019</bcf:citekey>
-    <bcf:citekey order="61" intorder="1">desai_timevae_2021</bcf:citekey>
-    <bcf:citekey order="62" intorder="1">lu_machine_2024</bcf:citekey>
+    <bcf:citekey order="60" intorder="1">lu_machine_2024</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
