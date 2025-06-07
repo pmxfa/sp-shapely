@@ -1009,6 +1009,124 @@
       \endverb
       \keyw{Training,ECG Synthesis,Electrocardiography,Generative Adversarial Network,Generative adversarial networks,Generators,Neural Network,Neural ODE (NODE),Performance evaluation,Time series analysis,Time-series generation,Training data}
     \endentry
+    \entry{Hazra2022-cy}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=760b15abdb2f2fbd79be99746ca1dd24}{%
+           family={Hazra},
+           familyi={H\bibinitperiod},
+           given={Debapriya},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9baa9a9ee8ca0704dbfcafec1de80f22}{%
+           family={Shafqat},
+           familyi={S\bibinitperiod},
+           given={Wafa},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8acb2b6e48919c3938f69bb7462fb1fe}{%
+           family={Byun},
+           familyi={B\bibinitperiod},
+           given={Yung-Cheol},
+           giveni={Y\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{publisher}{2}{%
+        {Computers, Materials}%
+        {Continua (Tech Science Press)}%
+      }
+      \strng{namehash}{6ee09df57f533c1f95c6c6529ee7d023}
+      \strng{fullhash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{fullhashraw}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{bibnamehash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{authorbibnamehash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{authornamehash}{6ee09df57f533c1f95c6c6529ee7d023}
+      \strng{authorfullhash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{authorfullhashraw}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Comput. Mater. Contin.}
+      \field{number}{2}
+      \field{title}{Generating synthetic data to reduce prediction error of energy consumption}
+      \field{volume}{70}
+      \field{year}{2022}
+      \field{pages}{3151\bibrangedash 3167}
+      \range{pages}{17}
+    \endentry
+    \entry{HERNANDEZ202228}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=78dda64a73c904af0c78fa3ce737d585}{%
+           family={Hernandez},
+           familyi={H\bibinitperiod},
+           given={Mikel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b40989ef08d144cd6e789f38ef0e35a6}{%
+           family={Epelde},
+           familyi={E\bibinitperiod},
+           given={Gorka},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7792b1528b789bb5df8eecb615df4b7f}{%
+           family={Alberdi},
+           familyi={A\bibinitperiod},
+           given={Ane},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e64753fd886f3e444ffea45d7d9f66c8}{%
+           family={Cilla},
+           familyi={C\bibinitperiod},
+           given={Rodrigo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0c6dec304e675ae831af6372c628d2c6}{%
+           family={Rankin},
+           familyi={R\bibinitperiod},
+           given={Debbie},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0c78c4030ed76d4014164c3c9a7c09ca}
+      \strng{fullhash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{fullhashraw}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{bibnamehash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{authorbibnamehash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{authornamehash}{0c78c4030ed76d4014164c3c9a7c09ca}
+      \strng{authorfullhash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{authorfullhashraw}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Synthetic data generation (SDG) research has been ongoing for some time with promising results in different application domains, including healthcare, biometrics and energy consumption. The need for a robust SDG solution to capitalise on advances in Big Data and AI technology has never been greater to enable access to useful data while ensuring reasonable privacy protections. This paper presents a systematic review from the last 5 years (2016–2021) to analyse and report on recent approaches in synthetic tabular data generation (STDG) with a focus on the healthcare application context to preserve patient privacy, paying special attention to the contribution of Generative Adversarial Networks (GAN). In total 34 publications have been retrieved and analysed. A classification of approaches has been proposed and the performance of GAN-based approaches has been extensively analysed. From the systematic review it has been concluded that there is no universal method or metric to evaluate and benchmark the performance of various approaches and that further research is needed to improve the generalisability of GANs to find a model that works optimally across tabular healthcare data.}
+      \field{issn}{0925-2312}
+      \field{journaltitle}{Neurocomputing}
+      \field{title}{Synthetic data generation for tabular health records: A systematic review}
+      \field{volume}{493}
+      \field{year}{2022}
+      \field{pages}{28\bibrangedash 45}
+      \range{pages}{18}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.neucom.2022.04.053
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231222004349
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231222004349
+      \endverb
+      \keyw{Synthetic data generation,Generative adversarial networks,Privacy preserving data,Data sharing,Healthcare,Artificial intelligence}
+    \endentry
     \entry{hudovernik_benchmarking_2024}{misc}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=2782c0caa625083fb214da3532b5f370}{%
@@ -1983,6 +2101,122 @@
       \endverb
       \keyw{Anonymization,confidentiality,Data models,Data privacy,Measurement,privacy,Privacy,privacy metrics,privacy-preserving big data analytics,Reviews,synthetic data,Synthetic data,synthetic data generation,Systematics}
     \endentry
+    \entry{Prihatno2021-mi}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=b46933204026f67c2332890880675700}{%
+           family={Prihatno},
+           familyi={P\bibinitperiod},
+           given={Aji\bibnamedelima Teguh},
+           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e90869c7ba17adb479dbbe67f97a7072}{%
+           family={Nurcahyanto},
+           familyi={N\bibinitperiod},
+           given={Himawan},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bed818a90ac2378cdf33b0fee444aa68}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Md\bibnamedelima Faisal},
+           giveni={M\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5ffa1e50af65b5f5cd1dd4a0bc31c8b3}{%
+           family={Rahman},
+           familyi={R\bibinitperiod},
+           given={Md\bibnamedelima Habibur},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=27fb170feebe90cc715c3bd573415e0c}{%
+           family={Alam},
+           familyi={A\bibinitperiod},
+           given={Md\bibnamedelima Morshed},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b376b45f2760d4af30541180013a435d}{%
+           family={Jang},
+           familyi={J\bibinitperiod},
+           given={Yeong\bibnamedelima Min},
+           giveni={Y\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{publisher}{1}{%
+        {MDPI AG}%
+      }
+      \strng{namehash}{c3a8de2ac3c6ace956ba8ba5e3fc6bd7}
+      \strng{fullhash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{fullhashraw}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{bibnamehash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{authorbibnamehash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{authornamehash}{c3a8de2ac3c6ace956ba8ba5e3fc6bd7}
+      \strng{authorfullhash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{authorfullhashraw}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In recent times, particulate matter (PM2.5) is one of the most critical air quality contaminants, and the rise of its concentration will intensify the hazard of cleanrooms. The forecasting of the concentration of PM2.5 has great importance to improve the safety of the highly pollutant-sensitive electronic circuits in the factories, especially inside semiconductor industries. In this paper, a Single-Dense Layer Bidirectional Long Short-term Memory (BiLSTM) model is developed to forecast the PM2.5 concentrations in the indoor environment by using the time series data. The real-time data samples of PM2.5 concentrations were obtained by using an industrial-grade sensor based on edge computing. The proposed model provided the best results comparing with the other existing models in terms of mean absolute error, mean square error, root mean square error, and mean absolute percentage error. These results show that the low error of forecasting PM2.5 concentration in a cleanroom in a semiconductor factory using the proposed Single-Dense Layer BiLSTM method is considerably high.}
+      \field{journaltitle}{Electronics (Basel)}
+      \field{month}{7}
+      \field{number}{15}
+      \field{title}{Forecasting {PM2.5} concentration using a {Single-Dense} Layer {BiLSTM} method}
+      \field{volume}{10}
+      \field{year}{2021}
+      \field{pages}{1808}
+      \range{pages}{1}
+    \endentry
+    \entry{Qian2023-pa}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7dfc43d0eaa1627f3c07c79898f4d2ad}{%
+           family={Qian},
+           familyi={Q\bibinitperiod},
+           given={Zhaozhi},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6c60ff757c2cd1d489afb4bc202d9349}{%
+           family={Cebere},
+           familyi={C\bibinitperiod},
+           given={Bogdan-Constantin},
+           giveni={B\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=44c5ebc1d90d166c1418c35650bdd2ef}{%
+           family={Schaar},
+           familyi={S\bibinitperiod},
+           given={Mihaela},
+           giveni={M\bibinitperiod},
+           givenun=0,
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \strng{namehash}{7d6577895b8b290183596cf064039d84}
+      \strng{fullhash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{fullhashraw}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{bibnamehash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{authorbibnamehash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{authornamehash}{7d6577895b8b290183596cf064039d84}
+      \strng{authorfullhash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{authorfullhashraw}{0900d3e0ac9865608cd97783e0a8379d}
+      \field{sortinit}{Q}
+      \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Synthcity is an open-source software package for innovative use cases of synthetic data in ML fairness, privacy and augmentation across diverse tabular data modalities, including static data, regular and irregular time series, data with censoring, multi-source data, composite data, and more. Synthcity provides the practitioners with a single access point to cutting edge research and tools in synthetic data. It also offers the community a playground for rapid experimentation and prototyping, a one-stop-shop for SOTA benchmarks, and an opportunity for extending research impact. The library can be accessed on GitHub (https://github.com/vanderschaarlab/synthcity) and pip (https://pypi.org/project/synthcity/). We warmly invite the community to join the development effort by providing feedback, reporting bugs, and contributing code.}
+      \field{eprintclass}{cs.LG}
+      \field{title}{Synthcity: facilitating innovative use cases of synthetic data in different data modalities}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2301.07573
+      \endverb
+    \endentry
     \entry{salakhutdinov_restricted_2007}{article}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=bd2be300d445e9f6db7808f9533e66cb}{%
@@ -2113,6 +2347,42 @@
       \endverb
       \verb{url}
       \verb https://www.mdpi.com/2079-9292/13/19/3909
+      \endverb
+    \endentry
+    \entry{shapley_P-295}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=aa2b96ffd25f090ad898c0022f7efa12}{%
+           family={Shapley},
+           familyi={S\bibinitperiod},
+           given={Lloyd\bibnamedelima S.},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Santa Monica, CA}%
+      }
+      \list{publisher}{1}{%
+        {RAND Corporation}%
+      }
+      \strng{namehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{fullhash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{fullhashraw}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{bibnamehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authorbibnamehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authornamehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authorfullhash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authorfullhashraw}{aa2b96ffd25f090ad898c0022f7efa12}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A Value for N-Person Games}
+      \field{year}{1952}
+      \verb{doi}
+      \verb 10.7249/P0295
       \endverb
     \endentry
     \entry{skandarani_gans_2021}{misc}{}{}
@@ -3476,6 +3746,124 @@
       \endverb
       \keyw{Training,ECG Synthesis,Electrocardiography,Generative Adversarial Network,Generative adversarial networks,Generators,Neural Network,Neural ODE (NODE),Performance evaluation,Time series analysis,Time-series generation,Training data}
     \endentry
+    \entry{Hazra2022-cy}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=760b15abdb2f2fbd79be99746ca1dd24}{%
+           family={Hazra},
+           familyi={H\bibinitperiod},
+           given={Debapriya},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9baa9a9ee8ca0704dbfcafec1de80f22}{%
+           family={Shafqat},
+           familyi={S\bibinitperiod},
+           given={Wafa},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8acb2b6e48919c3938f69bb7462fb1fe}{%
+           family={Byun},
+           familyi={B\bibinitperiod},
+           given={Yung-Cheol},
+           giveni={Y\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{publisher}{2}{%
+        {Computers, Materials}%
+        {Continua (Tech Science Press)}%
+      }
+      \strng{namehash}{6ee09df57f533c1f95c6c6529ee7d023}
+      \strng{fullhash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{fullhashraw}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{bibnamehash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{authorbibnamehash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{authornamehash}{6ee09df57f533c1f95c6c6529ee7d023}
+      \strng{authorfullhash}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \strng{authorfullhashraw}{e5ef187f9ccb475a9cc68dff7c798b23}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Comput. Mater. Contin.}
+      \field{number}{2}
+      \field{title}{Generating synthetic data to reduce prediction error of energy consumption}
+      \field{volume}{70}
+      \field{year}{2022}
+      \field{pages}{3151\bibrangedash 3167}
+      \range{pages}{17}
+    \endentry
+    \entry{HERNANDEZ202228}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=78dda64a73c904af0c78fa3ce737d585}{%
+           family={Hernandez},
+           familyi={H\bibinitperiod},
+           given={Mikel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b40989ef08d144cd6e789f38ef0e35a6}{%
+           family={Epelde},
+           familyi={E\bibinitperiod},
+           given={Gorka},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7792b1528b789bb5df8eecb615df4b7f}{%
+           family={Alberdi},
+           familyi={A\bibinitperiod},
+           given={Ane},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e64753fd886f3e444ffea45d7d9f66c8}{%
+           family={Cilla},
+           familyi={C\bibinitperiod},
+           given={Rodrigo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0c6dec304e675ae831af6372c628d2c6}{%
+           family={Rankin},
+           familyi={R\bibinitperiod},
+           given={Debbie},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0c78c4030ed76d4014164c3c9a7c09ca}
+      \strng{fullhash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{fullhashraw}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{bibnamehash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{authorbibnamehash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{authornamehash}{0c78c4030ed76d4014164c3c9a7c09ca}
+      \strng{authorfullhash}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \strng{authorfullhashraw}{f4f1e7850bd73a9e9e596a6c49290d81}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Synthetic data generation (SDG) research has been ongoing for some time with promising results in different application domains, including healthcare, biometrics and energy consumption. The need for a robust SDG solution to capitalise on advances in Big Data and AI technology has never been greater to enable access to useful data while ensuring reasonable privacy protections. This paper presents a systematic review from the last 5 years (2016–2021) to analyse and report on recent approaches in synthetic tabular data generation (STDG) with a focus on the healthcare application context to preserve patient privacy, paying special attention to the contribution of Generative Adversarial Networks (GAN). In total 34 publications have been retrieved and analysed. A classification of approaches has been proposed and the performance of GAN-based approaches has been extensively analysed. From the systematic review it has been concluded that there is no universal method or metric to evaluate and benchmark the performance of various approaches and that further research is needed to improve the generalisability of GANs to find a model that works optimally across tabular healthcare data.}
+      \field{issn}{0925-2312}
+      \field{journaltitle}{Neurocomputing}
+      \field{title}{Synthetic data generation for tabular health records: A systematic review}
+      \field{volume}{493}
+      \field{year}{2022}
+      \field{pages}{28\bibrangedash 45}
+      \range{pages}{18}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.neucom.2022.04.053
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231222004349
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231222004349
+      \endverb
+      \keyw{Synthetic data generation,Generative adversarial networks,Privacy preserving data,Data sharing,Healthcare,Artificial intelligence}
+    \endentry
     \entry{hudovernik_benchmarking_2024}{misc}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=2782c0caa625083fb214da3532b5f370}{%
@@ -4450,6 +4838,122 @@
       \endverb
       \keyw{Anonymization,confidentiality,Data models,Data privacy,Measurement,privacy,Privacy,privacy metrics,privacy-preserving big data analytics,Reviews,synthetic data,Synthetic data,synthetic data generation,Systematics}
     \endentry
+    \entry{Prihatno2021-mi}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=b46933204026f67c2332890880675700}{%
+           family={Prihatno},
+           familyi={P\bibinitperiod},
+           given={Aji\bibnamedelima Teguh},
+           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e90869c7ba17adb479dbbe67f97a7072}{%
+           family={Nurcahyanto},
+           familyi={N\bibinitperiod},
+           given={Himawan},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bed818a90ac2378cdf33b0fee444aa68}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Md\bibnamedelima Faisal},
+           giveni={M\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5ffa1e50af65b5f5cd1dd4a0bc31c8b3}{%
+           family={Rahman},
+           familyi={R\bibinitperiod},
+           given={Md\bibnamedelima Habibur},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=27fb170feebe90cc715c3bd573415e0c}{%
+           family={Alam},
+           familyi={A\bibinitperiod},
+           given={Md\bibnamedelima Morshed},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b376b45f2760d4af30541180013a435d}{%
+           family={Jang},
+           familyi={J\bibinitperiod},
+           given={Yeong\bibnamedelima Min},
+           giveni={Y\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{publisher}{1}{%
+        {MDPI AG}%
+      }
+      \strng{namehash}{c3a8de2ac3c6ace956ba8ba5e3fc6bd7}
+      \strng{fullhash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{fullhashraw}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{bibnamehash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{authorbibnamehash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{authornamehash}{c3a8de2ac3c6ace956ba8ba5e3fc6bd7}
+      \strng{authorfullhash}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \strng{authorfullhashraw}{7ab9ec48c9ed2243ec6a81dd1d575287}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In recent times, particulate matter (PM2.5) is one of the most critical air quality contaminants, and the rise of its concentration will intensify the hazard of cleanrooms. The forecasting of the concentration of PM2.5 has great importance to improve the safety of the highly pollutant-sensitive electronic circuits in the factories, especially inside semiconductor industries. In this paper, a Single-Dense Layer Bidirectional Long Short-term Memory (BiLSTM) model is developed to forecast the PM2.5 concentrations in the indoor environment by using the time series data. The real-time data samples of PM2.5 concentrations were obtained by using an industrial-grade sensor based on edge computing. The proposed model provided the best results comparing with the other existing models in terms of mean absolute error, mean square error, root mean square error, and mean absolute percentage error. These results show that the low error of forecasting PM2.5 concentration in a cleanroom in a semiconductor factory using the proposed Single-Dense Layer BiLSTM method is considerably high.}
+      \field{journaltitle}{Electronics (Basel)}
+      \field{month}{7}
+      \field{number}{15}
+      \field{title}{Forecasting {PM2.5} concentration using a {Single-Dense} Layer {BiLSTM} method}
+      \field{volume}{10}
+      \field{year}{2021}
+      \field{pages}{1808}
+      \range{pages}{1}
+    \endentry
+    \entry{Qian2023-pa}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7dfc43d0eaa1627f3c07c79898f4d2ad}{%
+           family={Qian},
+           familyi={Q\bibinitperiod},
+           given={Zhaozhi},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6c60ff757c2cd1d489afb4bc202d9349}{%
+           family={Cebere},
+           familyi={C\bibinitperiod},
+           given={Bogdan-Constantin},
+           giveni={B\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=44c5ebc1d90d166c1418c35650bdd2ef}{%
+           family={Schaar},
+           familyi={S\bibinitperiod},
+           given={Mihaela},
+           giveni={M\bibinitperiod},
+           givenun=0,
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \strng{namehash}{7d6577895b8b290183596cf064039d84}
+      \strng{fullhash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{fullhashraw}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{bibnamehash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{authorbibnamehash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{authornamehash}{7d6577895b8b290183596cf064039d84}
+      \strng{authorfullhash}{0900d3e0ac9865608cd97783e0a8379d}
+      \strng{authorfullhashraw}{0900d3e0ac9865608cd97783e0a8379d}
+      \field{sortinit}{Q}
+      \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Synthcity is an open-source software package for innovative use cases of synthetic data in ML fairness, privacy and augmentation across diverse tabular data modalities, including static data, regular and irregular time series, data with censoring, multi-source data, composite data, and more. Synthcity provides the practitioners with a single access point to cutting edge research and tools in synthetic data. It also offers the community a playground for rapid experimentation and prototyping, a one-stop-shop for SOTA benchmarks, and an opportunity for extending research impact. The library can be accessed on GitHub (https://github.com/vanderschaarlab/synthcity) and pip (https://pypi.org/project/synthcity/). We warmly invite the community to join the development effort by providing feedback, reporting bugs, and contributing code.}
+      \field{eprintclass}{cs.LG}
+      \field{title}{Synthcity: facilitating innovative use cases of synthetic data in different data modalities}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2301.07573
+      \endverb
+    \endentry
     \entry{salakhutdinov_restricted_2007}{article}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=bd2be300d445e9f6db7808f9533e66cb}{%
@@ -4580,6 +5084,42 @@
       \endverb
       \verb{url}
       \verb https://www.mdpi.com/2079-9292/13/19/3909
+      \endverb
+    \endentry
+    \entry{shapley_P-295}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=aa2b96ffd25f090ad898c0022f7efa12}{%
+           family={Shapley},
+           familyi={S\bibinitperiod},
+           given={Lloyd\bibnamedelima S.},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Santa Monica, CA}%
+      }
+      \list{publisher}{1}{%
+        {RAND Corporation}%
+      }
+      \strng{namehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{fullhash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{fullhashraw}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{bibnamehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authorbibnamehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authornamehash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authorfullhash}{aa2b96ffd25f090ad898c0022f7efa12}
+      \strng{authorfullhashraw}{aa2b96ffd25f090ad898c0022f7efa12}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A Value for N-Person Games}
+      \field{year}{1952}
+      \verb{doi}
+      \verb 10.7249/P0295
       \endverb
     \endentry
     \entry{skandarani_gans_2021}{misc}{}{}

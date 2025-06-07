@@ -29,6 +29,17 @@
 \usepackage{titlesec}
 \usepackage{titletoc}
 
+% test
+
+% Add this to your preamble:
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+% Define styles
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
 \titleformat{\section}[block]
   {\normalfont\Large\bfseries\centering}
@@ -197,6 +208,19 @@ The faculty of the University of the Philippines Cebu -- Department of Computer 
 
 \vspace{1em} % adds a little vertical space
 
+This study would not have been possible without the guidance, support, and inspiration I received from so many individuals throughout this journey. \\
+
+First and foremost, I would like to express my deepest gratitude to my SP adviser, Asst. Prof.~Dharyll Prince Abellana, whose brilliance has never failed to amaze me. His insight, patience, and unwavering belief in my work have shaped this study into what it is today. \\
+
+To my family, thank you for your never-ending support, encouragement, and love. Your presence has been my foundation through every challenge I faced. \\
+
+To my friends, acquaintances, and even strangers who, in one way or another, inspired me during my college journey—thank you. Whether through kind words, shared struggles, or silent examples, you’ve each left a mark that pushed me forward. \\
+
+And lastly, to myself—for choosing an unfamiliar topic in pursuit of growth, for embracing uncertainty, and for continuing even in moments of doubt. This work is as much a product of my perseverance as it is of academic pursuit.
+
+
+
+
 \newpage
 
 \begin{center}
@@ -205,6 +229,10 @@ The faculty of the University of the Philippines Cebu -- Department of Computer 
 
 \vspace{1em} % adds a little vertical space
 
+
+
+
+
 \newpage
 
 \begin{center}
@@ -212,6 +240,8 @@ The faculty of the University of the Philippines Cebu -- Department of Computer 
 \end{center}
 
 \vspace{1em} % adds a little vertical space
+
+This study introduces a Shapley-based evaluation framework for generative models in synthetic time series data generation, addressing the critical gap in interpretable performance attribution across fidelity and usability dimensions. Three generative architectures, TimeGAN, TimeVAE, and VRNNGAN (hybrid), were systematically evaluated across electricity, exchange, and weather datasets using a comprehensive methodology integrating statistical fidelity measures (KL divergence, Wasserstein distance) and forecasting utility metrics (RMSE, MAE). Bootstrap validation with 15 iterations per model-dataset combination provided statistical robustness, while two-way ANOVA analysis revealed significant model-dataset interactions (all p $<$ 0.001), confirming that synthetic data generation effectiveness is fundamentally context-dependent. Tukey HSD post-hoc analysis identified distinct performance groupings, with VRNNGAN consistently forming its own superior statistical group across all metrics. Shapley value analysis enabled fair attribution of individual model contributions, revealing that VRNNGAN achieved consistent superiority across 10 of 12 metric-dataset combinations, demonstrating genuine architectural synergy rather than additive benefits. Notably, geometric similarity preservation showed dataset-specific preferences, with TimeVAE excelling for electricity data, TimeGAN for exchange data, and VRNNGAN for weather data. The emergence of negative Shapley values provided novel insights into architectural limitations, indicating that certain model-dataset combinations actively degrade synthetic data quality. This framework advances synthetic data evaluation methodology by providing interpretable insights into when and why specific generative approaches excel, offering practitioners evidence-based model selection guidelines for context-aware synthetic data deployment.
 
 \newpage
 % Add after \tableofcontents
@@ -253,11 +283,12 @@ Addressing this gap, this study employs a Shapley-based analysis to provide inte
 \end{enumerate}
 
 \subsection{Significance of the Study}
-This study addresses a critical gap in the literature on synthetic data generation, particularly focusing on the balance between fidelity and usability in datasets generated for time series applications. While generative models like GANs, VAEs, and their hybrids have shown promise in isolated studies, there remains a substantial need for a comprehensive evaluation framework that assesses these models based on their ability to produce high-quality synthetic datasets.
 
-By applying a Shapley-based analysis, this study provides a systematic approach for assessing how well synthetic data supports machine learning tasks while maintaining statistical similarity to real data. This dual-focus approach is crucial because generating high-quality synthetic data requires more than mere replication of the original data’s statistical features; it must also enhance the data's practical utility for machine learning tasks, particularly when the original datasets are flawed or biased.
+This study addresses a critical gap in synthetic data generation methodology by introducing the first Shapley-based evaluation framework specifically designed for generative models in time series applications. While existing research has focused on isolated performance comparisons between GANs, VAEs, and hybrid architectures, there has been no systematic approach that provides interpretable attribution of each model's contribution to synthetic data quality across both fidelity and usability dimensions.
 
-The outcomes of this study are expected to significantly impact the field by providing actionable insights that can guide the development and refinement of generative models. Identifying models that effectively balance these two critical dimensions will help researchers and practitioners in fields where the quality of synthetic data is particularly important for overcoming challenges like data scarcity and bias without sacrificing the data’s utility.
+The Shapley-based framework represents a novel application of cooperative game theory principles to generative model assessment, enabling fair attribution of performance contributions rather than traditional black-box comparisons. This systematic integration of fidelity and usability metrics within a unified evaluation framework addresses the longstanding challenge of balancing statistical accuracy with practical utility in synthetic data applications. This framework enables evidence-based model selection guidelines that move beyond aggregate performance metrics to offer nuanced understanding of when and why specific generative approaches excel. The methodology supports identification of optimal models based on target application requirements and dataset characteristics, facilitating more informed architectural decisions in generative model development. Additionally, the balanced evaluation framework offers actionable insights for quality assessment that consider both statistical fidelity and downstream task performance, enabling confident deployment of synthetic data in real-world applications.
+
+The research addresses critical needs in data-scarce domains where both statistical accuracy and practical utility are essential for meaningful synthetic data deployment. By providing interpretable attribution of model contributions, the framework enables informed decision-making in regulated industries where explainable AI is increasingly required.
 
 \subsection{Scopes and Delimitations of the Study}
 This study focuses on evaluating the quality of synthetic data generated by specific generative models—Generative Adversarial Networks (GANs), Variational Autoencoders (VAEs), and their hybrid (GAN-VAES)—within the context of time series applications. The primary evaluation framework integrates the concept of fidelity and usability. These two concepts are treated as interrelated aspects of data quality, rather than as separate, isolated evaluative criteria.
@@ -294,11 +325,11 @@ This study focuses on evaluating the quality of synthetic data generated by spec
 
 \subsection{Overview of Synthetic Data Generation}
 
-Synthetic data refers to artificially generated data produced through specialized mathematical models or algorithms, specifically designed to address particular data science tasks \parencite{jordon_synthetic_2022}. According to \cite{jordon_synthetic_2022}, synthetic data serves as a tool to address various challenges in data science, including privacy concerns, bias, and data scarcity, without directly exposing sensitive information. This view is further supported by \cite{goyal_systematic_2024} who have highlighted the increasing recognition of synthetic data for its potential to address pressing real-world issues such as mitigating data scarcity, addressing privacy concerns, and reducing algorithmic biases— issues common in machine learning applications. Similarly, \cite{emam_practical_2020} emphasizes that although it is not real data, synthetic data is generated based on the statistical properties of the original dataset, ensuring it mirrors the original data in terms of patterns and distributions. This approach enables for the preservation of statistical integrity while mitigating risks related to data privacy breaches.  
+Synthetic data refers to artificially generated data produced through specialized mathematical models or algorithms, specifically designed to address particular data science tasks \parencite{jordon_synthetic_2022}. According to \textcite{jordon_synthetic_2022}, synthetic data serves as a tool to address various challenges in data science, including privacy concerns, bias, and data scarcity, without directly exposing sensitive information. This view is further supported by \textcite{goyal_systematic_2024} who have highlighted the increasing recognition of synthetic data for its potential to address pressing real-world issues such as mitigating data scarcity, addressing privacy concerns, and reducing algorithmic biases— issues common in machine learning applications. Similarly, \textcite{emam_practical_2020} emphasizes that although it is not real data, synthetic data is generated based on the statistical properties of the original dataset, ensuring it mirrors the original data in terms of patterns and distributions. This approach enables for the preservation of statistical integrity while mitigating risks related to data privacy breaches.  
 
-Expanding on these definitions, synthetic data has seen widespread adoption in a variety of fields, where the aforementioned challenges are most pronounced. This is especially evident in the healthcare domain, where access to relevant datasets is often constrained due to privacy and scarcity. A study by \cite{skandarani_gans_2021} illustrates this through the use of Generative Adversarial Networks (GANs) to generate medical images to enable meaningful research. This application is further elaborated by \cite{habiba_ecg_2021}, who investigated ECG synthesis using Neural Ordinary Differential Equations (ODE) and GAN models, demonstrating another facet of how synthetic data can support advancements in medical research. Similarly, in other domains like finance, where there is a need for balanced datasets and anonymization, synthetic data has proven beneficial as exemplified by \cite{caliskan_comparative_2023}, comparatively analyzing the Variational Auto-Encoder (VAE) and Conditional Tabular Generative Adversarial Network (CTGAN) for generating synthetic financial credit load data. Additionally, synthetic data is also used in network traffic simulation \parencite{cullen_evaluation_2022}, supporting cybersecurity applications through the generation of anonymized datasets.
+Expanding on these definitions, synthetic data has seen widespread adoption in a variety of fields, where the aforementioned challenges are most pronounced. This is especially evident in the healthcare domain, where access to relevant datasets is often constrained due to privacy and scarcity. A study by \textcite{skandarani_gans_2021} illustrates this through the use of Generative Adversarial Networks (GANs) to generate medical images to enable meaningful research. This application is further elaborated by \textcite{habiba_ecg_2021}, who investigated ECG synthesis using Neural Ordinary Differential Equations (ODE) and GAN models, demonstrating another facet of how synthetic data can support advancements in medical research. Similarly, in other domains like finance, where there is a need for balanced datasets and anonymization, synthetic data has proven beneficial as exemplified by \textcite{caliskan_comparative_2023}, comparatively analyzing the Variational Auto-Encoder (VAE) and Conditional Tabular Generative Adversarial Network (CTGAN) for generating synthetic financial credit load data. Additionally, synthetic data is also used in network traffic simulation \parencite{cullen_evaluation_2022}, supporting cybersecurity applications through the generation of anonymized datasets.
 
-Despite its utility, there remains significant open challenges in the field of synthetic data generation. A recurring theme across the related literature is the lack of well-agreed metrics for evaluating the quality, utility, and privacy of synthetic data \parencite{goyal_systematic_2024, caliskan_comparative_2023, bauer_comprehensive_2024, lu_machine_2024}. This absence of well-agreed evaluation methods makes it a challenging task to compare the performance of different models, such as GANs, VAEs, and Neural ODEs, and to determine which model is best suited for a given application, as observed in a systematic review by \cite{goyal_systematic_2024}. For example, while some studies rely on statistical difference evaluations like Kullback-Leibler (KL) divergence or Wasserstein distance \parencite{li_his-gan_2019}, others employ human evaluation or application-specific metrics to assess synthetic data quality \parencite{lu_machine_2024}, which further contributes to the inconsistencies in evaluation. Beyond evaluation, the balance between fidelity and privacy also remains a critical issue, with multiple studies emphasizing the difficulty of generating data that mirrors the original dataset while protecting sensitive information \parencite{goyal_systematic_2024}. Additional issues include propagation of biases \parencite{jordon_synthetic_2022}, fairness issues \parencite{lu_machine_2024}, high computational costs \parencite{bauer_comprehensive_2024} and the lack of robust privacy-preserving techniques \parencite{kaabachi_scoping_2024}.
+Despite its utility, there remains significant open challenges in the field of synthetic data generation. A recurring theme across the related literature is the lack of well-agreed metrics for evaluating the quality, utility, and privacy of synthetic data \parencite{goyal_systematic_2024, caliskan_comparative_2023, bauer_comprehensive_2024, lu_machine_2024}. This absence of well-agreed evaluation methods makes it a challenging task to compare the performance of different models, such as GANs, VAEs, and Neural ODEs, and to determine which model is best suited for a given application, as observed in a systematic review by \textcite{goyal_systematic_2024}. For example, while some studies rely on statistical difference evaluations like Kullback-Leibler (KL) divergence or Wasserstein distance \parencite{li_his-gan_2019}, others employ human evaluation or application-specific metrics to assess synthetic data quality \parencite{lu_machine_2024}, which further contributes to the inconsistencies in evaluation. Beyond evaluation, the balance between fidelity and privacy also remains a critical issue, with multiple studies emphasizing the difficulty of generating data that mirrors the original dataset while protecting sensitive information \parencite{goyal_systematic_2024}. Additional issues include propagation of biases \parencite{jordon_synthetic_2022}, fairness issues \parencite{lu_machine_2024}, high computational costs \parencite{bauer_comprehensive_2024} and the lack of robust privacy-preserving techniques \parencite{kaabachi_scoping_2024}.
 
 In light of the challenges discussed above, it is evident that the field of synthetic data generation is at a crucial juncture. Given the growing reliance on machine learning models across sectors, understanding how to measure the quality and impact of synthetic data will become increasingly important. Thus, the study of metrics for evaluating synthetic data—in terms of both privacy protection and data utility—will be a critical area of future research. Such metrics will not only improve synthetic data's applicability across industries but also enhance trust in its use for privacy-sensitive applications like healthcare and finance.
 
@@ -312,21 +343,52 @@ General utility metrics assess the overall statistical properties and model eval
 
 In addition to utility metrics, privacy metrics are crucial for evaluating the extent to which synthetic data protects sensitive information in the original dataset. Differential Privacy (DP) is one of the most widely recognized privacy metrics, providing a formal framework that quantifies the privacy guarantees of a data release mechanism \parencite{jordon_synthetic_2022,goyal_systematic_2024,kaabachi_scoping_2024,nikolenko_synthetic_2019}. Similarly, Distance to Closest Record (DCR) offers another valuable perspective by measuring the distance between each synthetic data point and its nearest neighbor in the real training dataset \parencite{mendelevitch_fidelity_2021}.
 
-In evaluating synthetic data generation, one of the most significant challenges is the inconsistency in comparative evaluations of different methods, which arises from the lack of uniform evaluation metrics \parencite{chundawat_tabsyndex_2024}. This inconsistency leads to confusion and variability in determining the effectiveness of synthetic data. As different models and applications prioritize various aspects, such as privacy, accuracy, or utility, establishing a common ground for evaluation becomes problematic. For example, while some methods may focus on enhancing privacy, others might aim to improve the accuracy or utility of the synthetic data, resulting in a diverse range of metrics that are not easily comparable. In response to these discrepancies, there have been concerted efforts within the research community to develop more unified evaluation metrics. One notable example is TabSynDex by~\cite{chundawat_tabsyndex_2024}, a single-score metric designed to robustly evaluate synthetic tabular data. Another innovative metric that has been developed is SHAPr \parencite{duddu_shapr_2022}, a Shapley-value based privacy metric which offers a versatile tool for measuring privacy risks.
+In evaluating synthetic data generation, one of the most significant challenges is the inconsistency in comparative evaluations of different methods, which arises from the lack of uniform evaluation metrics \parencite{chundawat_tabsyndex_2024}. This inconsistency leads to confusion and variability in determining the effectiveness of synthetic data. As different models and applications prioritize various aspects, such as privacy, accuracy, or utility, establishing a common ground for evaluation becomes problematic. For example, while some methods may focus on enhancing privacy, others might aim to improve the accuracy or utility of the synthetic data, resulting in a diverse range of metrics that are not easily comparable. In response to these discrepancies, there have been concerted efforts within the research community to develop more unified evaluation metrics. One notable example is TabSynDex by~\textcite{chundawat_tabsyndex_2024}, a single-score metric designed to robustly evaluate synthetic tabular data. Another innovative metric that has been developed is SHAPr \parencite{duddu_shapr_2022}, a Shapley-value based privacy metric which offers a versatile tool for measuring privacy risks.
 
 However, these efforts encounter additional complexities. A prominent issue is the difficulty in balancing the trade-offs between privacy and utility. Enhancing privacy typically involves introducing mechanisms that may degrade the utility of the data by reducing its accuracy or limiting the types of analysis that can be performed effectively. This trade-off is particularly problematic in fields requiring high-fidelity data for accurate analysis, such as healthcare and finance, where both high utility and stringent privacy are critical \parencite{mendelevitch_fidelity_2021,caliskan_comparative_2023}. Moreover, many existing studies and methodologies fail to thoroughly evaluate residual privacy risks, especially concerning publicly released synthetic data \parencite{kaabachi_scoping_2024}. This oversight can lead to significant privacy breaches, as residual information may still be exploited to uncover sensitive data about individuals in the original dataset. Lastly, the metrics currently employed often struggle to capture complex relationships and dependencies between multiple attributes in the data. This deficiency can lead to synthetic datasets that, while statistically similar to original datasets in marginal distributions, fail to preserve more complex interdependencies, thus limiting their usefulness for more sophisticated data science tasks \parencite{jordon_synthetic_2022}.
 
+\begin{table}[H]
+\centering
+\caption{Key Evaluation Metrics in Synthetic Data Generation Literature}
+\label{tab:literature_metrics_comprehensive}
+\small
+\begin{tabular}{llp{5cm}l}
+\toprule
+\textbf{Category} & \textbf{Metric} & \textbf{Application} & \textbf{Source} \\
+\midrule
+\multirow{2}{*}{Fidelity} 
+    & KL Divergence & Measures distributional similarity between synthetic and original data & \textcite{li_his-gan_2019} \\
+    & Wasserstein Distance & Evaluates geometric similarity preservation in data distributions & \textcite{li_his-gan_2019} \\
+\midrule
+\multirow{4}{*}{Utility} 
+    & RMSE & Emphasizes larger prediction errors for forecasting evaluation & \textcite{Hazra2022-cy} \\
+    & MAE & Measures average absolute prediction errors & \textcite{Hazra2022-cy} \\
+    & Accuracy & Measures proportion of correct predictions & \textcite{figueira_survey_2022} \\
+    & F1-Score & Provides balanced score of precision and recall & \textcite{figueira_survey_2022} \\
+\midrule
+\multirow{2}{*}{Privacy} 
+    & Distance to Closest Record & Evaluates privacy by assessing similarity to nearest original data points & \textcite{mendelevitch_fidelity_2021} \\
+    & Differential Privacy & Formal privacy measure that quantifies privacy risk & \textcite{nikolenko_synthetic_2019} \\
+\midrule
+\multirow{3}{*}{Unified} 
+    & TabSynDex & Single-score metric for tabular data fidelity and utility & \textcite{chundawat_tabsyndex_2024} \\
+    & SHAPr & Shapley-based privacy risk assessment & \textcite{duddu_shapr_2022} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
 \subsection{Survey of Generative Deep Learning Models}
 
-Generative deep learning models have emerged as powerful tools for creating synthetic data, increasingly becoming relevant in fields like healthcare, finance, and security, where data privacy and scarcity are major concerns. These models aim to capture the underlying data distribution of the training set in order to produce samples that reflect the learned distribution \parencite{carvajal-patino_synthetic_2022}. For example, GANs use an adversarial framework where the generator learns to model the data distribution by producing synthetic samples that fool a discriminator, which is trained to distinguish real from synthetic data. Similarly, VAEs utilize an encoder-decoder architecture, where the encoder maps data into a latent space and the decoder generates new samples by reconstructing data from this latent representation. Prior to the development of deep learning models, early generative approaches, such as Hidden Markov Models (HMMs) and Gaussian Mixture Models (GMMs) paved the way by capturing simple probabilistic relationships in data. However, as Cao et al. (2023) notes, it was the advent of deep learning that brought major performance advancements, allowing generative models to handle complex, high-dimensional data distributions. This idea is supported by~\cite{caliskan_comparative_2023}, who suggest that the proliferation of deep learning algorithms and emergence of generative techniques offers more promising solutions in the generation of financial credit loan data. This leap in capability has established deep learning-based models as central to modern synthetic data generation. 
+Generative deep learning models have emerged as powerful tools for creating synthetic data, increasingly becoming relevant in fields like healthcare, finance, and security, where data privacy and scarcity are major concerns. These models aim to capture the underlying data distribution of the training set in order to produce samples that reflect the learned distribution \parencite{carvajal-patino_synthetic_2022}. For example, GANs use an adversarial framework where the generator learns to model the data distribution by producing synthetic samples that fool a discriminator, which is trained to distinguish real from synthetic data. Similarly, VAEs utilize an encoder-decoder architecture, where the encoder maps data into a latent space and the decoder generates new samples by reconstructing data from this latent representation. Prior to the development of deep learning models, early generative approaches, such as Hidden Markov Models (HMMs) and Gaussian Mixture Models (GMMs) paved the way by capturing simple probabilistic relationships in data. However, as Cao et al. (2023) notes, it was the advent of deep learning that brought major performance advancements, allowing generative models to handle complex, high-dimensional data distributions. This idea is supported by~\textcite{caliskan_comparative_2023}, who suggest that the proliferation of deep learning algorithms and emergence of generative techniques offers more promising solutions in the generation of financial credit loan data. This leap in capability has established deep learning-based models as central to modern synthetic data generation. 
 
-With the rise of deep learning, models such as GANs and VAEs have emerged as foundational generative models that leverage neural networks to capture and reproduce complex data distributions in high-dimensional spaces. GANs, introduced by~\cite{goodfellow_generative_2014}, use an adversarial framework involving two neural networks, a generator and a discriminator. More specifically, the generator begins with random noise as its input and strives to produce data whose distribution challenges the discriminator’s ability to classify it as real or synthetic. Based on the discriminator’s classification results, the gradients of the generator are updated to better approximate the real data distribution \parencite{zia_synthetic_2023}. Although initially focused on synthetic image generation, GANs have extended their utility beyond image synthesis to domains like time-series data generation \parencite{yoon_time-series_2019}. 
+With the rise of deep learning, models such as GANs and VAEs have emerged as foundational generative models that leverage neural networks to capture and reproduce complex data distributions in high-dimensional spaces. GANs, introduced by~\textcite{goodfellow_generative_2014}, use an adversarial framework involving two neural networks, a generator and a discriminator. More specifically, the generator begins with random noise as its input and strives to produce data whose distribution challenges the discriminator’s ability to classify it as real or synthetic. Based on the discriminator’s classification results, the gradients of the generator are updated to better approximate the real data distribution \parencite{zia_synthetic_2023}. Although initially focused on synthetic image generation, GANs have extended their utility beyond image synthesis to domains like time-series data generation \parencite{yoon_time-series_2019}. 
 
-VAEs represent another class of generative models frequently used for synthetic data generation. Proposed by~\cite{kingma_auto-encoding_2022}, VAEs use a probabilistic approach, learning to encode input data into a latent space in a manner that enables controlled sampling. Unlike GANs, which rely on adversarial training, VAEs  employ a probabilistic approach using encoder and decoder networks to learn and generate data \parencite{lu_machine_2024}. One of the key strengths of VAEs lies in their ability to generate smooth, continuous latent spaces. This quality enables fine control over the generative process, allowing the user to manipulate specific features or generate data with particular attributes by sampling specific regions of the latent space, such as in anomaly detection \parencite{niu_lstm-based_2020}, where VAEs can learn normal patterns and identify deviations as anomalies.
+VAEs represent another class of generative models frequently used for synthetic data generation. Proposed by~\textcite{kingma_auto-encoding_2022}, VAEs use a probabilistic approach, learning to encode input data into a latent space in a manner that enables controlled sampling. Unlike GANs, which rely on adversarial training, VAEs  employ a probabilistic approach using encoder and decoder networks to learn and generate data \parencite{lu_machine_2024}. One of the key strengths of VAEs lies in their ability to generate smooth, continuous latent spaces. This quality enables fine control over the generative process, allowing the user to manipulate specific features or generate data with particular attributes by sampling specific regions of the latent space, such as in anomaly detection \parencite{niu_lstm-based_2020}, where VAEs can learn normal patterns and identify deviations as anomalies.
 
-In addition to GANs and VAEs, Restricted Boltzmann Machines (RBMs) have also been critical in the evolution of generative models. Proposed by~\cite{salakhutdinov_restricted_2007}, RBMs are models that can learn the distribution of the training data through a two-layer architecture — a visible layer that represents the observed data and a hidden layer that captures latent features \parencite{carvajal-patino_synthetic_2022}. RBMs have been successfully applied in a range of tasks, including generating user preferences for recommendation systems like Netflix \parencite{nematholahy_recommender_2020} and reconstructing missing data in tabular datasets. For instance, in financial modeling, they have been used to generate synthetic market data, replicating the probability distributions of real-world datasets and capturing complex dependencies \parencite{kondratyev_market_2019}.
+In addition to GANs and VAEs, Restricted Boltzmann Machines (RBMs) have also been critical in the evolution of generative models. Proposed by~\textcite{salakhutdinov_restricted_2007}, RBMs are models that can learn the distribution of the training data through a two-layer architecture — a visible layer that represents the observed data and a hidden layer that captures latent features \parencite{carvajal-patino_synthetic_2022}. RBMs have been successfully applied in a range of tasks, including generating user preferences for recommendation systems like Netflix \parencite{nematholahy_recommender_2020} and reconstructing missing data in tabular datasets. For instance, in financial modeling, they have been used to generate synthetic market data, replicating the probability distributions of real-world datasets and capturing complex dependencies \parencite{kondratyev_market_2019}.
 
-Originally introduced by~\cite{sohl-dickstein_deep_2015}, Diffusion Models have gained significant attention in synthetic data generation in recent years due to their ability to handle complex data distributions with stability and precision. As per~\cite{lin_diffusion_2023}, the underlying principle of Diffusion Models is to progressively perturb observed data through a forward diffusion process and then recover the original data using a backward reverse process. The forward process involves multiple steps of noise injection, where the noise level changes incrementally at each step. Conversely, the backward process consists of a series of denoising steps, parameterized by a neural network, that gradually remove the injected noise. Once the backward process has been learned, Diffusion Models can generate new samples from almost any initial data \parencite{lin_diffusion_2023}. This is supported by a study by~\cite{you_diffusion_2023} that highlights that Diffusion Models are particularly effective in scenarios with limited training data, as they can generate novel samples even when very few training samples are available. In addition,~\cite{zhu_synthetic_2024} emphasizes that Diffusion Models, along with other foundational generative models like GANs, have become one of the most widely used methods for modeling the distribution of continuous-domain data and generating new samples. Their growing popularity reflects their versatility and robustness in a wide range of applications, especially as Diffusion Models have demonstrated their power over many existing generative techniques~\parencite{lin_diffusion_2023}.
+Originally introduced by~\textcite{sohl-dickstein_deep_2015}, Diffusion Models have gained significant attention in synthetic data generation in recent years due to their ability to handle complex data distributions with stability and precision. As per~\textcite{lin_diffusion_2023}, the underlying principle of Diffusion Models is to progressively perturb observed data through a forward diffusion process and then recover the original data using a backward reverse process. The forward process involves multiple steps of noise injection, where the noise level changes incrementally at each step. Conversely, the backward process consists of a series of denoising steps, parameterized by a neural network, that gradually remove the injected noise. Once the backward process has been learned, Diffusion Models can generate new samples from almost any initial data \parencite{lin_diffusion_2023}. This is supported by a study by~\textcite{you_diffusion_2023} that highlights that Diffusion Models are particularly effective in scenarios with limited training data, as they can generate novel samples even when very few training samples are available. In addition,~\textcite{zhu_synthetic_2024} emphasizes that Diffusion Models, along with other foundational generative models like GANs, have become one of the most widely used methods for modeling the distribution of continuous-domain data and generating new samples. Their growing popularity reflects their versatility and robustness in a wide range of applications, especially as Diffusion Models have demonstrated their power over many existing generative techniques~\parencite{lin_diffusion_2023}.
 
 \newpage
 \section{Methodology}
@@ -381,6 +443,7 @@ The bootstrap evaluation procedure was implemented as follows:
 \end{enumerate}
 
 This bootstrap approach provides robust estimates of model performance while accounting for testing variability and ensuring that results are not dependent on specific test data partitions. By bootstrapping the evaluation phase rather than the training phase, the methodology maintains consistent model training while generating reliable confidence intervals for performance assessment.
+
 \subsubsection{Statistical Analysis Framework}
 The experimental design employs a two-way factorial ANOVA to examine the effects of model type (TimeGAN, TimeVAE, VRNNGAN) and dataset characteristics (Electricity, Exchange, Weather) on synthetic data quality metrics. This analysis tests for:
 \begin{itemize}
@@ -403,7 +466,7 @@ The fidelity of synthetic data is assessed through distributional similarity mea
 \end{enumerate}
 
 \subsubsection{Usability Evaluation}
-Usability assessment focuses on the practical utility of synthetic data for downstream forecasting tasks using a Train on Synthetic-Test on Real (TSTR) paradigm:
+Usability assessment focuses on the practical utility of synthetic data for downstream forecasting tasks using a Train on Synthetic-Test on Real (TSTR) paradigm \Parencite{HERNANDEZ202228}:
 
 \begin{enumerate}
     \item \textbf{Forecasting Setup:} Long Short-Term Memory (LSTM) networks are trained exclusively on synthetic data generated by each model and evaluated on held-out real data to assess practical utility.
@@ -415,37 +478,93 @@ Usability assessment focuses on the practical utility of synthetic data for down
     \end{itemize}
 \end{enumerate}
 
+\subsubsection{Model Configuration and Hyperparameters}
+
+To ensure reproducibility and transparency, all generative models were implemented using their default configurations as specified in their respective original publications and library implementations. The LSTM forecasting model used for usability evaluation was configured based on established best practices for time series forecasting tasks.
+
+TimeGAN and TimeVAE were implemented using the Synthcity library \parencite{Qian2023-pa}, which provides standardized implementations of synthetic data generation models. For TimeGAN, the base RNN architecture was modified to LSTM to ensure compatibility with the forecasting evaluation framework and maintain consistency with the LSTM-based usability assessment. TimeVAE utilized the standard Synthcity configuration with its default variational autoencoder parameters optimized for time series generation. VRNNGAN was implemented using the original author's implementation from \textcite{lee_vrnngan_2022}, following the hybrid architecture specifications that combine both GAN and VAE components with their respective default settings. Sequence lengths were adapted to each dataset's characteristics for all models to optimize temporal pattern recognition while maintaining comparability across architectures.
+
+The decision to utilize default parameters for all generative models ensures reproducibility and eliminates potential bias that could arise from model-specific hyperparameter optimization. This approach maintains consistency with the original implementations while providing fair comparative evaluation across different architectural paradigms, ensuring that performance differences reflect inherent model capabilities rather than optimization advantages.
+
+The LSTM forecasting model employed a simple shallow architecture with 64 hidden units, following established guidelines for time series forecasting where moderate network complexity often provides optimal balance between learning capacity and overfitting prevention. The choice of 64 hidden units aligns with recommendations by \textcite{Prihatno2021-mi}, who demonstrated that this configuration provides sufficient representational capacity for time series prediction tasks while avoiding the overfitting and underfitting risks. The shallow LSTM architecture was deliberately chosen to focus evaluation on synthetic data quality rather than forecasting model sophistication, ensuring performance differences reflect data utility rather than model complexity. The complete LSTM configuration is detailed in Table \ref{tab:lstm_params}.
+
+\begin{table}[H]
+\centering
+\caption{LSTM Forecasting Model Configuration}
+\label{tab:lstm_params}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Hidden Units & 64 \\
+Number of LSTM Layers & 1 \\
+Fully Connected Layers & 1 \\
+Sequence Length & Variable* \\
+Batch Size & 32 \\
+Learning Rate & 0.002 \\
+Training Epochs & 50 \\
+Optimizer & Adam \\
+Loss Function & MSE \\
+Prediction Horizon & 1 step ahead \\
+Architecture Type & Shallow LSTM \\
+\bottomrule
+\end{tabular}
+\\[0.5em]
+\footnotesize
+\textit{*Sequence length varies by dataset characteristics}
+\end{table}
+
 \subsection{Shapley Value Analysis Framework}
 
-\subsubsection{Theoretical Foundation}
-The Shapley value analysis provides fair attribution of each model's contribution to synthetic data quality by considering all possible coalitions and marginal contributions. Given the potential for Model × Dataset interactions in generative model performance, Shapley values are calculated separately for each metric-dataset combination to preserve context-dependent performance patterns.
+The Shapley value analysis provides fair attribution of each model's contribution to synthetic data quality by considering all possible coalitions and marginal contributions. This approach builds upon the foundational work of \textcite{shapley_P-295}, who established the mathematical framework for fairly distributing gains among players in cooperative games based on their marginal contributions across all possible coalition formations.
 
 \subsubsection{Implementation}
-For each metric-dataset combination, model performances are converted to utility values using $utility = -performance$ for error metrics. The Shapley contributions are calculated using:
+The Shapley value analysis is implemented separately for each metric-dataset combination to preserve context-dependent performance patterns. Since the metrics used are error-based—where lower values indicate better performance—a transformation is applied to convert these into utility values, where higher is better. This enables compatibility with the additive nature of Shapley values.
 
-% \[
-% \phi_{\text{TimeGAN}} = \frac{1}{2} \big[utility(\text{TimeGAN}) + utility(\text{VRNNGAN}) - utility(\text{TimeVAE})\big]
-% \]
+The utility for a model \( i \) is defined as:
 
-% \[
-% \phi_{\text{TimeVAE}} = \frac{1}{2} \big[utility(\text{TimeVAE}) + utility(\text{VRNNGAN}) - utility(\text{TimeGAN})\big]
-% \]
+\[
+u_i = \max_j(p_j) - p_i
+\]
 
-% \[
-% \phi_{\text{VRNNGAN}} = utility(\text{VRNNGAN}) - (utility(\text{TimeGAN}) + utility(\text{TimeVAE}))
-% \]
+where \( p_i \) is the raw performance (error) of model \( i \), and \( \max_j(p_j) \) is the worst (highest) performance observed across all models. This transformation ensures that the worst-performing model receives zero utility, and others receive values proportional to their improvement over the worst case.
 
-For each metric-dataset combination, the model achieving the lowest error value is identified as the winner for that specific context.
+The characteristic function $v(S)$ represents the performance utility achieved when using the generative approaches specified in coalition $S$, defined as:
+\begin{itemize}
+    \item \( v(\emptyset) = 0 \) (empty coalition baseline)
+    \item \( v(\{\text{GAN}\}) \) = utility contribution of TimeGAN individually
+    \item \( v(\{\text{VAE}\}) \) = utility contribution of TimeVAE individually  
+    \item \( v(\{\text{GAN-VAE}\}) \) = utility contribution of the hybrid VRNNGAN architecture
+\end{itemize}
+
+For the two-player Shapley framework with TimeGAN and TimeVAE as individual players and VRNNGAN as their collaborative outcome, the Shapley contributions are calculated using closed-form expressions:
+
+\[
+\phi_{\text{GAN}} = \frac{1}{2} \big[v(\{\text{GAN}\}) - v(\emptyset)\big] + \frac{1}{2} \big[v(\{\text{GAN-VAE}\}) - v(\{\text{VAE}\})\big],
+\]
+
+\[
+\phi_{\text{VAE}} = \frac{1}{2} \big[v(\{\text{VAE}\}) - v(\emptyset)\big] + \frac{1}{2} \big[v(\{\text{GAN-VAE}\}) - v(\{\text{GAN}\})\big],
+\]
+
+\[
+\phi_{\text{GAN-VAE}} = v(\{\text{GAN-VAE}\}) - v(\emptyset).
+\]
+
+These formulas ensure fair attribution by averaging each player's marginal contributions across all possible orderings of coalition formation. The first term in each individual player's formula represents their standalone contribution, while the second term captures their marginal contribution when joining the other player. The hybrid model's Shapley value represents its total utility contribution relative to the baseline.
 
 \subsubsection{Interpretation}
-Positive Shapley values indicate performance improvement, while negative values suggest performance degradation. The analysis enables identification of context-dependent model strengths and provides guidance for dataset-specific model selection.
+Positive Shapley values indicate performance improvement, while negative values suggest performance degradation. The analysis enables identification of context-dependent model strengths and provides guidance for dataset-specific model selection. The higher the Shapley value, the greater the model contributes to the quality of synthetic data generated.
 
 
 \newpage
 
 \section{Results and Discussion}
 
-This chapter presents and analyzes the findings derived from the methodologies employed in this study.
+% This chapter presents and analyzes the findings derived from the methodologies employed in this study.
+
+This chapter presents and analyzes the comprehensive findings derived from the Shapley-based evaluation framework applied to generative model performance in synthetic time series data generation. The analysis encompasses bootstrap validation results that establish statistical robustness, ANOVA findings that reveal significant model-dataset interactions, and Shapley value attributions that provide interpretable insights into individual model contributions across fidelity and usability dimensions.
 
 \subsection{Bootstrap Analysis Overview}
 To ensure statistical robustness, each model-dataset combination was evaluated through 15 bootstrap runs, generating a total of 135 observations across all experiments. This approach provides sufficient statistical power for robust ANOVA testing and reliable confidence interval estimation.
@@ -565,7 +684,7 @@ Weather data presents the highest bootstrap variability, particularly for TimeVA
 
 \subsubsection{ANOVA Summary}
 
-The two-way ANOVA analysis reveals significant performance differences between generative models across all evaluation metrics. Table \ref{tab:anova_summary} demonstrates that model type, dataset characteristics, and their interactions all produce statistically significant effects (p $<$ 0.001) on synthetic data quality.
+The two-way ANOVA analysis reveals significant performance differences between generative models across all evaluation metrics. Table~\ref{tab:anova_summary} demonstrates that model type, dataset characteristics, and their interactions all produce statistically significant effects (p $<$ 0.001) on synthetic data quality.
 
 The significant main effects confirm that TimeGAN, TimeVAE, and VRNNGAN generate distinctly different synthetic data quality outcomes, with performance variations that are consistent across the four metrics examined. Similarly, the three datasets—electricity, exchange, and weather—present varying challenges for synthetic data generation, indicating that certain time series characteristics inherently affect model performance.
 
@@ -795,27 +914,57 @@ VRNNGAN & \textbf{6.776} & \textbf{0.039} & \textbf{1.137} & \textbf{0.675} \\
 
 The statistical analysis reveals a coherent pattern of findings that illuminate both the individual strengths of generative models and their complex interactions with dataset characteristics. The significant main effects identified through ANOVA (all F-statistics $>$ 100, p $<$ 0.001) combined with the Tukey HSD post-hoc results establish VRNNGAN's consistent superiority across evaluation metrics, while the substantial Model × Dataset interactions demonstrate that synthetic data generation effectiveness is fundamentally context-dependent rather than universal.
 
-This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence scores ranging from 6.776 to 16.326 compared to individual models' scores of 2.918 to 8.542 demonstrate substantial improvements in statistical fidelity preservation with respect to the test dataset. Similarly, VRNNGAN consistently achieves the highest Shapley values for forecasting metrics, with RMSE contributions ranging from 0.059 to 1.137 and MAE contributions from 0.064 to 0.675, confirming enhanced practical utility across all datasets. %These findings are consistent with~\cite{yoon_time-series_2019} and~\cite{desai_timevae_2021}, who identified distinct strengths in adversarial versus variational approaches, but this study extends their work by providing new quantitative evidence of context-dependent effectiveness through interpretable attribution analysis.
+\subsubsection*{Hybrid Architecture Synergy and Performance Patterns}
 
-% NOTE: Also add the fact where despite the VRNNGAN performing the best, the rankings of timeGAN and timeVAE are not fixed, and often change depending on the context (dataset and metric combination)
-% NOTE: Also add consistency of VRNNGAN study, since it was also compared to gan and vae models. i think there was also another study that supports this. 
+This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence Shapley values ranging from 6.776 to 16.326 compared to individual models' contributions of 2.918 to 8.542 demonstrate substantial improvements in statistical fidelity preservation. Similarly, VRNNGAN consistently achieves the highest Shapley values for forecasting utility metrics, with RMSE contributions ranging from 0.059 to 1.137 and MAE contributions from 0.064 to 0.675, confirming enhanced practical utility across all datasets.
 
-Most notably, the Wasserstein distance metric reveals the clearest evidence of context-dependent model effectiveness, with each dataset favoring a different generative approach for geometric similarity preservation. For electricity data, TimeVAE achieves the highest Shapley value (0.033), demonstrating the effectiveness of variational approaches for structured temporal patterns with regular load distributions. In contrast, exchange data favors TimeGAN (0.054), indicating that adversarial training better captures the stochastic volatility and irregular patterns characteristic of financial time series. Weather data shows VRNNGAN's superiority (0.129), suggesting that the most complex meteorological patterns require hybrid architectural approaches to achieve optimal geometric similarity preservation. This pattern provides compelling evidence that geometric similarity—as measured by Wasserstein distance—is fundamentally influenced by dataset-specific temporal characteristics in ways that favor different generative paradigms.
+The consistent superiority of the hybrid architecture extends beyond the comparative advantages identified in previous literature. While \textcite{yoon_time-series_2019} focused on demonstrating TimeGAN's effectiveness against other GAN variants, and \textcite{desai_timevae_2021} showed TimeVAE's competitive performance against TimeGAN in specific contexts, this study provides the first systematic evidence that combining the GAN and VAE approaches yields synergistic benefits. The Shapley analysis framework enables quantification of how GAN and VAE components contribute to overall performance, revealing that VRNNGAN's success stems from architectural complementarity rather than simple performance averaging.
 
-% NOTE: Wrong numbers used, need to mention both TimeGAN and TimeVAE negative shapley values.  
+\subsubsection*{Context-Dependent Model Effectiveness}
 
-% The emergence of negative Shapley values for TimeGAN in weather data forecasting (-0.396 RMSE, -0.232 MAE) reveals previously undocumented limitations that occur when adversarial training encounters complex meteorological patterns with intricate interdependencies. This finding sheds new light compared to~\cite{lu_machine_2024}'s general observations about trade-offs between statistical accuracy and practical utility, demonstrating that these trade-offs can be severe enough to result in performance degradation rather than simply reduced effectiveness.
+Notably, while VRNNGAN demonstrates consistent superiority across most evaluation contexts, winning 10 out of 12 metric-dataset combinations in the Shapley analysis, the relative rankings between TimeGAN and TimeVAE are not fixed and vary considerably depending on the evaluation context. This finding reinforces the context-dependent nature of generative model effectiveness and underscores the importance of comprehensive evaluation frameworks rather than relying on single-context comparisons.
+
+Most notably, the Wasserstein distance metric reveals the clearest evidence of context-dependent model effectiveness, with each dataset favoring a different generative approach for geometric similarity preservation. For electricity data, TimeVAE achieves the highest Shapley value (0.047), demonstrating the effectiveness of variational approaches for structured temporal patterns with regular load distributions. In contrast, exchange data favors TimeGAN with the highest Wasserstein Shapley value (0.036), while TimeVAE shows negative contribution (-0.028), indicating that adversarial training better captures the stochastic volatility and irregular patterns characteristic of financial time series. Weather data demonstrates VRNNGAN's superiority (0.039), completing the pattern where each dataset-metric combination reveals distinct architectural advantages.
+
+\subsubsection*{Model Limitations and Negative Contributions}
+
+The emergence of negative Shapley values provides novel insights into model limitations under specific contexts. TimeGAN's negative Wasserstein contribution (-0.012) for electricity data and TimeVAE's negative contribution (-0.028) for exchange data reveal context-specific performance limitations that extend beyond simple underperformance. These negative contributions indicate that certain architectural approaches can actually detract from overall synthetic data quality when applied to incompatible temporal patterns. This represents a fundamental shift from viewing model selection as choosing the best performer to understanding when certain approaches should be explicitly avoided for specific data contexts.
+
+\subsubsection*{Methodological Contributions and Framework Advancement}
+
+The application of Shapley value analysis to generative model evaluation represents a significant methodological advancement that addresses evaluation challenges identified in recent literature reviews by \textcite{goyal_systematic_2024}. The framework successfully provides interpretable attribution of model contributions while maintaining mathematical rigor through fair allocation principles. The bootstrap methodology with 15 iterations per model-dataset combination provided sufficient statistical power for robust evaluation while revealing consistent performance patterns that inform practical model selection decisions.
+
+\subsubsection*{Practical Implications and Implementation Guidance}
+
+The findings provide actionable guidance for practitioners implementing synthetic time series data solutions. VRNNGAN demonstrates consistent superiority across statistical fidelity and forecasting metrics, winning 10 out of 12 total metric-dataset combinations, suggesting that hybrid architectures should be prioritized for applications requiring balanced performance across multiple quality dimensions. However, the Wasserstein distance results reveal important exceptions: TimeVAE achieves optimal geometric similarity preservation for electricity data (Shapley value: 0.047), TimeGAN excels for exchange data (0.036), while VRNNGAN dominates weather data (0.039).
+
+% \subsection{Discussion}
+
+% The statistical analysis reveals a coherent pattern of findings that illuminate both the individual strengths of generative models and their complex interactions with dataset characteristics. The significant main effects identified through ANOVA (all F-statistics $>$ 100, p $<$ 0.001) combined with the Tukey HSD post-hoc results establish VRNNGAN's consistent superiority across evaluation metrics, while the substantial Model × Dataset interactions demonstrate that synthetic data generation effectiveness is fundamentally context-dependent rather than universal.
+
+% This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence scores ranging from 6.776 to 16.326 compared to individual models' scores of 2.918 to 8.542 demonstrate substantial improvements in statistical fidelity preservation with respect to the test dataset. Similarly, VRNNGAN consistently achieves the highest Shapley values for forecasting metrics, with RMSE contributions ranging from 0.059 to 1.137 and MAE contributions from 0.064 to 0.675, confirming enhanced practical utility across all datasets.
+
+% The consistent superiority of the hybrid architecture extends beyond the comparative advantages identified in previous literature. While \textcite{yoon_time-series_2019} focused on demonstrating TimeGAN's effectiveness against other GAN variants, and \textcite{desai_timevae_2021} showed TimeVAE's competitive performance against TimeGAN in specific contexts, this study provides the first systematic evidence that combining these approaches yields synergistic benefits. The Shapley analysis framework enables quantification of how VAE and GAN components contribute to overall performance, revealing that VRNNGAN's success stems from architectural complementarity rather than simple performance averaging.
+
+% % NOTE: Also add the fact where despite the VRNNGAN performing the best, the rankings of timeGAN and timeVAE are not fixed, and often change depending on the context (dataset and metric combination)
+% % NOTE: Also add consistency of VRNNGAN study, since it was also compared to gan and vae models. i think there was also another study that supports this. 
+
+% Most notably, the Wasserstein distance metric reveals the clearest evidence of context-dependent model effectiveness, with each dataset favoring a different generative approach for geometric similarity preservation. For electricity data, TimeVAE achieves the highest Shapley value (0.033), demonstrating the effectiveness of variational approaches for structured temporal patterns with regular load distributions. In contrast, exchange data favors TimeGAN (0.054), indicating that adversarial training better captures the stochastic volatility and irregular patterns characteristic of financial time series. Weather data shows VRNNGAN's superiority (0.129), suggesting that the most complex meteorological patterns require hybrid architectural approaches to achieve optimal geometric similarity preservation. This pattern provides compelling evidence that geometric similarity—as measured by Wasserstein distance—is fundamentally influenced by dataset-specific temporal characteristics in ways that favor different generative paradigms.
+
+% % NOTE: Wrong numbers used, need to mention both TimeGAN and TimeVAE negative shapley values.  
+
+% % The emergence of negative Shapley values for TimeGAN in weather data forecasting (-0.396 RMSE, -0.232 MAE) reveals previously undocumented limitations that occur when adversarial training encounters complex meteorological patterns with intricate interdependencies. This finding sheds new light compared to~\textcite{lu_machine_2024}'s general observations about trade-offs between statistical accuracy and practical utility, demonstrating that these trade-offs can be severe enough to result in performance degradation rather than simply reduced effectiveness.
 
 
 \newpage
 \section{CONCLUSION AND FUTURE WORKS}
-This study explores the application of Shapley value analysis to evaluate generative models for synthetic time series data generation, focusing on the balance between fidelity and usability metrics. The research systematically compared TimeGAN, TimeVAE, and VRNNGAN across three diverse datasets to determine optimal model selection strategies for synthetic data applications. 
-
-The methodology employed a comprehensive evaluation framework that integrated statistical fidelity measures and forecasting utility metrics within a Shapley-based analysis system. Bootstrap validation provided statistical robustness, while ANOVA analysis confirmed significant model-dataset interactions across all evaluation metrics.
+This study explores the application of Shapley value analysis to evaluate generative models for synthetic time series data generation, focusing on the balance between fidelity and usability metrics. The research systematically compared TimeGAN, TimeVAE, and VRNNGAN across three diverse datasets to determine optimal model selection strategies for synthetic data applications. The methodology employed a comprehensive evaluation framework that integrated statistical fidelity measures and forecasting utility metrics within a Shapley-based analysis framework. Bootstrap validation provided statistical robustness, while two-way ANOVA analysis confirmed significant model-dataset interactions across all evaluation metrics. Tukey HSD post-hoc testing identified specific pairwise differences between models, revealing distinct performance groupings that informed the subsequent Shapley value attribution analysis.
 
 The results demonstrate VRNNGAN's consistent superiority across all evaluation scenarios. The hybrid model achieved the highest performance in both distributional similarity and forecasting accuracy, with substantial improvements over individual model approaches. Model effectiveness varied considerably across different time series characteristics, with hybrid advantages ranging significantly depending on context. 
 
-These findings contribute to the body of knowledge by establishing Shapley value analysis as a mathematically principled framework for interpretable evaluation of generative models, moving beyond traditional comparative approaches to fair attribution of model contributions. The research advances understanding of how different generative architectures create value in synthetic data generation through systematic decomposition of performance contributions. For practitioners, this work provides empirical evidence for hybrid architecture superiority in balancing multiple quality dimensions and demonstrates the importance of context-aware model selection rather than universal benchmarking approaches in real-world synthetic data applications.
+The emergence of negative Shapley values provided novel insights into architectural limitations, demonstrating that certain model-dataset conbinations can actively degrade synthetic data quality rather than simply underperforming. This finding fundamentally reframes model selection from identifying the best performed to understanding when specific approaches should be avoided for particular temporal contexts.
+
+The Shapley value framework represents a significant methodological advancement in generative model evaluation, addressing longstanding challenges in interpretable performance attribution. Unlike traditional comparative approaches that provide aggregate performance rankings, this framework enables practitioners to understand why certain models excel in specific contexts and how architectural components contribute to overall synthetic data quality. The mathematical rigor of fair allocation principles ensures that performance attribution remains consistent and interpretable across diverse evaluation scenarios.
 
 The study's limitations include its focus on forecasting tasks using LSTM networks, which may not generalize to other machine learning applications such as classification or anomaly detection. The deliberate exclusion of privacy metrics represents a significant limitation given the critical importance of privacy preservation in synthetic data applications. Additionally, the evaluation scope was constrained to time series data and three specific datasets, which may not capture the full diversity of real-world data characteristics.
 
@@ -829,7 +978,7 @@ Due to the lack of comprehensive privacy evaluation in this framework, future sc
 \Large\textbf{DECLARATION OF CONFLICTS OF INTEREST}
 \end{center}
 
-\vspace{1em} % adds a little vertical space
+\vspace{1em}
 
 The author declares that there is no conflict of interest regarding the publication of this paper.
 
@@ -839,12 +988,9 @@ The author declares that there is no conflict of interest regarding the publicat
 \Large\textbf{DATA AVAILABILITY}
 \end{center}
 
-\vspace{1em} % adds a little vertical space
+\vspace{1em}
 
 The data used in this study were sourced from PapersWithCode.
-
-% Include all references, even if they are not cited in the text
-% \nocite{*}
 
 \newpage
 % Print the bibliography
