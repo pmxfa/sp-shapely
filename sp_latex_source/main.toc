@@ -1,41 +1,40 @@
 \contentsline {section}{\numberline {1}INTRODUCTION}{1}{}%
 \contentsline {subsection}{\numberline {1.1}Rationale}{1}{}%
-\contentsline {subsection}{\numberline {1.2}Statement of the Problem}{1}{}%
+\contentsline {subsection}{\numberline {1.2}Statement of the Problem}{2}{}%
 \contentsline {subsubsection}{\numberline {1.2.1}Research Questions}{2}{}%
-\contentsline {subsection}{\numberline {1.3}Significance of the Study}{2}{}%
+\contentsline {subsection}{\numberline {1.3}Significance of the Study}{3}{}%
 \contentsline {subsection}{\numberline {1.4}Scopes and Delimitations of the Study}{3}{}%
-\contentsline {subsubsection}{\numberline {1.4.1}Delimitations}{3}{}%
-\contentsline {subsubsection}{\numberline {1.4.2}Limitations}{4}{}%
-\contentsline {section}{\numberline {2}Literature Review}{5}{}%
-\contentsline {subsection}{\numberline {2.1}Overview of Synthetic Data Generation}{5}{}%
-\contentsline {subsection}{\numberline {2.2}Metrics for Evaluating Synthetic Data}{6}{}%
-\contentsline {subsection}{\numberline {2.3}Survey of Generative Deep Learning Models}{9}{}%
-\contentsline {section}{\numberline {3}Methodology}{11}{}%
-\contentsline {subsection}{\numberline {3.1}Dataset Preparation}{11}{}%
-\contentsline {subsection}{\numberline {3.2}Generative Models}{12}{}%
-\contentsline {subsection}{\numberline {3.3}Experimental Design and Statistical Validation}{12}{}%
-\contentsline {subsubsection}{\numberline {3.3.1}Bootstrap Methodology}{12}{}%
-\contentsline {subsubsection}{\numberline {3.3.2}Statistical Analysis Framework}{13}{}%
-\contentsline {subsection}{\numberline {3.4}Evaluation Metrics}{13}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Fidelity Evaluation}{13}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Usability Evaluation}{14}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Model Configuration and Hyperparameters}{14}{}%
-\contentsline {subsection}{\numberline {3.5}Shapley Value Analysis Framework}{15}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Implementation}{15}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Interpretation}{16}{}%
-\contentsline {section}{\numberline {4}Results and Discussion}{17}{}%
-\contentsline {subsection}{\numberline {4.1}Bootstrap Analysis Overview}{17}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Electricity Dataset Bootstrap Summary}{17}{}%
-\contentsline {subsubsection}{\numberline {4.1.2}Exchange Dataset Bootstrap Summary}{18}{}%
-\contentsline {subsubsection}{\numberline {4.1.3}Weather Dataset Bootstrap Summary}{19}{}%
-\contentsline {subsection}{\numberline {4.2}Statistical Analysis (ANOVA)}{19}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}ANOVA Summary}{19}{}%
-\contentsline {subsubsection}{\numberline {4.2.2}Model × Dataset Interaction}{20}{}%
-\contentsline {subsubsection}{\numberline {4.2.3}Tukey-HSD Post-Hoc Results}{22}{}%
-\contentsline {subsection}{\numberline {4.3}Shapley Value Analysis}{24}{}%
-\contentsline {subsubsection}{\numberline {4.3.1}Electricity Dataset Results}{25}{}%
-\contentsline {subsubsection}{\numberline {4.3.2}Exchange Dataset Results}{25}{}%
-\contentsline {subsubsection}{\numberline {4.3.3}Weather Dataset Results}{26}{}%
-\contentsline {subsection}{\numberline {4.4}Discussion}{26}{}%
-\contentsline {section}{\numberline {5}CONCLUSION AND FUTURE WORKS}{29}{}%
+\contentsline {subsubsection}{\numberline {1.4.1}Delimitations}{4}{}%
+\contentsline {subsubsection}{\numberline {1.4.2}Limitations}{5}{}%
+\contentsline {section}{\numberline {2}Literature Review}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Overview of Synthetic Data Generation}{6}{}%
+\contentsline {subsection}{\numberline {2.2}Metrics for Evaluating Synthetic Data}{7}{}%
+\contentsline {subsection}{\numberline {2.3}Survey of Generative Deep Learning Models}{10}{}%
+\contentsline {section}{\numberline {3}Methodology}{14}{}%
+\contentsline {subsection}{\numberline {3.1}Dataset Preparation}{14}{}%
+\contentsline {subsection}{\numberline {3.2}Generative Models}{15}{}%
+\contentsline {subsection}{\numberline {3.3}Experimental Design and Statistical Validation}{16}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Bootstrap Methodology}{16}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Statistical Analysis Framework}{16}{}%
+\contentsline {subsection}{\numberline {3.4}Evaluation Metrics}{17}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Fidelity Evaluation}{17}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Usability Evaluation}{17}{}%
+\contentsline {subsubsection}{\numberline {3.4.3}Model Configuration and Hyperparameters}{18}{}%
+\contentsline {subsection}{\numberline {3.5}Shapley Value Analysis Framework}{19}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Implementation}{19}{}%
+\contentsline {section}{\numberline {4}Results and Discussion}{21}{}%
+\contentsline {subsection}{\numberline {4.1}Bootstrap Analysis Overview}{21}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Electricity Dataset Bootstrap Summary}{22}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}Exchange Dataset Bootstrap Summary}{23}{}%
+\contentsline {subsubsection}{\numberline {4.1.3}Weather Dataset Bootstrap Summary}{24}{}%
+\contentsline {subsection}{\numberline {4.2}Statistical Analysis (ANOVA)}{24}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}ANOVA Summary}{24}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}Model × Dataset Interaction}{25}{}%
+\contentsline {subsubsection}{\numberline {4.2.3}Tukey-HSD Post-Hoc Results}{28}{}%
+\contentsline {subsection}{\numberline {4.3}Shapley Value Analysis}{29}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Electricity Dataset Results}{30}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Exchange Dataset Results}{31}{}%
+\contentsline {subsubsection}{\numberline {4.3.3}Weather Dataset Results}{31}{}%
+\contentsline {subsection}{\numberline {4.4}Discussion}{32}{}%
+\contentsline {section}{\numberline {5}CONCLUSION AND FUTURE WORKS}{35}{}%
 \contentsfinish 

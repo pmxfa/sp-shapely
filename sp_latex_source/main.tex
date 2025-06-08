@@ -1,8 +1,8 @@
 % \documentclass[A4, 12pt]{article}
-\documentclass{article}
+\documentclass[11pt]{article}
 
 % Page setup
-\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[a4paper, left=1.5in, right=1in, top=1in, bottom=1in]{geometry}
 
 % Spacing and indentation
 \usepackage{setspace}
@@ -111,16 +111,16 @@
 \end{table}
 
     \vfill
-    \hspace*{-0.20in}
+    \hspace*{-0.45in}
     \begin{tabular}{ll}
-        \begin{minipage}[t]{0.45\textwidth}
+        \begin{minipage}[t]{0.50\textwidth}
         \centering
         \rule{7cm}{0.4pt} \\
         PINKY GRACE ARCENAL MARFA\\
         Student \\
         \end{minipage}
         &
-        \begin{minipage}[t]{0.60\textwidth}
+        \begin{minipage}[t]{0.65\textwidth}
         \centering
         \rule{8.5cm}{0.4pt} \\
         Asst. Prof. DHARYLL PRINCE M. ABELLANA \\
@@ -150,6 +150,8 @@ The faculty of the University of the Philippines Cebu -- Department of Computer 
     \textbf{Interpretable Deep Learning: Shapley-based Analysis on Generative Models for Synthetic Data Generation}\\
     \vspace{3em}
     \rule{\textwidth}{0.7pt} % Horizontal line
+    
+    \vspace{3em}
     \textit{by}\\
     \textbf{PINKY GRACE ARCENAL MARFA}
 \end{center}
@@ -561,7 +563,6 @@ For the two-player Shapley framework with TimeGAN and TimeVAE as individual play
 
 These formulas ensure fair attribution by averaging each player's marginal contributions across all possible orderings of coalition formation. The first term in each individual player's formula represents their standalone contribution, while the second term captures their marginal contribution when joining the other player. The hybrid model's Shapley value represents its total utility contribution relative to the baseline.
 
-\subsubsection{Interpretation}
 Positive Shapley values indicate performance improvement, while negative values suggest performance degradation. The analysis enables identification of context-dependent model strengths and provides guidance for dataset-specific model selection. The higher the Shapley value, the greater the model contributes to the quality of synthetic data generated.
 
 
@@ -579,6 +580,8 @@ To ensure statistical robustness, each model-dataset combination was evaluated t
 The bootstrap results (Tables \ref{tab:bootstrap_electricity}, \ref{tab:bootstrap_exchange}, and \ref{tab:bootstrap_weather}) demonstrate consistent performance patterns across all datasets. VRNNGAN consistently achieves the lowest standard deviations across most metrics, indicating stable performance regardless of data sampling variations. All models show tight 95\% confidence intervals, confirming the reliability of the performance estimates used in subsequent statistical analyses.
 
 Notably, the bootstrap analysis reveals dataset-specific performance variations that justify the need for individual dataset evaluation rather than aggregated comparisons.
+
+\newpage 
 \subsubsection{Electricity Dataset Bootstrap Summary}
 The electricity dataset shows the most consistent model performance, with all models demonstrating tight confidence intervals and minimal variability across bootstrap runs.
 
@@ -614,6 +617,7 @@ The electricity dataset shows the most consistent model performance, with all mo
 \end{tabular}
 \end{table}
 
+\newpage
 \subsubsection{Exchange Dataset Bootstrap Summary}
 
 Exchange data reveals slightly higher variability for VRNNGAN in KL divergence (std: 0.037), while maintaining stable performance across other metrics.
@@ -649,6 +653,7 @@ Exchange data reveals slightly higher variability for VRNNGAN in KL divergence (
 \end{tabular}
 \end{table}
 
+\newpage
 \subsubsection{Weather Dataset Bootstrap Summary}
 
 Weather data presents the highest bootstrap variability, particularly for TimeVAE in forecasting metrics (RMSE std: 0.030), reflecting the dataset's inherent complexity.
@@ -863,7 +868,7 @@ TimeGAN's negative Shapley value (-0.012) for Wasserstein distance indicates tha
 \toprule
 \textbf{Approach} & \textbf{KL Divergence} & \textbf{Wasserstein} & \textbf{RMSE} & \textbf{MAE} \\
 \midrule
-TimeGAN & 6.544 & -0.012 & 0.110 & 0.023 \\
+TimeGAN & 6.544 & -0.012 & 0.010 & 0.023 \\
 TimeVAE & 6.193 & \textbf{0.047} & 0.050 & 0.041 \\
 VRNNGAN & \textbf{12.737} & 0.035 & \textbf{0.059} & \textbf{0.064} \\
 \bottomrule
