@@ -1,0 +1,404 @@
+
+# Libraries
+```{r setup}
+library(jsonlite)
+library(rlang)
+```
+
+# Check Dataset
+```{r data-cleaning}
+# Load and clean the dataset
+dataset <- read.csv("cleaned_bootstrap.csv")
+
+# Check the structure of the data
+str(dataset)
+
+# Convert categorical variables to factors
+dataset$model <- as.factor(dataset$model)
+dataset$dataset <- as.factor(dataset$dataset)
+
+# Check for missing values
+sum(is.na(dataset))
+
+# Summary of the cleaned data
+summary(dataset)
+
+# Check factor levels
+levels(dataset$model)
+levels(dataset$dataset)
+```
+
+# Two-way ANOVA
+
+```{r two-way-anova}
+res_wasserstein <- aov(wasserstein ~ model + dataset + model*dataset, data = dataset)
+res_kl <- aov(kl ~ model + dataset + model*dataset, data = dataset)
+res_rmse <- aov(rmse ~ model + dataset + model*dataset, data = dataset)
+res_mae <- aov(mae ~ model + dataset + model*dataset, data = dataset)
+
+# Display summaries
+cat("Wasserstein Distance ANOVA:\n")
+summary(res_wasserstein)
+cat("\nKL Divergence ANOVA:\n")
+summary(res_kl)
+cat("RMSE ANOVA")
+summary(res_rmse)
+cat("\nMAE ANOVA:\n")
+summary(res_mae)
+```
+
+```{r presentation-interaction-plots}
+library(ggplot2)
+library(gridExtra)
+
+# Simple function to make one plot
+make_ggplot <- function(metric_name, y_col, title) {
+  ggplot(dataset, aes(x = model, y = !!sym(y_col), color = dataset, group = dataset)) +
+    geom_point(stat = "summary", fun = "mean", size = 4) +
+    geom_line(stat = "summary", fun = "mean", size = 1.5) +
+    labs(title = paste(title, ": Model × Dataset Interaction"),
+         x = "Model", y = paste(title, "(Lower = Better)"),
+         color = "Dataset") +
+    theme_minimal() +
+    scale_color_manual(values = c("electricity" = "red", "exchange" = "blue", "weather" = "green"))
+}
+
+# Create all plots at once
+plots <- list(
+  kl = make_ggplot("KL Divergence", "kl", "KL Divergence"),
+  wasserstein = make_ggplot("Wasserstein", "wasserstein", "Wasserstein"),
+  rmse = make_ggplot("RMSE", "rmse", "RMSE"), 
+  mae = make_ggplot("MAE", "mae", "MAE")
+)
+
+# Display individual plots
+print(plots$kl)
+print(plots$wasserstein) 
+print(plots$rmse)
+print(plots$mae)
+
+# Save plots
+ggsave("interaction_kl.png", plots$kl, width = 10, height = 6)
+ggsave("interaction_wasserstein.png", plots$wasserstein, width = 10, height = 6)
+ggsave("interaction_rmse.png", plots$rmse, width = 10, height = 6)
+ggsave("interaction_mae.png", plots$mae, width = 10, height = 6)
+
+# Combined plot
+combined <- grid.arrange(plots$kl, plots$wasserstein, plots$rmse, plots$mae, ncol = 2)
+ggsave("interaction_plots_combined.png", combined, width = 14, height = 10)
+
+cat("All plots saved!\n")
+```
+
+# TukeyHSD Post-Hoc
+
+```{r posthoc-analysis}
+# Correct Tukey HSD post-hoc analysis with compact letter display
+
+library(multcomp)  # For compact letter display
+
+# Perform TukeyHSD
+tukey_kl <- TukeyHSD(res_kl)
+tukey_wasserstein <- TukeyHSD(res_wasserstein)
+tukey_rmse <- TukeyHSD(res_rmse)
+tukey_mae <- TukeyHSD(res_mae)
+
+# Function to create compact letter display
+create_compact_letters <- function(tukey_result, aov_result, metric_name) {
+  
+  cat(paste("\n=== ", toupper(metric_name), " TUKEY HSD RESULTS ===\n"))
+  
+  # Use multcomp for compact letter display
+  tukey_mc <- glht(aov_result, linfct = mcp(model = "Tukey"))
+  letters_result <- cld(tukey_mc, alpha = 0.05)
+  
+  # Extract means for each group
+  model_means <- aggregate(dataset[[metric_name]], 
+                          by = list(Model = dataset$model), 
+                          FUN = mean, na.rm = TRUE)
+  names(model_means)[2] <- "Mean"
+  
+  # Combine with letters
+  results_table <- data.frame(
+    Model = names(letters_result$mcletters$Letters),
+    Mean = round(model_means$Mean[match(names(letters_result$mcletters$Letters), model_means$Model)], 4),
+    Group = letters_result$mcletters$Letters,
+    stringsAsFactors = FALSE
+  )
+  
+  # Sort by mean (best to worst for error metrics)
+  results_table <- results_table[order(results_table$Mean), ]
+  
+  cat("Pairwise Comparisons (Groups with same letter are NOT significantly different):\n")
+  print(results_table)
+  
+  return(results_table)
+}
+
+# Create compact letter displays for each metric
+kl_letters <- create_compact_letters(tukey_kl, res_kl, "kl")
+wasserstein_letters <- create_compact_letters(tukey_wasserstein, res_wasserstein, "wasserstein")
+rmse_letters <- create_compact_letters(tukey_rmse, res_rmse, "rmse")
+mae_letters <- create_compact_letters(tukey_mae, res_mae, "mae")
+
+# Create summary table for paper
+create_summary_tukey_table <- function() {
+  
+  cat("\n=== SUMMARY TABLE FOR PUBLICATION ===\n")
+  
+  summary_table <- data.frame(
+    Model = kl_letters$Model,
+    KL_Mean = kl_letters$Mean,
+    KL_Group = kl_letters$Group,
+    Wasserstein_Mean = wasserstein_letters$Mean[match(kl_letters$Model, wasserstein_letters$Model)],
+    Wasserstein_Group = wasserstein_letters$Group[match(kl_letters$Model, wasserstein_letters$Model)],
+    RMSE_Mean = rmse_letters$Mean[match(kl_letters$Model, rmse_letters$Model)],
+    RMSE_Group = rmse_letters$Group[match(kl_letters$Model, rmse_letters$Model)],
+    MAE_Mean = mae_letters$Mean[match(kl_letters$Model, mae_letters$Model)],
+    MAE_Group = mae_letters$Group[match(kl_letters$Model, mae_letters$Model)]
+  )
+  
+  print(summary_table)
+  
+  return(summary_table)
+}
+
+final_tukey_table <- create_summary_tukey_table()
+```
+
+# Shapley Analysis
+
+```{r shap-function}
+calculate_shapley_based_contributions <- function(data, metric_col, dataset_name = "all") {
+  
+  if(dataset_name != "all") {
+    data <- data[data$dataset == dataset_name, ]
+  }
+  
+  # Get raw performances (lower = better for error metrics)
+  gan_perf <- mean(data[data$model == "TimeGAN", metric_col], na.rm = TRUE)
+  vae_perf <- mean(data[data$model == "TimeVAE", metric_col], na.rm = TRUE)
+  hybrid_perf <- mean(data[data$model == "VRNNGAN", metric_col], na.rm = TRUE)
+  
+  # Transform to utility scale (higher = better)
+  # Use the worst performance as baseline
+  worst_baseline <- max(gan_perf, vae_perf, hybrid_perf)
+  
+  # Value function v(S) - improvement from baseline
+  v_empty <- 0
+  v_gan <- worst_baseline - gan_perf
+  v_vae <- worst_baseline - vae_perf  
+  v_gan_vae <- worst_baseline - hybrid_perf
+  
+  # Your original Shapley formulas
+  phi_gan <- (1/2) * (v_gan - v_empty) + (1/2) * (v_gan_vae - v_vae)
+  phi_vae <- (1/2) * (v_vae - v_empty) + (1/2) * (v_gan_vae - v_gan)
+  phi_hybrid <- v_gan_vae - v_empty
+  
+  # Calculate contribution percentages
+  total_contribution <- phi_gan + phi_vae
+  gan_percent <- ifelse(total_contribution > 0, (phi_gan / total_contribution) * 100, 50)
+  vae_percent <- ifelse(total_contribution > 0, (phi_vae / total_contribution) * 100, 50)
+  
+  # Results table
+  results <- data.frame(
+    Component = c("GAN", "VAE", "GAN-VAE"),
+    Shapley_Value = c(phi_gan, phi_vae, phi_hybrid),
+    Raw_Performance = c(gan_perf, vae_perf, hybrid_perf),
+    Contribution_Percent = c(gan_percent, vae_percent, 100),
+    Interpretation = c(
+      paste("GAN contributes", round(gan_percent, 1), "% to hybrid success"),
+      paste("VAE contributes", round(vae_percent, 1), "% to hybrid success"),
+      "Total hybrid performance"
+    )
+  )
+  
+  return(list(
+    results = results,
+    dataset = dataset_name,
+    metric = metric_col,
+    efficiency_check = abs((phi_gan + phi_vae) - phi_hybrid) < 1e-10,
+    synergy = phi_hybrid > max(v_gan, v_vae)  # Does hybrid beat individual components?
+  ))
+}
+```
+
+```{r shapley-analysis-with-hybrid-display}
+# Modified function to clearly show all three components including hybrid
+create_complete_shapley_analysis <- function() {
+  
+  datasets <- levels(dataset$dataset)
+  metrics <- c("kl", "wasserstein", "rmse", "mae")
+  
+  cat("=== COMPLETE SHAPLEY ANALYSIS (ALL COMPONENTS) ===\n")
+  cat("Showing GAN, VAE, and GAN-VAE (VRNNGAN) hybrid values\n\n")
+  
+  for(ds in datasets) {
+    cat(paste("### ", toupper(ds), " DATASET ###\n"))
+    
+    # Create complete summary table showing all three components
+    dataset_summary <- data.frame(
+      Metric = character(0),
+      TimeGAN_Shapley = numeric(0),
+      TimeVAE_Shapley = numeric(0),
+      VRNNGAN_Shapley = numeric(0),
+      TimeGAN_Performance = numeric(0),
+      TimeVAE_Performance = numeric(0),
+      VRNNGAN_Performance = numeric(0),
+      Best_Component = character(0),
+      Hybrid_Advantage = character(0),
+      stringsAsFactors = FALSE
+    )
+    
+    for(metric in metrics) {
+      result <- calculate_shapley_based_contributions(dataset, metric, ds)
+      
+      # Extract all values
+      gan_shapley <- result$results$Shapley_Value[1]
+      vae_shapley <- result$results$Shapley_Value[2]
+      hybrid_shapley <- result$results$Shapley_Value[3]  # This is the hybrid!
+      
+      gan_perf <- result$results$Raw_Performance[1]
+      vae_perf <- result$results$Raw_Performance[2]
+      hybrid_perf <- result$results$Raw_Performance[3]
+      
+      # Find best performing component (lowest raw performance for error metrics)
+      best_perf_idx <- which.min(c(gan_perf, vae_perf, hybrid_perf))
+      best_component <- c("TimeGAN", "TimeVAE", "VRNNGAN")[best_perf_idx]
+      
+      # Check if hybrid has advantage (better performance than individual components)
+      hybrid_advantage <- ifelse(hybrid_perf < min(gan_perf, vae_perf), "YES", "NO")
+      
+      # Add to summary
+      dataset_summary <- rbind(dataset_summary, data.frame(
+        Metric = toupper(metric),
+        TimeGAN_Shapley = round(gan_shapley, 4),
+        TimeVAE_Shapley = round(vae_shapley, 4),
+        VRNNGAN_Shapley = round(hybrid_shapley, 4),
+        TimeGAN_Performance = round(gan_perf, 4),
+        TimeVAE_Performance = round(vae_perf, 4),
+        VRNNGAN_Performance = round(hybrid_perf, 4),
+        Best_Component = best_component,
+        Hybrid_Advantage = hybrid_advantage,
+        stringsAsFactors = FALSE
+      ))
+    }
+    
+    # Print complete summary
+    cat("Complete Component Analysis:\n")
+    print(dataset_summary)
+    
+    # Analysis insights
+    cat("\nDataset Insights:\n")
+    timegan_wins <- sum(dataset_summary$Best_Component == "TimeGAN")
+    timevae_wins <- sum(dataset_summary$Best_Component == "TimeVAE") 
+    vrnngan_wins <- sum(dataset_summary$Best_Component == "VRNNGAN")
+    hybrid_advantages <- sum(dataset_summary$Hybrid_Advantage == "YES")
+    
+    cat(paste("• TimeGAN best in", timegan_wins, "out of", length(metrics), "metrics\n"))
+    cat(paste("• TimeVAE best in", timevae_wins, "out of", length(metrics), "metrics\n"))
+    cat(paste("• VRNNGAN best in", vrnngan_wins, "out of", length(metrics), "metrics\n"))
+    cat(paste("• Hybrid advantage in", hybrid_advantages, "out of", length(metrics), "metrics\n"))
+    
+    # Average Shapley values
+    avg_gan <- mean(dataset_summary$TimeGAN_Shapley)
+    avg_vae <- mean(dataset_summary$TimeVAE_Shapley)
+    avg_hybrid <- mean(dataset_summary$VRNNGAN_Shapley)
+    
+    cat(paste("• Average TimeGAN Shapley:", round(avg_gan, 4), "\n"))
+    cat(paste("• Average TimeVAE Shapley:", round(avg_vae, 4), "\n"))
+    cat(paste("• Average VRNNGAN Shapley:", round(avg_hybrid, 4), "\n"))
+    
+    cat("\n", rep("=", 80), "\n\n")
+  }
+}
+
+# Run the complete analysis
+create_complete_shapley_analysis()
+```
+
+# chart
+
+```{r shapley-winners-visualization}
+# Create visualization showing Shapley analysis winners by dataset and metric
+create_shapley_winners_chart <- function() {
+  
+  library(ggplot2)
+  library(dplyr)
+  
+  datasets <- levels(dataset$dataset)
+  metrics <- c("kl", "wasserstein", "rmse", "mae")
+  
+  # Collect all results
+  results_data <- data.frame()
+  
+  for(ds in datasets) {
+    for(metric in metrics) {
+      result <- calculate_shapley_based_contributions(dataset, metric, ds)
+      
+      # Get Shapley values for all three components
+      gan_shapley <- result$results$Shapley_Value[1]
+      vae_shapley <- result$results$Shapley_Value[2]
+      hybrid_shapley <- result$results$Shapley_Value[3]
+      
+      # Determine winner (highest Shapley value)
+      shapley_values <- c(gan_shapley, vae_shapley, hybrid_shapley)
+      winner_idx <- which.max(shapley_values)
+      winner <- c("GAN", "VAE", "GAN-VAE")[winner_idx]
+      winner_shapley_value <- max(shapley_values) 
+      
+      # Add to results
+      results_data <- rbind(results_data, data.frame(
+        Dataset = tools::toTitleCase(ds),
+        Metric = toupper(metric),
+        Winner = winner,
+        Shapley_Value = winner_shapley_value,
+        GAN_Value = gan_shapley,
+        VAE_Value = vae_shapley,
+        Hybrid_Value = hybrid_shapley,
+        stringsAsFactors = FALSE
+      ))
+    }
+  }
+  
+  # Create the plot
+  p <- ggplot(results_data, aes(x = Metric, y = Shapley_Value, fill = Winner)) +
+    geom_bar(stat = "identity", alpha = 0.8, width = 0.7) +
+    geom_text(aes(label = paste0(Winner, "\n(", round(Shapley_Value, 3), ")")), 
+              vjust = -0.1, fontface = "bold", size = 3) +
+    facet_wrap(~Dataset, scales = "free_y", ncol = 3) +
+    labs(
+      title = "Dataset-Specific Shapley Analysis: Winner by Performance Metric",
+      subtitle = "GAN-VAE hybrid dominates across datasets and metrics",
+      x = "Performance Metric",
+      y = "Shapley Value (Winner's Contribution)",
+      fill = "Winning Approach"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+      plot.subtitle = element_text(hjust = 0.5, color = "darkgreen", size = 12),
+      strip.text = element_text(face = "bold", size = 11),
+      axis.text.x = element_text(angle = 0, hjust = 0.5),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_fill_manual(
+      values = c("GAN" = "#6BAED6", "GAN-VAE" = "#74C476", "VAE" = "#FD8D3C"),
+      labels = c("GAN" = "GAN", "GAN-VAE" = "GAN-VAE", "VAE" = "VAE")
+    ) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.1)))
+  
+  return(p)
+}
+
+# Create and display the chart
+shapley_winners_chart <- create_shapley_winners_chart()
+print(shapley_winners_chart)
+
+# Save the chart
+ggsave("shapley_dataset_winners.png", shapley_winners_chart, 
+       width = 12, height = 6, dpi = 300, bg = "white")
+
+cat("Shapley winners chart saved as 'shapley_dataset_winners.png'\n")
+```
