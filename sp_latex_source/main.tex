@@ -28,6 +28,7 @@
 
 \usepackage{titlesec}
 \usepackage{titletoc}
+\usepackage{url}
 
 % test
 
@@ -110,25 +111,27 @@
 \end{table}
 
     \vfill
-    \hspace*{-0.15in}
+    \hspace*{-0.20in}
     \begin{tabular}{ll}
         \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \rule{8cm}{0.4pt} \\
+        \rule{7cm}{0.4pt} \\
         PINKY GRACE ARCENAL MARFA\\
         Student \\
         \end{minipage}
         &
         \begin{minipage}[t]{0.60\textwidth}
         \centering
-        \rule{7cm}{0.4pt} \\
+        \rule{8.5cm}{0.4pt} \\
         Asst. Prof. DHARYLL PRINCE M. ABELLANA \\
         Special Problem Adviser \\
         \end{minipage}
     \end{tabular}
+
+
+
 \end{titlepage}
 
-% \maketitle
 
 \pagenumbering{roman}
 \thispagestyle{empty}
@@ -210,7 +213,7 @@ The faculty of the University of the Philippines Cebu -- Department of Computer 
 
 This study would not have been possible without the guidance, support, and inspiration I received from so many individuals throughout this journey. \\
 
-First and foremost, I would like to express my deepest gratitude to my SP adviser, Asst. Prof.~Dharyll Prince Abellana, whose brilliance has never failed to amaze me. His insight, patience, and unwavering belief in my work have shaped this study into what it is today. \\
+First and foremost, I would like to express my deepest gratitude to my SP adviser, Asst. Prof.~Dharyll Prince Abellana, whose clarity of thought and brilliance consistently inspired me. His insight, patience, and unwavering belief in my work have shaped this study into what it is today. \\
 
 To my family, thank you for your never-ending support, encouragement, and love. Your presence has been my foundation through every challenge I faced. \\
 
@@ -223,15 +226,21 @@ And lastly, to myself—for choosing an unfamiliar topic in pursuit of growth, f
 
 \newpage
 
+
+\vfill
 \begin{center}
 \Large\textbf{DEDICATION}
 \end{center}
 
-\vspace{1em} % adds a little vertical space
+\vspace{2em}
 
-
-
-
+\begin{center}
+\large\textit{To myself, who showed up even in doubt,\\
+and to everyone that follows—\\
+may you find light in the questions,\\
+and courage in the search.}
+\end{center}
+\vfill
 
 \newpage
 
@@ -246,15 +255,12 @@ This study introduces a Shapley-based evaluation framework for generative models
 \newpage
 % Add after \tableofcontents
 \tableofcontents
-% \thispagestyle{empty} % Remove page number from TOC page
 \newpage
 
 \listoffigures
-% \thispagestyle{empty} % Remove page number from TOC page
 \newpage
 
 \listoftables
-% \thispagestyle{empty} % Remove page number from TOC page
 \newpage
 
 \pagenumbering{arabic}
@@ -267,19 +273,20 @@ The increasing reliance on machine learning (ML) models across various domains s
 While synthetic data provides a promising alternative to real-world data, its effectiveness largely relies on its quality, which can be assessed based on fidelity and usability. Fidelity evaluates how closely the synthetic data replicates the statistical properties of the original data, while usability assesses its efficacy in supporting ML tasks \parencite{loni_review_2025}. These dimensions are interdependent: high fidelity ideally enhances usability, assuming the original data is reliable. However, if the original dataset contains flaws or biases, replicating it with high fidelity might only perpetuate its limitations \parencite{shahul_hameed_bias_2024}. Thus, it is essential for synthetic data to not simply mimic the original data but also address and improve upon its deficiencies to ensure greater usability.
 
 This study aims to evaluate and compare the effectiveness of various generative models in producing synthetic datasets that are both statistically similar to real data (high fidelity) and practically useful in ML applications (high usability). The ultimate goal is to identify models that can best mitigate the shortcomings of low-quality datasets, thereby enhancing the overall robustness and reliability of machine learning systems. Utilizing a Shapley-based analysis, this research quantitatively assesses each generative model's contribution to the quality of synthetic data. This comprehensive evaluation seeks to determine each model's capability not only to adhere closely to the statistical properties of the original data but also to enhance the effectiveness of downstream ML applications. By dissecting the contributions of Generative Adversarial Networks (GANs), Variational Autoencoders (VAEs), and their combined applications in time series data generation, the study aims to pinpoint which models provide the optimal balance between fidelity and usability.
+
 \subsection{Statement of the Problem}
 
-Generative models, including GANs, VAEs, and their hybrids, have demonstrated significant potential in addressing data scarcity and privacy concerns through synthetic data generation. However, the effectiveness of these models in producing high-quality synthetic time series data, particularly when evaluated against the dual metrics of fidelity and usability, remains underexplored. Current evaluation approaches in synthetic data generation lack interpretability, making it difficult to understand which specific model components contribute most to overall performance and how these contributions vary across different data contexts.
+The increasing demand for synthetic data in machine learning has led to widespread adoption of generative models such as GANs, VAEs, and hybrid variants. While these models show promise in addressing data scarcity and privacy concerns, evaluating the quality of the synthetic data they generate—particularly for time series—remains a methodological challenge. Most existing studies assess either fidelity or usability in isolation, without offering a unified or interpretable framework that considers both.
 
-This leads to a notable research gap: there is no established interpretable methodology for evaluating which generative models best navigate the trade-offs between fidelity and usability in time series data applications. Existing comparative studies typically rely on aggregate performance metrics that obscure the individual contributions of different model architectures, limiting practitioners' ability to make informed decisions about model selection and optimization strategies.
+Current evaluation practices often rely on black-box comparisons and aggregated metrics, which obscure the contributions of individual model components and mask trade-offs between statistical accuracy and task performance. Consequently, it becomes difficult for practitioners to identify which models work best under specific conditions, or to understand why certain models outperform others. This lack of interpretability limits transparency and trust in generative models, especially in sensitive domains requiring explainable and accountable AI.
 
-Addressing this gap, this study employs a Shapley-based analysis to provide interpretable insights into generative model performance. This approach moves beyond traditional black-box comparisons to offer transparent attribution of each model's contribution to synthetic data quality. The Shapley framework enables practitioners to understand not only which models perform best, but why they perform well and how their effectiveness varies across different data characteristics. Such interpretable insights are crucial for advancing the use of synthetic datasets, particularly in environments where understanding model behavior is as important as achieving high performance, such as in regulated industries where explainable AI is increasingly required.
+The absence of interpretable evaluation methodologies represents a critical gap in synthetic data research. Without systematic frameworks that fairly attribute model contributions across fidelity and usability, practitioners cannot discern context-specific performance patterns or select optimal architectures based on task requirements. Furthermore, aggregate rankings fail to explain model performance, hindering evidence-based decisions and raising concerns about the reliability of synthetic data, particularly in domains that demand trust and accountability.
 
 \subsubsection{Research Questions}
 \begin{enumerate}
-    \item How can fidelity and usability metrics be effectively integrated into a comparative evaluation of generative models for time series synthetic data generation?
-    \item What trade-offs exist between fidelity and usability in synthetic data generation, and how do these trade-offs affect downstream machine learning tasks?
-    \item Which generative model most effectively balances fidelity and usability to produce high-quality synthetic time series data?
+    \item How can Shapley value analysis provide interpretable insights into the fidelity and usability contributions of generative models?
+    \item How do model-dataset interactions affect the interpretability of fidelity-usability trade-offs?
+    \item Which generative model architecture provides optimal performance across varying conditions?
 \end{enumerate}
 
 \subsection{Significance of the Study}
@@ -288,7 +295,7 @@ This study addresses a critical gap in synthetic data generation methodology by 
 
 The Shapley-based framework represents a novel application of cooperative game theory principles to generative model assessment, enabling fair attribution of performance contributions rather than traditional black-box comparisons. This systematic integration of fidelity and usability metrics within a unified evaluation framework addresses the longstanding challenge of balancing statistical accuracy with practical utility in synthetic data applications. This framework enables evidence-based model selection guidelines that move beyond aggregate performance metrics to offer nuanced understanding of when and why specific generative approaches excel. The methodology supports identification of optimal models based on target application requirements and dataset characteristics, facilitating more informed architectural decisions in generative model development. Additionally, the balanced evaluation framework offers actionable insights for quality assessment that consider both statistical fidelity and downstream task performance, enabling confident deployment of synthetic data in real-world applications.
 
-The research addresses critical needs in data-scarce domains where both statistical accuracy and practical utility are essential for meaningful synthetic data deployment. By providing interpretable attribution of model contributions, the framework enables informed decision-making in regulated industries where explainable AI is increasingly required.
+Ultimately, this research advances the field of synthetic data generation by reframing evaluation as an interpretable, context-aware process. It challenges the assumption of universal model performance and calls for dataset-sensitive assessment strategies that align with the growing demand for trustworthy and explainable AI systems.
 
 \subsection{Scopes and Delimitations of the Study}
 This study focuses on evaluating the quality of synthetic data generated by specific generative models—Generative Adversarial Networks (GANs), Variational Autoencoders (VAEs), and their hybrid (GAN-VAES)—within the context of time series applications. The primary evaluation framework integrates the concept of fidelity and usability. These two concepts are treated as interrelated aspects of data quality, rather than as separate, isolated evaluative criteria.
@@ -938,24 +945,6 @@ The application of Shapley value analysis to generative model evaluation represe
 
 The findings provide actionable guidance for practitioners implementing synthetic time series data solutions. VRNNGAN demonstrates consistent superiority across statistical fidelity and forecasting metrics, winning 10 out of 12 total metric-dataset combinations, suggesting that hybrid architectures should be prioritized for applications requiring balanced performance across multiple quality dimensions. However, the Wasserstein distance results reveal important exceptions: TimeVAE achieves optimal geometric similarity preservation for electricity data (Shapley value: 0.047), TimeGAN excels for exchange data (0.036), while VRNNGAN dominates weather data (0.039).
 
-% \subsection{Discussion}
-
-% The statistical analysis reveals a coherent pattern of findings that illuminate both the individual strengths of generative models and their complex interactions with dataset characteristics. The significant main effects identified through ANOVA (all F-statistics $>$ 100, p $<$ 0.001) combined with the Tukey HSD post-hoc results establish VRNNGAN's consistent superiority across evaluation metrics, while the substantial Model × Dataset interactions demonstrate that synthetic data generation effectiveness is fundamentally context-dependent rather than universal.
-
-% This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence scores ranging from 6.776 to 16.326 compared to individual models' scores of 2.918 to 8.542 demonstrate substantial improvements in statistical fidelity preservation with respect to the test dataset. Similarly, VRNNGAN consistently achieves the highest Shapley values for forecasting metrics, with RMSE contributions ranging from 0.059 to 1.137 and MAE contributions from 0.064 to 0.675, confirming enhanced practical utility across all datasets.
-
-% The consistent superiority of the hybrid architecture extends beyond the comparative advantages identified in previous literature. While \textcite{yoon_time-series_2019} focused on demonstrating TimeGAN's effectiveness against other GAN variants, and \textcite{desai_timevae_2021} showed TimeVAE's competitive performance against TimeGAN in specific contexts, this study provides the first systematic evidence that combining these approaches yields synergistic benefits. The Shapley analysis framework enables quantification of how VAE and GAN components contribute to overall performance, revealing that VRNNGAN's success stems from architectural complementarity rather than simple performance averaging.
-
-% % NOTE: Also add the fact where despite the VRNNGAN performing the best, the rankings of timeGAN and timeVAE are not fixed, and often change depending on the context (dataset and metric combination)
-% % NOTE: Also add consistency of VRNNGAN study, since it was also compared to gan and vae models. i think there was also another study that supports this. 
-
-% Most notably, the Wasserstein distance metric reveals the clearest evidence of context-dependent model effectiveness, with each dataset favoring a different generative approach for geometric similarity preservation. For electricity data, TimeVAE achieves the highest Shapley value (0.033), demonstrating the effectiveness of variational approaches for structured temporal patterns with regular load distributions. In contrast, exchange data favors TimeGAN (0.054), indicating that adversarial training better captures the stochastic volatility and irregular patterns characteristic of financial time series. Weather data shows VRNNGAN's superiority (0.129), suggesting that the most complex meteorological patterns require hybrid architectural approaches to achieve optimal geometric similarity preservation. This pattern provides compelling evidence that geometric similarity—as measured by Wasserstein distance—is fundamentally influenced by dataset-specific temporal characteristics in ways that favor different generative paradigms.
-
-% % NOTE: Wrong numbers used, need to mention both TimeGAN and TimeVAE negative shapley values.  
-
-% % The emergence of negative Shapley values for TimeGAN in weather data forecasting (-0.396 RMSE, -0.232 MAE) reveals previously undocumented limitations that occur when adversarial training encounters complex meteorological patterns with intricate interdependencies. This finding sheds new light compared to~\textcite{lu_machine_2024}'s general observations about trade-offs between statistical accuracy and practical utility, demonstrating that these trade-offs can be severe enough to result in performance degradation rather than simply reduced effectiveness.
-
-
 \newpage
 \section{CONCLUSION AND FUTURE WORKS}
 This study explores the application of Shapley value analysis to evaluate generative models for synthetic time series data generation, focusing on the balance between fidelity and usability metrics. The research systematically compared TimeGAN, TimeVAE, and VRNNGAN across three diverse datasets to determine optimal model selection strategies for synthetic data applications. The methodology employed a comprehensive evaluation framework that integrated statistical fidelity measures and forecasting utility metrics within a Shapley-based analysis framework. Bootstrap validation provided statistical robustness, while two-way ANOVA analysis confirmed significant model-dataset interactions across all evaluation metrics. Tukey HSD post-hoc testing identified specific pairwise differences between models, revealing distinct performance groupings that informed the subsequent Shapley value attribution analysis.
@@ -990,7 +979,15 @@ The author declares that there is no conflict of interest regarding the publicat
 
 \vspace{1em}
 
-The data used in this study were sourced from PapersWithCode.
+The datasets used in this study were sourced from PapersWithCode, a publicly accessible repository of machine learning datasets and benchmarks. The three time series datasets employed in this research are available at the following locations:
+
+\begin{itemize}
+    \item \textbf{Electricity Transformer Temperature (ETTh1):} Available at \url{https://paperswithcode.com/dataset/etth1-192}
+    \item \textbf{Exchange Rate:} Available at \url{https://paperswithcode.com/dataset/echange}
+    \item \textbf{Weather:} Available at \url{https://paperswithcode.com/dataset/weather-ltsf}
+\end{itemize}
+
+Access to these datasets is subject to the terms and conditions of PapersWithCode and the original data providers. All datasets are publicly available for research purposes. The preprocessing scripts and experimental code used in this study can be made available upon reasonable request to support reproducibility of the findings.
 
 \newpage
 % Print the bibliography
