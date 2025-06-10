@@ -1,6 +1,9 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Model × Dataset Interaction Effects for KL Divergence}}{26}{}%
 \contentsline {figure}{\numberline {2}{\ignorespaces Model × Dataset Interaction Effects for Wasserstein Distance}}{26}{}%
 \contentsline {figure}{\numberline {3}{\ignorespaces Model × Dataset Interaction Effects for RMSE}}{27}{}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Model × Dataset Interaction Rffects for MAE}}{27}{}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Shapley Analysis Summary Plot}}{30}{}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Model × Dataset Interaction Effects for MAE}}{27}{}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Shapley Value Analysis for KL Divergence across Models and Datasets}}{30}{}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Shapley Value Analysis for Wasserstein Distance across Models and Datasets}}{31}{}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Shapley Value Analysis for RMSE across Models and Datasets}}{31}{}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Shapley Value Analysis for MAE across Models and Datasets}}{32}{}%
 \contentsfinish 

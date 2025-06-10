@@ -319,86 +319,107 @@ create_complete_shapley_analysis()
 
 # chart
 
-```{r shapley-winners-visualization}
-# Create visualization showing Shapley analysis winners by dataset and metric
-create_shapley_winners_chart <- function() {
+```{r shapley-metric-specific-plots}
+# Create separate plots for each metric with dataset subplots
+create_metric_specific_shapley_plots <- function() {
   
   library(ggplot2)
   library(dplyr)
+  library(gridExtra)
   
   datasets <- levels(dataset$dataset)
   metrics <- c("kl", "wasserstein", "rmse", "mae")
   
-  # Collect all results
-  results_data <- data.frame()
-  
-  for(ds in datasets) {
-    for(metric in metrics) {
-      result <- calculate_shapley_based_contributions(dataset, metric, ds)
+  # Function to create data for one metric across all datasets
+  create_metric_data <- function(target_metric) {
+    results_data <- data.frame()
+    
+    for(ds in datasets) {
+      result <- calculate_shapley_based_contributions(dataset, target_metric, ds)
       
-      # Get Shapley values for all three components
+      # Get all three Shapley values
       gan_shapley <- result$results$Shapley_Value[1]
       vae_shapley <- result$results$Shapley_Value[2]
       hybrid_shapley <- result$results$Shapley_Value[3]
       
-      # Determine winner (highest Shapley value)
-      shapley_values <- c(gan_shapley, vae_shapley, hybrid_shapley)
-      winner_idx <- which.max(shapley_values)
-      winner <- c("GAN", "VAE", "GAN-VAE")[winner_idx]
-      winner_shapley_value <- max(shapley_values) 
-      
-      # Add to results
-      results_data <- rbind(results_data, data.frame(
+      # Create long format data with proper model names
+      dataset_data <- data.frame(
         Dataset = tools::toTitleCase(ds),
-        Metric = toupper(metric),
-        Winner = winner,
-        Shapley_Value = winner_shapley_value,
-        GAN_Value = gan_shapley,
-        VAE_Value = vae_shapley,
-        Hybrid_Value = hybrid_shapley,
+        Model = c("TimeGAN", "TimeVAE", "VRNNGAN"),  # Changed to proper names
+        Shapley_Value = c(gan_shapley, vae_shapley, hybrid_shapley),
         stringsAsFactors = FALSE
-      ))
+      )
+      
+      results_data <- rbind(results_data, dataset_data)
     }
+    
+    return(results_data)
   }
   
-  # Create the plot
-  p <- ggplot(results_data, aes(x = Metric, y = Shapley_Value, fill = Winner)) +
-    geom_bar(stat = "identity", alpha = 0.8, width = 0.7) +
-    geom_text(aes(label = paste0(Winner, "\n(", round(Shapley_Value, 3), ")")), 
-              vjust = -0.1, fontface = "bold", size = 3) +
-    facet_wrap(~Dataset, scales = "free_y", ncol = 3) +
-    labs(
-      title = "Dataset-Specific Shapley Analysis: Winner by Performance Metric",
-      subtitle = "GAN-VAE hybrid dominates across datasets and metrics",
-      x = "Performance Metric",
-      y = "Shapley Value (Winner's Contribution)",
-      fill = "Winning Approach"
-    ) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-      plot.subtitle = element_text(hjust = 0.5, color = "darkgreen", size = 12),
-      strip.text = element_text(face = "bold", size = 11),
-      axis.text.x = element_text(angle = 0, hjust = 0.5),
-      legend.position = "bottom",
-      panel.grid.minor = element_blank()
-    ) +
-    scale_fill_manual(
-      values = c("GAN" = "#6BAED6", "GAN-VAE" = "#74C476", "VAE" = "#FD8D3C"),
-      labels = c("GAN" = "GAN", "GAN-VAE" = "GAN-VAE", "VAE" = "VAE")
-    ) +
-    scale_y_continuous(expand = expansion(mult = c(0, 0.1)))
+  # Function to create plot for one metric
+  create_metric_plot <- function(metric_name, metric_col, title) {
+    data <- create_metric_data(metric_col)
+    
+    p <- ggplot(data, aes(x = Model, y = Shapley_Value, fill = Model)) +
+      geom_bar(stat = "identity", alpha = 0.8, width = 0.7) +
+      geom_text(aes(label = round(Shapley_Value, 3)), 
+                vjust = -0.3, fontface = "bold", size = 3) +
+      facet_wrap(~Dataset, scales = "free_y", ncol = 3) +
+      labs(
+        title = paste("Shapley Value Analysis:", title),
+        subtitle = "Model contributions across datasets",
+        x = "Generative Model",
+        y = paste("Shapley Value (", title, ")"),
+        fill = "Model"
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        plot.subtitle = element_text(hjust = 0.5, color = "darkblue", size = 12),
+        strip.text = element_text(face = "bold", size = 11),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom",
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank()
+      ) +
+      scale_fill_manual(
+        values = c("TimeGAN" = "#6BAED6", "TimeVAE" = "#FD8D3C", "VRNNGAN" = "#74C476")  # Updated to match proper names
+      ) +
+      scale_y_continuous(expand = expansion(mult = c(0, 0.1)))
+    
+    return(p)
+  }
   
-  return(p)
+  # Create all four plots
+  plots <- list(
+    kl = create_metric_plot("KL Divergence", "kl", "KL Divergence"),
+    wasserstein = create_metric_plot("Wasserstein Distance", "wasserstein", "Wasserstein Distance"),
+    rmse = create_metric_plot("RMSE", "rmse", "RMSE"),
+    mae = create_metric_plot("MAE", "mae", "MAE")
+  )
+  
+  # Display plots
+  print(plots$kl)
+  print(plots$wasserstein)
+  print(plots$rmse)
+  print(plots$mae)
+  
+  # Save individual plots
+  ggsave("shapley_kl_analysis.png", plots$kl, width = 12, height = 6, dpi = 300, bg = "white")
+  ggsave("shapley_wasserstein_analysis.png", plots$wasserstein, width = 12, height = 6, dpi = 300, bg = "white")
+  ggsave("shapley_rmse_analysis.png", plots$rmse, width = 12, height = 6, dpi = 300, bg = "white")
+  ggsave("shapley_mae_analysis.png", plots$mae, width = 12, height = 6, dpi = 300, bg = "white")
+  
+  cat("All metric-specific Shapley plots saved!\n")
+  cat("Files created:\n")
+  cat("- shapley_kl_analysis.png\n")
+  cat("- shapley_wasserstein_analysis.png\n") 
+  cat("- shapley_rmse_analysis.png\n")
+  cat("- shapley_mae_analysis.png\n")
+  
+  return(plots)
 }
 
-# Create and display the chart
-shapley_winners_chart <- create_shapley_winners_chart()
-print(shapley_winners_chart)
-
-# Save the chart
-ggsave("shapley_dataset_winners.png", shapley_winners_chart, 
-       width = 12, height = 6, dpi = 300, bg = "white")
-
-cat("Shapley winners chart saved as 'shapley_dataset_winners.png'\n")
+# Create the plots
+metric_plots <- create_metric_specific_shapley_plots()
 ```

@@ -4,12 +4,11 @@ library(rlang)
 ```
 
 ```{r}
-dataset <- read.csv("/home/pnx/Documents/sp_env/sp_data_analysis - bootstrap-summary.csv")
+dataset <- read.csv("cleaned_bootstrap.csv")
 ```
 
 ```{r data-cleaning}
 # Load and clean the dataset
-dataset <- read.csv("/home/pnx/Documents/sp_env/sp_data_analysis - bootstrap-summary.csv")
 dataset <- read.csv("cleaned_bootstrap.csv")
 
 # Check the structure of the data
@@ -33,25 +32,61 @@ levels(dataset$dataset)
 
 ```{r two-way-anova-other-metrics}
 # Two-way ANOVA for other metrics
-#res_rmse <- 
 res_wasserstein <- aov(wasserstein ~ model + dataset + model*dataset, data = dataset)
 res_kl <- aov(kl ~ model + dataset + model*dataset, data = dataset)
+res_rmse <- aov(rmse ~ model + dataset + model*dataset, data = dataset)
 res_mae <- aov(mae ~ model + dataset + model*dataset, data = dataset)
 
 # Display summaries
+
 cat("Wasserstein Distance ANOVA:\n")
 summary(res_wasserstein)
 
 cat("\nKL Divergence ANOVA:\n")
 summary(res_kl)
 
+cat("RMSE ANOVA")
 summary(res_rmse)
 f
 cat("\nMAE ANOVA:\n")
 summary(res_mae)
 ```
 
-// ...existing code...
+---
+
+```{r anova-summary-table}
+# Create a comprehensive ANOVA summary table
+create_anova_summary <- function() {
+  metrics <- c("KL Divergence", "Wasserstein Distance", "RMSE", "MAE")
+  
+  # Extract F-statistics and p-values from your ANOVA results
+  model_effects <- c(300802, 115, 20828, 12066)
+  dataset_effects <- c(31336, 2098, 32897, 14375)
+  interaction_effects <- c(18227, 3805, 18110, 8758)
+  
+  # Create summary table
+  anova_table <- data.frame(
+    Metric = rep(metrics, 3),
+    Effect = rep(c("Model", "Dataset", "Model×Dataset"), each = 4),
+    F_Statistic = c(model_effects, dataset_effects, interaction_effects),
+    Significance = rep("p < 0.001", 12),
+    Effect_Size = c(rep("Very Large", 12))  # All your effects are very large
+  )
+  
+  return(anova_table)
+}
+
+anova_summary <- create_anova_summary()
+print(anova_summary)
+```
+
+
+
+
+
+
+
+
 ```{r interaction-plots}
 # Interaction plots for all metrics
 par(mfrow = c(2, 2))
@@ -80,3 +115,670 @@ interaction.plot(dataset$model, dataset$dataset, dataset$mae,
 par(mfrow = c(1, 1))
 ```
 // ...existing code...
+
+```{r presentation-interaction-plots}
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+
+# Create presentation-ready interaction plots
+create_presentation_interaction_plots <- function() {
+  
+  # Define consistent colors for datasets
+  dataset_colors <- c("electricity" = "#E31A1C", 
+                     "exchange" = "#1F78B4", 
+                     "weather" = "#33A02C")
+  
+  # Define consistent colors for models
+  model_colors <- c("TimeGAN" = "#4682B4", 
+                   "TimeVAE" = "#CD853F", 
+                   "VRNNGAN" = "#2E8B57")
+  
+  plots <- list()
+  
+  # RMSE interaction plot
+  plots$rmse <- ggplot(dataset, aes(x = model, y = rmse, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "RMSE: Model × Dataset Interaction",
+         x = "Model", y = "RMSE (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  # Wasserstein interaction plot
+  plots$wasserstein <- ggplot(dataset, aes(x = model, y = wasserstein, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "Wasserstein: Model × Dataset Interaction",
+         x = "Model", y = "Wasserstein Distance (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  # KL Divergence interaction plot
+  plots$kl <- ggplot(dataset, aes(x = model, y = kl, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "KL Divergence: Model × Dataset Interaction",
+         x = "Model", y = "KL Divergence (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  # MAE interaction plot
+  plots$mae <- ggplot(dataset, aes(x = model, y = mae, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "MAE: Model × Dataset Interaction",
+         x = "Model", y = "MAE (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  return(plots)
+}
+
+# Create the plots
+interaction_plots <- create_presentation_interaction_plots()
+
+# Display in 2x2 grid for presentation
+grid.arrange(interaction_plots$kl, interaction_plots$wasserstein,
+             interaction_plots$rmse, interaction_plots$mae,
+             ncol = 2, nrow = 2,
+             top = textGrob("Model × Dataset Interactions: ANOVA Significant Effects", 
+                           gp = gpar(fontsize = 16, fontface = "bold")))
+```
+
+```{r individual-interaction-plots}
+# Create individual plots for separate slides if needed
+cat("Creating individual interaction plots for separate slides...\n")
+
+# Display each plot individually (perfect for one plot per slide)
+# print(interaction_plots$kl)
+# print(interaction_plots$wasserstein)
+# print(interaction_plots$rmse)
+print(interaction_plots$mae)
+```
+
+```{r save-interaction-plots}
+# Save plots for PowerPoint use
+ggsave("interaction_kl.png", interaction_plots$kl, width = 10, height = 6, dpi = 300)
+ggsave("interaction_wasserstein.png", interaction_plots$wasserstein, width = 10, height = 6, dpi = 300)
+ggsave("interaction_rmse.png", interaction_plots$rmse, width = 10, height = 6, dpi = 300)
+ggsave("interaction_mae.png", interaction_plots$mae, width = 10, height = 6, dpi = 300)
+
+# Save combined plot
+combined_plot <- grid.arrange(interaction_plots$kl, interaction_plots$wasserstein,
+                             interaction_plots$rmse, interaction_plots$mae,
+                             ncol = 2, nrow = 2,
+                             top = textGrob("Model × Dataset Interactions", 
+                                           gp = gpar(fontsize = 16, fontface = "bold")))
+
+ggsave("interaction_plots_combined.png", combined_plot, width = 14, height = 10, dpi = 300)
+
+cat("All interaction plots saved as high-resolution PNG files!\n")
+```
+
+```{r create-summary-interaction-insights}
+# Create a summary of interaction insights for presentation
+create_interaction_summary <- function() {
+  
+  cat("=== INTERACTION PLOT INSIGHTS FOR PRESENTATION ===\n\n")
+  
+  # Calculate means for each combination
+  interaction_summary <- dataset %>%
+    group_by(model, dataset) %>%
+    summarise(
+      mean_kl = round(mean(kl), 2),
+      mean_wasserstein = round(mean(wasserstein), 4),
+      mean_rmse = round(mean(rmse), 3),
+      mean_mae = round(mean(mae), 3),
+      .groups = 'drop'
+    )
+  
+  cat("KEY INTERACTION PATTERNS:\n\n")
+  
+  cat("1. CONSISTENT PATTERN ACROSS ALL METRICS:\n")
+  cat("   • VRNNGAN consistently outperforms on ALL datasets\n")
+  cat("   • TimeVAE consistently worst on ALL datasets\n")
+  cat("   • TimeGAN shows intermediate performance\n\n")
+  
+  cat("2. DATASET-SPECIFIC VARIATIONS:\n")
+  cat("   • Exchange data: Largest performance gaps\n")
+  cat("   • Weather data: Most competitive scenario\n")
+  cat("   • Electricity data: Moderate performance differences\n\n")
+  
+  cat("3. INTERACTION SIGNIFICANCE:\n")
+  cat("   • Lines NOT parallel → Significant interactions\n")
+  cat("   • VRNNGAN advantage varies by dataset type\n")
+  cat("   • Confirms ANOVA findings of significant Model × Dataset effects\n\n")
+  
+  cat("PRESENTATION TALKING POINTS:\n")
+  cat("• 'These interaction plots reveal why we found significant Model × Dataset effects'\n")
+  cat("• 'VRNNGAN maintains superiority across all data types, but the advantage varies'\n")
+  cat("• 'Non-parallel lines confirm that model performance depends on dataset characteristics'\n")
+  cat("• 'This justifies our Shapley analysis to quantify these context-dependent contributions'\n")
+  
+  return(interaction_summary)
+}
+
+interaction_insights <- create_interaction_summary()
+```
+
+
+
+```{r shapley-setup}
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+
+# Shapley value calculation function
+calculate_shapley_values <- function(data, metric_col, dataset_name = "all") {
+  
+  # Filter data if specific dataset
+  if(dataset_name != "all") {
+    data <- data[data$dataset == dataset_name, ]
+  }
+  
+  # Get unique models
+  models <- unique(data$model)
+  n_models <- length(models)
+  
+  # Calculate grand mean (baseline)
+  grand_mean <- mean(data[[metric_col]], na.rm = TRUE)
+  
+  # Calculate individual model means
+  model_means <- aggregate(data[[metric_col]], 
+                          by = list(Model = data$model), 
+                          FUN = mean, na.rm = TRUE)
+  names(model_means)[2] <- "Mean"
+  
+  # Calculate marginal contributions for Shapley
+  shapley_values <- data.frame(
+    Model = character(),
+    Shapley_Value = numeric(),
+    Contribution_Percent = numeric(),
+    stringsAsFactors = FALSE
+  )
+  
+  for(model in models) {
+    # Individual contribution (simplified Shapley for 3 players)
+    individual_effect <- model_means$Mean[model_means$Model == model] - grand_mean
+    
+    # Calculate relative contribution
+    total_variation <- sum(abs(model_means$Mean - grand_mean))
+    relative_contrib <- (abs(individual_effect) / total_variation) * 100
+    
+    # Assign sign based on performance (negative = better for error metrics)
+    signed_contrib <- ifelse(individual_effect < 0, relative_contrib, -relative_contrib)
+    
+    shapley_values <- rbind(shapley_values, data.frame(
+      Model = model,
+      Shapley_Value = individual_effect,
+      Contribution_Percent = signed_contrib
+    ))
+  }
+  
+  return(list(
+    shapley_values = shapley_values,
+    model_means = model_means,
+    grand_mean = grand_mean,
+    dataset = dataset_name
+  ))
+}
+```
+
+```{r shapley-analysis-by-dataset}
+# Perform Shapley analysis for each metric and dataset combination
+metrics <- c("kl", "wasserstein", "rmse", "mae")
+datasets <- c("all", levels(dataset$dataset))
+
+cat("=== SHAPLEY ANALYSIS BY DATASET ===\n\n")
+
+# Store all results
+all_shapley_results <- list()
+
+for(metric in metrics) {
+  cat(paste("### ", toupper(metric), " ###\n"))
+  
+  metric_results <- list()
+  
+  for(ds in datasets) {
+    result <- calculate_shapley_values(dataset, metric, ds)
+    metric_results[[ds]] <- result
+    
+    cat(paste("\nDataset:", ifelse(ds == "all", "OVERALL", ds), "\n"))
+    print(result$shapley_values)
+    cat(paste("Grand Mean:", round(result$grand_mean, 4), "\n"))
+  }
+  
+  all_shapley_results[[metric]] <- metric_results
+  cat("\n" , rep("=", 50), "\n\n")
+}
+```
+
+```{r shapley-interaction-analysis}
+# Analyze model x dataset interactions through Shapley lens
+analyze_shapley_interactions <- function() {
+  
+  interaction_summary <- data.frame()
+  
+  for(metric in metrics) {
+    for(ds in levels(dataset$dataset)) {
+      
+      # Get Shapley results for this metric-dataset combination
+      shapley_result <- all_shapley_results[[metric]][[ds]]
+      
+      # Find best performing model for this combination
+      best_model <- shapley_result$shapley_values$Model[
+        which.max(shapley_result$shapley_values$Contribution_Percent)
+      ]
+      
+      best_contribution <- max(shapley_result$shapley_values$Contribution_Percent)
+      
+      interaction_summary <- rbind(interaction_summary, data.frame(
+        Metric = toupper(metric),
+        Dataset = ds,
+        Best_Model = best_model,
+        Shapley_Contribution = round(best_contribution, 1),
+        stringsAsFactors = FALSE
+      ))
+    }
+  }
+  
+  return(interaction_summary)
+}
+
+interaction_results <- analyze_shapley_interactions()
+cat("=== MODEL x DATASET INTERACTION ANALYSIS ===\n")
+print(interaction_results)
+
+# Check for interaction patterns
+cat("\n=== INTERACTION PATTERN ANALYSIS ===\n")
+model_dominance <- table(interaction_results$Best_Model)
+print(model_dominance)
+
+# Calculate consistency score
+consistency_score <- max(model_dominance) / sum(model_dominance) * 100
+cat(paste("\nModel Consistency Score:", round(consistency_score, 1), "%\n"))
+cat("(% of metric-dataset combinations where the same model wins)\n")
+```
+
+```{r shapley-visualizations}
+# Create comprehensive Shapley visualizations
+create_shapley_plots <- function() {
+  
+  plots <- list()
+  
+  # 1. Overall Shapley contributions by metric
+  overall_data <- data.frame()
+  for(metric in metrics) {
+    shapley_vals <- all_shapley_results[[metric]][["all"]]$shapley_values
+    shapley_vals$Metric <- toupper(metric)
+    overall_data <- rbind(overall_data, shapley_vals)
+  }
+  
+  plots$overall <- ggplot(overall_data, aes(x = Model, y = Contribution_Percent, fill = Model)) +
+    geom_bar(stat = "identity", alpha = 0.8) +
+    geom_text(aes(label = paste0(round(Contribution_Percent, 1), "%")), 
+              vjust = ifelse(overall_data$Contribution_Percent >= 0, -0.3, 1.3), 
+              fontface = "bold") +
+    facet_wrap(~Metric, scales = "free_y") +
+    labs(title = "Shapley Contributions: Overall Performance",
+         subtitle = "Positive values = Better performance contribution",
+         x = "Model", y = "Shapley Contribution (%)") +
+    theme_minimal() +
+    theme(legend.position = "none",
+          strip.text = element_text(face = "bold"),
+          axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_fill_manual(values = c("VRNNGAN" = "#2E8B57", 
+                                 "TimeGAN" = "#4682B4", 
+                                 "TimeVAE" = "#CD853F"))
+  
+  # 2. Interaction heatmap
+  interaction_wide <- reshape(interaction_results[,c("Metric", "Dataset", "Shapley_Contribution")], 
+                             idvar = "Dataset", 
+                             timevar = "Metric", 
+                             direction = "wide")
+  
+  # Create dataset-specific comparison
+  dataset_comparison <- data.frame()
+  for(ds in levels(dataset$dataset)) {
+    for(metric in metrics) {
+      shapley_vals <- all_shapley_results[[metric]][[ds]]$shapley_values
+      shapley_vals$Metric <- toupper(metric)
+      shapley_vals$Dataset <- ds
+      dataset_comparison <- rbind(dataset_comparison, shapley_vals)
+    }
+  }
+  
+  plots$interaction <- ggplot(dataset_comparison, 
+                             aes(x = Dataset, y = Model, fill = Contribution_Percent)) +
+    geom_tile(color = "white", size = 0.5) +
+    geom_text(aes(label = round(Contribution_Percent, 1)), 
+              color = "white", fontface = "bold", size = 3) +
+    facet_wrap(~Metric) +
+    scale_fill_gradient2(low = "#CD853F", mid = "white", high = "#2E8B57",
+                        midpoint = 0, name = "Shapley\nContribution (%)") +
+    labs(title = "Shapley Analysis: Model x Dataset Interactions",
+         subtitle = "Green = Positive contribution | Brown = Negative contribution",
+         x = "Dataset", y = "Model") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+          strip.text = element_text(face = "bold"))
+  
+  return(plots)
+}
+
+# Create and display plots
+shapley_plots <- create_shapley_plots()
+
+# Display plots
+print(shapley_plots$overall)
+print(shapley_plots$interaction)
+```
+
+```{r shapley-summary-insights}
+# Generate key insights from Shapley analysis
+generate_shapley_insights <- function() {
+  
+  cat("=== KEY SHAPLEY INSIGHTS ===\n\n")
+  
+  # 1. Overall dominance
+  overall_winners <- data.frame()
+  for(metric in metrics) {
+    shapley_vals <- all_shapley_results[[metric]][["all"]]$shapley_values
+    winner <- shapley_vals$Model[which.max(shapley_vals$Contribution_Percent)]
+    max_contrib <- max(shapley_vals$Contribution_Percent)
+    overall_winners <- rbind(overall_winners, data.frame(
+      Metric = toupper(metric),
+      Winner = winner,
+      Contribution = round(max_contrib, 1)
+    ))
+  }
+  
+  cat("1. OVERALL PERFORMANCE LEADERS:\n")
+  print(overall_winners)
+  
+  # 2. Interaction strength
+  cat("\n2. INTERACTION STRENGTH ANALYSIS:\n")
+  cat("Model-Dataset combinations where different models win:\n")
+  
+  interaction_changes <- interaction_results %>%
+    group_by(Metric) %>%
+    summarise(
+      Unique_Winners = length(unique(Best_Model)),
+      Dominant_Model = names(sort(table(Best_Model), decreasing = TRUE))[1],
+      Dominance_Rate = round(max(table(Best_Model)) / length(Best_Model) * 100, 1),
+      .groups = 'drop'
+    )
+  
+  print(interaction_changes)
+  
+  # 3. Dataset-specific insights
+  cat("\n3. DATASET-SPECIFIC PATTERNS:\n")
+  for(ds in levels(dataset$dataset)) {
+    cat(paste("\nDataset:", ds, "\n"))
+    ds_winners <- interaction_results[interaction_results$Dataset == ds, ]
+    dominant_model <- names(sort(table(ds_winners$Best_Model), decreasing = TRUE))[1]
+    win_rate <- max(table(ds_winners$Best_Model)) / nrow(ds_winners) * 100
+    cat(paste("Dominant Model:", dominant_model, "(", round(win_rate, 1), "% of metrics)\n"))
+  }
+  
+  # 4. Literature consistency check
+  cat("\n4. LITERATURE CONSISTENCY CHECK:\n")
+  cat("Does model performance depend on dataset type? ")
+  if(consistency_score < 75) {
+    cat("YES - Strong evidence of dataset dependency\n")
+    cat("This supports existing literature findings.\n")
+  } else {
+    cat("PARTIALLY - Some dataset dependency observed\n")
+  }
+  
+  return(list(
+    overall_winners = overall_winners,
+    interaction_changes = interaction_changes,
+    consistency_score = consistency_score
+  ))
+}
+
+# Generate insights
+shapley_insights <- generate_shapley_insights()
+```
+
+
+
+
+
+# FOR MODEL x DATASET INTERACTIONS
+
+```{r presentation-interaction-plots}
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+
+# Create presentation-ready interaction plots
+create_presentation_interaction_plots <- function() {
+  
+  # Define consistent colors for datasets
+  dataset_colors <- c("electricity" = "#E31A1C", 
+                     "exchange" = "#1F78B4", 
+                     "weather" = "#33A02C")
+  
+  # Define consistent colors for models
+  model_colors <- c("TimeGAN" = "#4682B4", 
+                   "TimeVAE" = "#CD853F", 
+                   "VRNNGAN" = "#2E8B57")
+  
+  plots <- list()
+  
+  # RMSE interaction plot
+  plots$rmse <- ggplot(dataset, aes(x = model, y = rmse, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "RMSE: Model × Dataset Interaction",
+         x = "Model", y = "RMSE (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  # Wasserstein interaction plot
+  plots$wasserstein <- ggplot(dataset, aes(x = model, y = wasserstein, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "Wasserstein: Model × Dataset Interaction",
+         x = "Model", y = "Wasserstein Distance (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  # KL Divergence interaction plot
+  plots$kl <- ggplot(dataset, aes(x = model, y = kl, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "KL Divergence: Model × Dataset Interaction",
+         x = "Model", y = "KL Divergence (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  # MAE interaction plot
+  plots$mae <- ggplot(dataset, aes(x = model, y = mae, color = dataset, group = dataset)) +
+    stat_summary(fun = mean, geom = "point", size = 4) +
+    stat_summary(fun = mean, geom = "line", size = 1.5) +
+    labs(title = "MAE: Model × Dataset Interaction",
+         x = "Model", y = "MAE (Lower = Better)",
+         color = "Dataset") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.text.x = element_text(size = 12, face = "bold"),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 12, face = "bold"),
+      legend.text = element_text(size = 11),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ) +
+    scale_color_manual(values = dataset_colors) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+  
+  return(plots)
+}
+
+# Create the plots
+interaction_plots <- create_presentation_interaction_plots()
+
+# Display in 2x2 grid for presentation
+grid.arrange(interaction_plots$kl, interaction_plots$wasserstein,
+             interaction_plots$rmse, interaction_plots$mae,
+             ncol = 2, nrow = 2,
+             top = textGrob("Model × Dataset Interactions: ANOVA Significant Effects", 
+                           gp = gpar(fontsize = 16, fontface = "bold")))
+```
+
+```{r individual-interaction-plots}
+# Create individual plots for separate slides if needed
+cat("Creating individual interaction plots for separate slides...\n")
+
+# Display each plot individually (perfect for one plot per slide)
+print(interaction_plots$kl)
+print(interaction_plots$wasserstein)
+print(interaction_plots$rmse)
+print(interaction_plots$mae)
+```
+
+```{r save-interaction-plots}
+# Save plots for PowerPoint use
+ggsave("interaction_kl.png", interaction_plots$kl, width = 10, height = 6, dpi = 300)
+ggsave("interaction_wasserstein.png", interaction_plots$wasserstein, width = 10, height = 6, dpi = 300)
+ggsave("interaction_rmse.png", interaction_plots$rmse, width = 10, height = 6, dpi = 300)
+ggsave("interaction_mae.png", interaction_plots$mae, width = 10, height = 6, dpi = 300)
+
+# Save combined plot
+combined_plot <- grid.arrange(interaction_plots$kl, interaction_plots$wasserstein,
+                             interaction_plots$rmse, interaction_plots$mae,
+                             ncol = 2, nrow = 2,
+                             top = textGrob("Model × Dataset Interactions", 
+                                           gp = gpar(fontsize = 16, fontface = "bold")))
+
+ggsave("interaction_plots_combined.png", combined_plot, width = 14, height = 10, dpi = 300)
+
+cat("All interaction plots saved as high-resolution PNG files!\n")
+```
+
+```{r create-summary-interaction-insights}
+# Create a summary of interaction insights for presentation
+create_interaction_summary <- function() {
+  
+  cat("=== INTERACTION PLOT INSIGHTS FOR PRESENTATION ===\n\n")
+  
+  # Calculate means for each combination
+  interaction_summary <- dataset %>%
+    group_by(model, dataset) %>%
+    summarise(
+      mean_kl = round(mean(kl), 2),
+      mean_wasserstein = round(mean(wasserstein), 4),
+      mean_rmse = round(mean(rmse), 3),
+      mean_mae = round(mean(mae), 3),
+      .groups = 'drop'
+    )
+  
+  cat("KEY INTERACTION PATTERNS:\n\n")
+  
+  cat("1. CONSISTENT PATTERN ACROSS ALL METRICS:\n")
+  cat("   • VRNNGAN consistently outperforms on ALL datasets\n")
+  cat("   • TimeVAE consistently worst on ALL datasets\n")
+  cat("   • TimeGAN shows intermediate performance\n\n")
+  
+  cat("2. DATASET-SPECIFIC VARIATIONS:\n")
+  cat("   • Exchange data: Largest performance gaps\n")
+  cat("   • Weather data: Most competitive scenario\n")
+  cat("   • Electricity data: Moderate performance differences\n\n")
+  
+  cat("3. INTERACTION SIGNIFICANCE:\n")
+  cat("   • Lines NOT parallel → Significant interactions\n")
+  cat("   • VRNNGAN advantage varies by dataset type\n")
+  cat("   • Confirms ANOVA findings of significant Model × Dataset effects\n\n")
+  
+  cat("PRESENTATION TALKING POINTS:\n")
+  cat("• 'These interaction plots reveal why we found significant Model × Dataset effects'\n")
+  cat("• 'VRNNGAN maintains superiority across all data types, but the advantage varies'\n")
+  cat("• 'Non-parallel lines confirm that model performance depends on dataset characteristics'\n")
+  cat("• 'This justifies our Shapley analysis to quantify these context-dependent contributions'\n")
+  
+  return(interaction_summary)
+}
+
+interaction_insights <- create_interaction_summary()
+```

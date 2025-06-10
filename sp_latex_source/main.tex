@@ -213,31 +213,27 @@ The faculty of the University of the Philippines Cebu -- Department of Computer 
 
 \vspace{1em} % adds a little vertical space
 
-This study would not have been possible without the guidance, support, and inspiration I received from so many individuals throughout this journey. \\
+This study would not have been possible without the guidance, support, and inspiration I received from so many individuals throughout this journey.
 
-First and foremost, I would like to express my deepest gratitude to my SP adviser, Asst. Prof.~Dharyll Prince Abellana, whose clarity of thought and brilliance consistently inspired me. His insight, patience, and unwavering belief in my work have shaped this study into what it is today. \\
+First and foremost, I would like to express my deepest gratitude to my SP adviser, Asst. Prof.~Dharyll Prince Abellana, whose clarity of thought and brilliance consistently guided me. His insight, patience, and unwavering belief in my work have shaped this study into what it is today.
 
-To my family, thank you for your never-ending support, encouragement, and love. Your presence has been my foundation through every challenge I faced. \\
+To the faculty and staff of the Department of Computer Science, thank you for the knowledge, support, and dedication you’ve extended to us students. Your commitment to excellence in teaching and mentorship made this academic journey meaningful.
 
-To my friends, acquaintances, and even strangers who, in one way or another, inspired me during my college journey—thank you. Whether through kind words, shared struggles, or silent examples, you’ve each left a mark that pushed me forward. \\
+To my family, thank you for your never-ending support, encouragement, and love. Your presence has been my foundation through every challenge I faced.
+
+To my STS1 trio, ln x and dops—despite sharing a single braincell at times, we somehow managed to make it through. Thank you for the laughter, shared deadlines, and constant reminders that we were never alone in this. Most of all, thank you for believing in me when it was difficult to believe in myself.
+
+To my friends, acquaintances, and even strangers who, in one way or another, inspired me during my college journey, thank you. Whether through kind words, shared struggles, or silent examples, you’ve each left a mark that pushed me forward.
 
 And lastly, to myself—for choosing an unfamiliar topic in pursuit of growth, for embracing uncertainty, and for continuing even in moments of doubt. This work is as much a product of my perseverance as it is of academic pursuit.
-
-
 
 
 \newpage
 
 
-\vfill
+\null\vfill
 \begin{center}
-\Large\textbf{DEDICATION}
-\end{center}
-
-\vspace{2em}
-
-\begin{center}
-\large\textit{To myself, who showed up even in doubt,\\
+\large\textit{To those who showed up even in doubt,\\
 and to everyone that follows—\\
 may you find light in the questions,\\
 and courage in the search.}
@@ -358,7 +354,7 @@ However, these efforts encounter additional complexities. A prominent issue is t
 
 \begin{table}[H]
 \centering
-\caption{Key Evaluation Metrics in Synthetic Data Generation Literature}
+\caption{Key evaluation metrics in Synthetic Data Generation literature}
 \label{tab:literature_metrics_comprehensive}
 \small
 \begin{tabular}{llp{5cm}l}
@@ -499,7 +495,7 @@ The LSTM forecasting model employed a simple shallow architecture with 64 hidden
 
 \begin{table}[H]
 \centering
-\caption{LSTM Forecasting Model Configuration}
+\caption{LSTM forecasting model configuration}
 \label{tab:lstm_params}
 \small
 \begin{tabular}{ll}
@@ -587,7 +583,7 @@ The electricity dataset shows the most consistent model performance, with all mo
 
 \begin{table}[H]
 \centering
-\caption{Bootstrap Summary Statistics for Electricity Dataset (15 runs per model)}
+\caption{Bootstrap summary statistics for electricity dataset (15 runs per model)}
 \label{tab:bootstrap_electricity}
 \small
 \begin{tabular}{lccccc}
@@ -623,7 +619,7 @@ The electricity dataset shows the most consistent model performance, with all mo
 Exchange data reveals slightly higher variability for VRNNGAN in KL divergence (std: 0.037), while maintaining stable performance across other metrics.
 \begin{table}[H]
     \centering
-\caption{Bootstrap Summary Statistics for Exchange Dataset (15 runs per model)}
+\caption{Bootstrap summary statistics for exchange dataset (15 runs per model)}
 \label{tab:bootstrap_exchange}
 \small
 \begin{tabular}{lccccc}
@@ -660,7 +656,7 @@ Weather data presents the highest bootstrap variability, particularly for TimeVA
 
 \begin{table}[H]
     \centering
-    \caption{Bootstrap Summary Statistics for Weather Dataset (15 runs per model)}
+    \caption{Bootstrap summary statistics for weather dataset (15 runs per model)}
     \label{tab:bootstrap_weather}
     \small
     \begin{tabular}{lccccc}
@@ -691,8 +687,6 @@ Weather data presents the highest bootstrap variability, particularly for TimeVA
 \end{table}
 
 \subsection{Statistical Analysis (ANOVA)}
-
-
 
 \subsubsection{ANOVA Summary}
 
@@ -755,7 +749,7 @@ Figures \ref{fig:rmse_interaction} and \ref{fig:mae_interaction} display the for
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{assets/interaction_mae.png}
-\caption{Model × Dataset Interaction Rffects for MAE}
+\caption{Model × Dataset Interaction Effects for MAE}
 \label{fig:mae_interaction}
 \end{figure}
 
@@ -768,7 +762,7 @@ A closer examination of the post-hoc results illustrates these performance group
 % KL Divergence Tukey HSD Results
 \begin{table}[H]
 \centering
-\caption{Tukey HSD Post-Hoc analysis for KL Divergence}
+\caption{Tukey HSD post-hoc analysis for KL divergence}
 \label{tab:tukey_kl}
 \begin{tabular}{lcc}
 \toprule
@@ -787,7 +781,7 @@ The Wasserstein distance results in Table \ref{tab:tukey_wasserstein} reveal a d
 % Wasserstein Distance Tukey HSD Results
 \begin{table}[H]
 \centering
-\caption{Tukey HSD Post-Hoc Analysis for Wasserstein Distance}
+\caption{Tukey HSD post-hoc analysis for Wasserstein distance}
 \label{tab:tukey_wasserstein}
 \begin{tabular}{lcc}
 \toprule
@@ -801,13 +795,13 @@ TimeGAN & 0.1488 & a \\
 \footnotesize
 \end{table}
 
-For forecasting performance metrics, the post-hoc analysis demonstrates more pronounced differences between models. In RMSE evaluation (Table \ref{tab:tukey_rmse}), VRNNGAN maintains its superior performance (0.220, group c), while TimeGAN (0.259, group a) significantly outperforms TimeVAE (0.629, group b). This substantial gap indicates that TimeVAE's approach to latent space modeling may not effectively capture the temporal dependencies necessary for accurate forecasting. Similarly, MAE results (Table \ref{tab:tukey_mae}) confirm this pattern, with VRNNGAN (0.149, group c) leading, followed by TimeGAN (0.181, group a), and TimeVAE showing notably higher error rates (0.412, group b).
+For forecasting performance metrics, the post-hoc analysis demonstrates more pronounced differences between models. In RMSE evaluation (Table \ref{tab:tukey_rmse}), VRNNGAN maintains its superior performance (0.220, group c), while TimeGAN (0.259, group a) significantly outperforms TimeVAE (0.629, group b). This notable gap indicates that TimeVAE's approach to latent space modeling may not effectively capture the temporal dependencies necessary for accurate forecasting. Similarly, MAE results (Table \ref{tab:tukey_mae}) confirm this pattern, with VRNNGAN (0.149, group c) leading, followed by TimeGAN (0.181, group a), and TimeVAE showing notably higher error rates (0.412, group b).
 
 
 % RMSE Tukey HSD Results
 \begin{table}[H]
 \centering
-\caption{Tukey HSD Post-Hoc Analysis for RMSE}
+\caption{Tukey HSD post-hoc analysis for RMSE}
 \label{tab:tukey_rmse}
 \begin{tabular}{lcc}
 \toprule
@@ -824,7 +818,7 @@ TimeVAE & 0.6287 & b \\
 % MAE Tukey HSD Results
 \begin{table}[H]
 \centering
-\caption{Tukey HSD Post-Hoc Analysis for MAE}
+\caption{Tukey HSD post-hoc analysis for MAE}
 \label{tab:tukey_mae}
 \begin{tabular}{lcc}
 \toprule
@@ -843,22 +837,51 @@ The consistent emergence of three distinct statistical groups across all metrics
 \subsection{Shapley Value Analysis}
 The Shapley analysis reveals the individual contributions of each model component to the overall performance across different metrics and datasets. For each metric evaluated, the analysis examines the marginal contributions and interactions between model components.
 
-% Dataset-Specific Shapley Analysis Summary
+\subsubsection{Cross-Metric Performance Patterns}
+
+Figures~\ref{fig:shapley_kl} through~\ref{fig:shapley_mae} present the Shapley value contributions of each generative model across all datasets for each evaluation metric. This cross-metric perspective reveals how architectural approaches contribute to specific aspects of synthetic data quality, independent of dataset characteristics.
+
+KL divergence analysis (Figure~\ref{fig:shapley_kl}) demonstrates VRNNGAN's consistent superiority in statistical fidelity preservation across all temporal contexts. The hybrid architecture maintains positive contributions regardless of dataset complexity, while TimeGAN and TimeVAE exhibit context-dependent performance with substantially lower overall contributions.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{assets/shapley_dataset_winners-final.png}
-\caption{Shapley Analysis Summary Plot}
-\label{fig:shap}
+\includegraphics[width=0.8\textwidth]{assets/shapley_kl_analysis.png}
+\caption{Shapley Value Analysis for KL Divergence across Models and Datasets}
+\label{fig:shapley_kl}
 \end{figure}
 
-The comprehensive analysis across datasets reveals distinct patterns in model effectiveness. VRNNGAN demonstrates consistent superiority across most metrics and datasets, with particularly strong performance in statistical fidelity measures (KL divergence) and forecasting accuracy (RMSE, MAE). However, individual models show dataset-specific advantages: TimeVAE excels in geometric similarity preservation for electricity data, while TimeGAN demonstrates superior Wasserstein distance performance for exchange data. 
+Wasserstein distance patterns (Figure~\ref{fig:shapley_wasserstein}) reveal the most pronounced context sensitivity among all metrics. Unlike statistical fidelity where VRNNGAN demonstrates universal advantages, geometric similarity preservation shows no single architectural winner. Each model demonstrates dataset-specific strengths, with negative Shapley values emerging for certain combinations, indicating fundamental incompatibilities between specific architectures and temporal pattern types.
 
-\subsubsection{Electricity Dataset Results}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/shapley_wasserstein_analysis.png}
+\caption{Shapley Value Analysis for Wasserstein Distance across Models and Datasets}
+\label{fig:shapley_wasserstein}
+\end{figure}
 
-The electricity dataset demonstrates VRNNGAN's strong performance across most evaluation metrics, with the notable exception of Wasserstein distance where TimeVAE shows superior geometric similarity preservation. Table~\ref{tab:shapley_electricity} shows that VRNNGAN achieves the highest Shapley values for KL divergence (12.737), RMSE (0.059), and MAE (0.064), indicating consistent effectiveness in both statistical fidelity and forecasting utility.
+Forecasting utility metrics exhibit consistent patterns across both RMSE (Figure~\ref{fig:shapley_rmse}) and MAE (Figure~\ref{fig:shapley_mae}). VRNNGAN maintains the highest contributions across all datasets, reinforcing its effectiveness in preserving temporal dependencies necessary for downstream prediction tasks. TimeVAE demonstrates substantially reduced forecasting contributions, particularly for weather and exchange datasets, while TimeGAN shows moderate contribution levels across most contexts.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/shapley_rmse_analysis.png}
+\caption{Shapley Value Analysis for RMSE across Models and Datasets}
+\label{fig:shapley_rmse}
+\end{figure}
 
-TimeGAN's negative Shapley value (-0.012) for Wasserstein distance indicates that TimeGAN reduces geometric similarity in electricity data generation. This negative contribution suggests performance degradation when TimeGAN's adversarial component is included for this specific metric-dataset combination.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{assets/shapley_mae_analysis.png}
+\caption{Shapley Value Analysis for MAE across Models and Datasets}
+\label{fig:shapley_mae}
+\end{figure}
+
+These cross-metric patterns establish the fundamental behavioral differences between architectural approaches, revealing that hybrid models provide consistent advantages for statistical fidelity and forecasting utility, while geometric similarity preservation remains highly context-dependent. The following analysis examines specific dataset characteristics to understand what drives these observed performance variations.
+
+\subsubsection{Dataset-Specific Performance Attribution}
+
+Each dataset presents unique temporal characteristics that favor different architectural approaches, revealing the underlying factors that determine optimal model selection for specific data contexts.
+
+The electricity dataset's regular load patterns create unique evaluation challenges that favor different architectural approaches depending on the quality dimension assessed. Table~\ref{tab:shapley_electricity} reveals that VRNNGAN dominates statistical fidelity (KL: 12.737) and forecasting metrics (RMSE: 0.059, MAE: 0.064), demonstrating the hybrid architecture's effectiveness for structured temporal dependencies. However, TimeVAE's superior Wasserstein performance (0.047) indicates that variational approaches excel at preserving geometric similarities in regular, predictable patterns where smooth latent space interpolation aligns with underlying data structure. TimeGAN's negative Wasserstein contribution (-0.012) suggests that adversarial training may introduce artifacts that distort geometric relationships in highly structured temporal data.
+
 
 \begin{table}[H]
 \centering
@@ -878,10 +901,7 @@ VRNNGAN & \textbf{12.737} & 0.035 & \textbf{0.059} & \textbf{0.064} \\
 \textit{Note: Bold indicates highest Shapley value (best contributor) per metric.}
 \end{table}
 
-\subsubsection{Exchange Dataset Results}
-The exchange dataset analysis reveals VRNNGAN's dominance across most metrics, with notable exceptions in geometric similarity preservation. Table~\ref{tab:shapley_exchange} demonstrates that for KL divergence, VRNNGAN achieves the highest Shapley value (16.326), indicating exceptional statistical fidelity preservation. However, TimeGAN demonstrates superior performance for Wasserstein distance (0.036), suggesting better geometric similarity modeling for this specific financial dataset context.
-
-The emergence of TimeVAE's negative Shapley value (-0.028) for Wasserstein distance indicates that TimeVAE reduces geometric similarity in exchange data generation. This negative contribution suggests performance degradation when TimeVAE's variational component is included for this specific metric-dataset combination.
+Financial time series characteristics present distinct challenges that reveal complementary strengths across architectural paradigms. Table~\ref{tab:shapley_exchange} shows VRNNGAN achieving exceptional statistical fidelity (KL: 16.326), the highest observed across all experiments, indicating superior distributional modeling for volatile financial patterns. TimeGAN's Wasserstein advantage (0.036) demonstrates that adversarial training effectively captures the stochastic nature of exchange rate fluctuations, while TimeVAE's negative contribution (-0.028) reveals fundamental limitations in variational approaches for modeling financial volatility. These patterns suggest that financial data complexity requires either sophisticated hybrid architectures or adversarial approaches specifically designed for non-stationary temporal patterns.
 
 \begin{table}[H]
 \centering
@@ -901,13 +921,12 @@ VRNNGAN & \textbf{16.326} & 0.008 & \textbf{0.069} & \textbf{0.069} \\
 \textit{Note: Bold indicates highest Shapley value (best contributor) per metric.}
 \end{table}
 
-\subsubsection{Weather Dataset Results}
-The weather dataset presents the most challenging context for synthetic data generation, evidenced by the emergence of negative Shapley contributions. Table~\ref{tab:shapley_weather} reveals that VRNNGAN maintains superior performance across all metrics, with particularly strong contributions for KL divergence (6.776).
+Weather data presents the most challenging evaluation context, with VRNNGAN demonstrating consistent superiority across all metrics while individual models show substantial performance variations. Table~\ref{tab:shapley_weather} confirms VRNNGAN's robust performance (KL: 6.776, Wasserstein: 0.039, RMSE: 1.137, MAE: 0.675), highlighting how meteorological complexity requires sophisticated architectural combinations to maintain synthetic data quality. The substantial Shapley value ranges across models reflect the inherent difficulty of capturing meteorological relationships, where seasonal patterns, non-linear dependencies, and multi-scale temporal interactions challenge individual generative approaches.
 
 \begin{table}[H]
 \centering
 \caption{Shapley value contributions for the weather dataset}
-~\label{tab:shapley_weather}
+\label{tab:shapley_weather}
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Approach} & \textbf{KL Divergence} & \textbf{Wasserstein} & \textbf{RMSE} & \textbf{MAE} \\
@@ -928,7 +947,7 @@ The statistical analysis reveals a coherent pattern of findings that illuminate 
 
 \subsubsection*{Hybrid Architecture Synergy and Performance Patterns}
 
-This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence Shapley values ranging from 6.776 to 16.326 compared to individual models' contributions of 2.918 to 8.542 demonstrate substantial improvements in statistical fidelity preservation. Similarly, VRNNGAN consistently achieves the highest Shapley values for forecasting utility metrics, with RMSE contributions ranging from 0.059 to 1.137 and MAE contributions from 0.064 to 0.675, confirming enhanced practical utility across all datasets.
+This statistical foundation provides empirical support for the Shapley value analysis, which reveals that VRNNGAN's advantages stem from genuine architectural synergy rather than merely additive benefits of combining VAE and GAN approaches. The hybrid model's KL divergence Shapley values ranging from 6.776 to 16.326 compared to individual models' contributions of 2.918 to 8.542 demonstrate significant improvements in statistical fidelity preservation. Similarly, VRNNGAN consistently achieves the highest Shapley values for forecasting utility metrics, with RMSE contributions ranging from 0.059 to 1.137 and MAE contributions from 0.064 to 0.675, confirming enhanced practical utility across all datasets.
 
 The consistent superiority of the hybrid architecture extends beyond the comparative advantages identified in previous literature. While \textcite{yoon_time-series_2019} focused on demonstrating TimeGAN's effectiveness against other GAN variants, and \textcite{desai_timevae_2021} showed TimeVAE's competitive performance against TimeGAN in specific contexts, this study provides the first systematic evidence that combining the GAN and VAE approaches yields synergistic benefits. The Shapley analysis framework enables quantification of how GAN and VAE components contribute to overall performance, revealing that VRNNGAN's success stems from architectural complementarity rather than simple performance averaging.
 

@@ -32,9 +32,8 @@
 \contentsline {subsubsection}{\numberline {4.2.2}Model × Dataset Interaction}{25}{}%
 \contentsline {subsubsection}{\numberline {4.2.3}Tukey-HSD Post-Hoc Results}{28}{}%
 \contentsline {subsection}{\numberline {4.3}Shapley Value Analysis}{29}{}%
-\contentsline {subsubsection}{\numberline {4.3.1}Electricity Dataset Results}{30}{}%
-\contentsline {subsubsection}{\numberline {4.3.2}Exchange Dataset Results}{31}{}%
-\contentsline {subsubsection}{\numberline {4.3.3}Weather Dataset Results}{31}{}%
-\contentsline {subsection}{\numberline {4.4}Discussion}{32}{}%
-\contentsline {section}{\numberline {5}CONCLUSION AND FUTURE WORKS}{35}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Cross-Metric Performance Patterns}{30}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Dataset-Specific Performance Attribution}{32}{}%
+\contentsline {subsection}{\numberline {4.4}Discussion}{34}{}%
+\contentsline {section}{\numberline {5}CONCLUSION AND FUTURE WORKS}{37}{}%
 \contentsfinish 

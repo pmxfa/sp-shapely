@@ -1,14 +1,14 @@
-\contentsline {table}{\numberline {1}{\ignorespaces Key Evaluation Metrics in Synthetic Data Generation Literature}}{10}{}%
-\contentsline {table}{\numberline {2}{\ignorespaces LSTM Forecasting Model Configuration}}{19}{}%
-\contentsline {table}{\numberline {3}{\ignorespaces Bootstrap Summary Statistics for Electricity Dataset (15 runs per model)}}{22}{}%
-\contentsline {table}{\numberline {4}{\ignorespaces Bootstrap Summary Statistics for Exchange Dataset (15 runs per model)}}{23}{}%
-\contentsline {table}{\numberline {5}{\ignorespaces Bootstrap Summary Statistics for Weather Dataset (15 runs per model)}}{24}{}%
+\contentsline {table}{\numberline {1}{\ignorespaces Key evaluation metrics in Synthetic Data Generation literature}}{10}{}%
+\contentsline {table}{\numberline {2}{\ignorespaces LSTM forecasting model configuration}}{19}{}%
+\contentsline {table}{\numberline {3}{\ignorespaces Bootstrap summary statistics for electricity dataset (15 runs per model)}}{22}{}%
+\contentsline {table}{\numberline {4}{\ignorespaces Bootstrap summary statistics for exchange dataset (15 runs per model)}}{23}{}%
+\contentsline {table}{\numberline {5}{\ignorespaces Bootstrap summary statistics for weather dataset (15 runs per model)}}{24}{}%
 \contentsline {table}{\numberline {6}{\ignorespaces Two-way ANOVA summary for synthetic data quality metrics}}{25}{}%
-\contentsline {table}{\numberline {7}{\ignorespaces Tukey HSD Post-Hoc analysis for KL Divergence}}{28}{}%
-\contentsline {table}{\numberline {8}{\ignorespaces Tukey HSD Post-Hoc Analysis for Wasserstein Distance}}{28}{}%
-\contentsline {table}{\numberline {9}{\ignorespaces Tukey HSD Post-Hoc Analysis for RMSE}}{29}{}%
-\contentsline {table}{\numberline {10}{\ignorespaces Tukey HSD Post-Hoc Analysis for MAE}}{29}{}%
-\contentsline {table}{\numberline {11}{\ignorespaces Shapley value contributions for the electricity dataset}}{31}{}%
-\contentsline {table}{\numberline {12}{\ignorespaces Shapley value contributions for the exchange dataset}}{31}{}%
-\contentsline {table}{\numberline {13}{\ignorespaces Shapley value contributions for the weather dataset}}{32}{}%
+\contentsline {table}{\numberline {7}{\ignorespaces Tukey HSD post-hoc analysis for KL divergence}}{28}{}%
+\contentsline {table}{\numberline {8}{\ignorespaces Tukey HSD post-hoc analysis for Wasserstein distance}}{28}{}%
+\contentsline {table}{\numberline {9}{\ignorespaces Tukey HSD post-hoc analysis for RMSE}}{29}{}%
+\contentsline {table}{\numberline {10}{\ignorespaces Tukey HSD post-hoc analysis for MAE}}{29}{}%
+\contentsline {table}{\numberline {11}{\ignorespaces Shapley value contributions for the electricity dataset}}{33}{}%
+\contentsline {table}{\numberline {12}{\ignorespaces Shapley value contributions for the exchange dataset}}{33}{}%
+\contentsline {table}{\numberline {13}{\ignorespaces Shapley value contributions for the weather dataset}}{34}{}%
 \contentsfinish 
